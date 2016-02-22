@@ -1,6 +1,5 @@
 import breeze.linalg.{DenseMatrix, DenseVector, Counter, randomDouble}
 import breeze.optimize.StochasticGradientDescent
-import org.apache.mahout.common.RandomUtils
 import org.apache.spark.examples.ml.TestALS.Movie
 import org.apache.spark.mllib.linalg.Vectors
 import org.apache.spark.mllib.linalg.distributed.{RowMatrix, MatrixEntry, CoordinateMatrix}
@@ -13,12 +12,13 @@ import org.apache.spark.{SparkContext, SparkConf}
 
 import scala.util.Random
 
-
+///home/Downloads/spark/bin/spark-submit --class TestGradientDescent target/scala-2.10/spark_sbt_2.10-1.0.jar
 /**
   * Created by les on 19/02/16.
   */
 object TestGradientDescent {
-    val rand = RandomUtils.getRandom(42L)
+   // val rand = RandomUtils.getRandom(42L)
+    val rand = new Random(42L)
     val learningRate = 0.1
     val preventOverFitting = 0.1
     val randomNoise = 0.1
