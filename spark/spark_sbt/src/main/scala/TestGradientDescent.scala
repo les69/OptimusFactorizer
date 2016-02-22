@@ -56,8 +56,8 @@ object TestGradientDescent {
         val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
-        val numFeatures = 5
-        var numIterations = 25
+        val numFeatures = 10
+        var numIterations = 100
         val globalAvg = ratings.map(x=>x.rating).collect().sum / ratings.count().toInt
 
         val (cachedUsers,cachedItems)=  cache(ratings,totUsers)

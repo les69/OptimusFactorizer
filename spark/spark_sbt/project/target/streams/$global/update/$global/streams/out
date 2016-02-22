@@ -1,4 +1,4 @@
-[info] Updating {file:/Users/les/Developing/test-spark/spark_sbt/project/}spark_sbt-build...
+[info] Updating {file:/Users/les/Projects/bigdata2k16/spark/spark_sbt/project/}spark_sbt-build...
 [debug] :: resolving dependencies :: default#spark_sbt-build;0.1-SNAPSHOT
 [debug] 	confs: [compile, runtime, test, provided, optional, compile-internal, runtime-internal, test-internal, plugin, sources, docs, pom, scala-tool]
 [debug] 	validate = true
@@ -16,7 +16,7 @@
 [debug] == resolving dependencies for default#spark_sbt-build;0.1-SNAPSHOT [provided]
 [debug] == resolving dependencies default#spark_sbt-build;0.1-SNAPSHOT->org.scala-lang#scala-library;2.10.4 [provided->default(compile)]
 [info] Resolving org.scala-lang#scala-library;2.10.4 ...
-[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@44490ffc
+[debug] sbt-chain: Checking cache for: sbt.ivyint.MergedDescriptors@2601cf40
 [debug] sbt-chain: module revision found in cache: org.scala-lang#scala-library;2.10.4
 [debug] 	found org.scala-lang#scala-library;2.10.4 in sbt-chain
 [debug] 	[2.10.4] org.scala-lang#scala-library;2.10.4
@@ -1766,19 +1766,19 @@
 [debug] 	[NOT REQUIRED] org.scala-sbt#apply-macro;0.13.8!apply-macro.jar
 [debug] 	[NOT REQUIRED] org.scala-lang#jline;2.10.4!jline.jar
 [debug] 	[NOT REQUIRED] org.fusesource.jansi#jansi;1.4!jansi.jar
-[debug] :: resolution report :: resolve 1523ms :: artifacts dl 42ms
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT compile produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-compile.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT runtime produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-runtime.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT test produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-test.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT provided produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-provided.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT optional produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-optional.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT compile-internal produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-compile-internal.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT runtime-internal produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-runtime-internal.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT test-internal produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-test-internal.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT plugin produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-plugin.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT sources produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-sources.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT docs produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-docs.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT pom produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-pom.xml
-[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT scala-tool produced in /Users/les/Developing/test-spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-scala-tool.xml
-[debug] 	resolve done (1523ms resolve - 42ms download)
+[debug] :: resolution report :: resolve 1369ms :: artifacts dl 41ms
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT compile produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-compile.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT runtime produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-runtime.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT test produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-test.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT provided produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-provided.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT optional produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-optional.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT compile-internal produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-compile-internal.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT runtime-internal produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-runtime-internal.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT test-internal produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-test-internal.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT plugin produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-plugin.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT sources produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-sources.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT docs produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-docs.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT pom produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-pom.xml
+[debug] 	report for default#spark_sbt-build;0.1-SNAPSHOT scala-tool produced in /Users/les/Projects/bigdata2k16/spark/spark_sbt/project/target/resolution-cache/reports/default-spark_sbt-build-scala-tool.xml
+[debug] 	resolve done (1369ms resolve - 41ms download)
 [info] Done updating.
