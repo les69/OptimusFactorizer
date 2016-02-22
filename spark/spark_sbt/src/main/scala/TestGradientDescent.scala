@@ -41,6 +41,7 @@ object TestGradientDescent {
         // Load training data in LIBSVM format.
         val sqlContext = new SQLContext(sc)
         import sqlContext.implicits._
+        val time = System.nanoTime()
 
         val ratingsPath  = "ml-latest/ratings-1m.dat"
         val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
@@ -170,6 +171,8 @@ object TestGradientDescent {
         }
 
         println(predictRating(userMatrix.apply(0),itemMatrix.apply(0)))
+        val micros = (System.nanoTime - time) / 1000
+        println("%d microseconds".format(micros))
 
 
     }
