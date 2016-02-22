@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="SBT: com.thoughtworks.xstream:xstream:1.4.4:jar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/com.thoughtworks.xstream/xstream/jars/xstream-1.4.4.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.ivy2/cache/com.thoughtworks.xstream/xstream/docs/xstream-1.4.4-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.ivy2/cache/com.thoughtworks.xstream/xstream/srcs/xstream-1.4.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

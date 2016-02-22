@@ -1,0 +1,7 @@
+[0m[[0minfo[0m] [0mPackaging /Users/les/Developing/test-spark/spark_sbt/target/scala-2.10/spark_sbt_2.10-1.0.jar ...[0m
+[0m[[0mdebug[0m] [0mInput file mappings:[0m
+[0m[[0mdebug[0m] [0m	TestWrdCount$$anonfun$1.class[0m
+[0m[[0mdebug[0m] [0m	  /Users/les/Developing/test-spark/spark_sbt/target/scala-2.10/classes/TestWrdCount$$anonfun$1.class[0m
+[0m[[0mdebug[0m] [0m	TestWrdCount.class[0m
+[0m[[0mdebug[0m] [0m	  /Users/les/Developing/test-spark/spark_sbt/target/scala-2.10/classes/TestWrdCount.class[0m
+[0m[[0minfo[0m] [0mDone packaging.[0m

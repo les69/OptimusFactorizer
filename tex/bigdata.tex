@@ -205,7 +205,7 @@ The most common approach to \texttt{CF} is through the factorization
 of a very big and sparse matrix.[3] For example during the Netflix
 Prize at the participans were given a matrix of 8.5 billions of ratings,
 of which only 100 millions were non zero values.
-\texttt{Model-based CF} uses machine-learning and data mining algorithms
+\textit{Model-based CF} uses machine-learning and data mining algorithms
 to uncover the latent factor model between users and items to
 predict the missing ratings.\texbf{latent factor models} are hidden
 relationships between users and items hardly discoverable in the original data;
@@ -219,29 +219,30 @@ between the real and the predicted value.\\
 {\sqrt {\frac{1} {N}{\sum\limits_{i = 1}^N {(c_{i} - \bar{c}_{i} } })^{2} } }
 \end{equation}
 
+Furthermore the model-based content filtering can be expanded in two distinct sections:
+\textit{user and item based content filtering} depending on the priority given to the
+prediction.
 
 
 \subsection{Related problems}
 \subsubsection{Cold start problem}
+Due to the nature of CF, the system needs a huge amount of data
+in order to produce a reliable prediction. But what happens if our system
+hasn't collected any or not enough information yet?
+This problem is called \textbf{cold start} and can be tackled with some advanced
+machine learning solutions called \textit{active learning}.
 
-\subsubsection{Display Equations}
-A numbered display equation -- one set off by vertical space
-from the text and centered horizontally -- is produced
-by the \textbf{equation} environment. An unnumbered display
-equation is produced by the \textbf{displaymath} environment.
+\subsubsection{Shilling Attacks}
+CF can be exploited to perturbate its prediction system with a technique
+called \textit{shilling attacks}. This happens when the input system (e.g. ratings)
+are given in the correct way trying to alter the recommendations to the one
+favoured by the attacker. It has also been noticed that these kind of attacks affect
+more user-based CF algorithms insted of item-based.[5]
 
-Again, in either environment, you can use any of the symbols
-and structures available in \LaTeX; this section will just
-give a couple of examples of display equations in context.
-First, consider the equation, shown as an inline equation above:
-\begin{equation}\lim_{n\rightarrow \infty}x=0\end{equation}
-Notice how it is formatted somewhat differently in
-the \textbf{displaymath}
-environment.  Now, we'll enter an unnumbered equation:
-\begin{displaymath}\sum_{i=0}^{\infty} x + 1\end{displaymath}
-and follow it with another numbered equation:
-\begin{equation}\sum_{i=0}^{\infty}x_i=\int_{0}^{\pi+2} f\end{equation}
-just to demonstrate \LaTeX's able handling of numbering.
+\subsubsection{Sparsity}
+
+Another problem related to CF is the sparsity
+
 
 \subsection{Citations}
 Citations to articles \cite{bowman:reasoning,
