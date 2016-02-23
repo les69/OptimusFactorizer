@@ -30,6 +30,8 @@ object TestGradientDescent {
 
     val bias_learning_rate = 0.5
     val biasReg = 0.1
+    val numFeatures = 20
+    val numIterations = 100
 
 
 
@@ -57,8 +59,7 @@ object TestGradientDescent {
         val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
-        val numFeatures = 10
-        var numIterations = 100
+
         val globalAvg = ratings.map(x=>x.rating).collect().sum / ratings.count().toInt
 
         val (cachedUsers,cachedItems)=  cache(ratings,totUsers)
@@ -84,27 +85,16 @@ object TestGradientDescent {
         val userMatrix = totUsers.map{
             user =>
                 val v1 = Array(globalAvg.toDouble, 0.0,1.0)
-                joinVectors(v1,Array.fill(numFeatures) {rand.nextGaussian() * randomNoise})
+                joinVectors(v1,Array.fill(numFeatures) {rand.nextDouble() * randomNoise})
         }
 
         val itemMatrix = movies.map{
             item =>
                 val v2 = Array(1.0,1.0,0.0)
-                joinVectors(v2,Array.fill(numFeatures){rand.nextGaussian() * randomNoise})
+                joinVectors(v2,Array.fill(numFeatures){rand.nextDouble() * randomNoise})
         }.collect()
 
 
-
-
-        //2054 e 4904
-
-        /**ratings.filter(r=>r.userId == 2054).foreach{
-            r=>
-                if(r.movieId == 4904)
-                    println("Found "+r.userId+" "+r.movieId)
-                else
-                    println("Exists "+r.userId+" "+r.movieId)
-        }**/
 
         var currentLearningRate = learningRate
 
@@ -134,31 +124,29 @@ object TestGradientDescent {
                     }
                     else {
                         val value = temp.first().rating
-                        if (value > 0.0) { //is it really necessary anymore?
 
-                            val userVector = userMatrix.apply(loopIndex)
-                            val itemVector = itemMatrix.apply(loopIndex)
-                            val err = value - pr_rating
-
-
-                            userVector.update(user_bias_index, bias_learning_rate * (err - biasReg * preventOverFitting * userVector.apply(user_bias_index)))
-                            itemVector.update(item_bias_index, bias_learning_rate * (err - biasReg * preventOverFitting * itemVector.apply(item_bias_index)))
+                        val userVector = userMatrix.apply(uid)
+                        val itemVector = itemMatrix.apply(iid)
+                        val err = value - pr_rating
 
 
-                            for (featureIndex <- feature_offset to numFeatures) {
-                                val uF = userVector.apply(featureIndex)
-                                val iF = itemVector.apply(featureIndex)
-
-                                val deltaUserFeature = err * iF - preventOverFitting * uF
-                                userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
+                        userVector.update(user_bias_index,userVector.apply(user_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * userVector.apply(user_bias_index)))
+                        itemVector.update(item_bias_index,itemVector.apply(item_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * itemVector.apply(item_bias_index)))
 
 
-                                val deltaItemFeature = err * uF - preventOverFitting * iF
-                                itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
-                            }
+                        for (featureIndex <- feature_offset to numFeatures) {
+                            val uF = userVector.apply(featureIndex)
+                            val iF = itemVector.apply(featureIndex)
+
+                            val deltaUserFeature = err * iF - preventOverFitting * uF
+                            userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
+
+
+                            val deltaItemFeature = err * uF - preventOverFitting * iF
+                            itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
+
                         }
-                        else
-                            numIterations += 1
+
                     }
 
 
@@ -170,11 +158,30 @@ object TestGradientDescent {
 
         }
 
-        println(predictRating(userMatrix.apply(0),itemMatrix.apply(0)))
+
+
+
         val micros = (System.nanoTime - time) / 1000
         println("%d microseconds".format(micros))
 
+        testOutput(userMatrix,itemMatrix,ratings,cachedUsers,cachedItems)
 
+
+    }
+    def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
+        println("Test prediction on all users one item each")
+
+        userMatrix.zipWithIndex.foreach{
+            userRow=>
+                val loopIndex = userRow._2
+                val uid = cachedUsers.apply(loopIndex)
+                val iid = cachedItems.apply(loopIndex)
+
+                val pr_rating = predictRating(userMatrix.apply(uid),itemMatrix.apply(iid))
+                val realValue = ratings.filter(r=> r.movieId == iid && r.userId == uid).first().rating
+
+                println("Prediction for user "+uid+" for item "+iid+" predicted value "+pr_rating+" real value "+realValue)
+        }
     }
     def joinVectors(v1:Array[Double],v2:Array[Double]): Array[Double] ={
         Array(v1.toArray,v2.toArray).flatten
