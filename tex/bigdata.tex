@@ -142,7 +142,6 @@ Gradient Descent} in combination with the common frameworks \texttt{Spark} and  
 \keywords{Flink; Spark; CF; Collaborative Filtering; ALS; SGD; Scala}
 
 \section{Introduction}
-
 Recommender systems are now trending due to the overwhelming availability
 of data. These systems have the ability to discover hidden relationships between
 users and items, and use these patterns to improve the user's taste prediction.
@@ -186,7 +185,7 @@ different approaches:
 \subsubsection{Memory-based Content Filtering}
 In \texttt{memory-based CF} uses user ratings to compute similarity
 between user and items and subsequently make a recommendation. Usually
-this approach involves "neighboring" algorithms such as \texbf{K-Nearest Neighbours}
+this approach involves "neighboring" algorithms such as \textbf{K-Nearest Neighbours}
 to build relationships between users. The similarity between two users
 is calculated using the \textbf{cosine similarity}.\\
 \textbf{Cosine similarity} is a measure of similarity between two vectors of an inner product space that measures the cosine of the angle between them.[4]
@@ -207,12 +206,12 @@ Prize at the participans were given a matrix of 8.5 billions of ratings,
 of which only 100 millions were non zero values.
 \textit{Model-based CF} uses machine-learning and data mining algorithms
 to uncover the latent factor model between users and items to
-predict the missing ratings.\texbf{latent factor models} are hidden
+predict the missing ratings.\textbf{latent factor models} are hidden
 relationships between users and items hardly discoverable in the original data;
 usually they may for example denote the quantity of action in a movie or the complexity
 of the characters.These vectors are then used to create the missing values in the user-items
 matrix.\\
-But what about the error of the prediction? There's an error function better known as
+But what about the error of the prediction? There's an error function better known as %move to section 3
 \textbf{Root Mean Square Error} which is used to calculate the difference
 between the real and the predicted value.\\
 \begin{equation}
@@ -241,36 +240,45 @@ more user-based CF algorithms insted of item-based.[5]
 
 \subsubsection{Sparsity}
 
-Another problem related to CF is the sparsity
+In the era of the \textit{web 2.0} the matrices who compose the datasets are
+usually very sparse due to the typical proportion for which  \(nUsers \ll nItems\).
+As said previously the matrix which was given had only 100M ratings out of
+8.5 billions of records. This problem is solved using matrix factorization.
 
 
-\subsection{Citations}
-Citations to articles \cite{bowman:reasoning,
-clark:pct, braams:babel, herlihy:methodology},
-conference proceedings \cite{clark:pct} or
-books \cite{salas:calculus, Lamport:LaTeX} listed
-in the Bibliography section of your
-article will occur throughout the text of your article.
-You should use BibTeX to automatically produce this bibliography;
-you simply need to insert one of several citation commands with
-a key of the item cited in the proper location in
-the \texttt{.tex} file \cite{Lamport:LaTeX}.
-The key is a short reference you invent to uniquely
-identify each work; in this sample document, the key is
-the first author's surname and a
-word from the title.  This identifying key is included
-with each item in the \texttt{.bib} file for your article.
+\section{Matrix Factorization}
 
-The details of the construction of the \texttt{.bib} file
-are beyond the scope of this sample document, but more
-information can be found in the \textit{Author's Guide},
-and exhaustive details in the \textit{\LaTeX\ User's
-Guide}\cite{Lamport:LaTeX}.
+During the last decade a huge effort has been applied to solve the problem of
+big datasets with an incredible amount of data.
+Let denote {\large{\textit{\textbf{R}}} = \textit{r{\small ij}}} denote a
+user-movie where each element \textit{r{\small ij}} represents a rating given by
+a user \textit{i} to an item \textit{j} with a value from 0 to 5; where 0 means
+non rated and 1 to 5 a rating ranging relatively from \textit{very poor} to \textit{awesome}.
+Let also define \textit{m} the number of users and \textit{n} the number of movies in the system.
+The problem of \textit{recommender systems} is to predict the missing values of {\large{\textit{\textbf{R}}}}
+using the known ratings.\\
+\begin{table}
+\centering
+\caption{Example of a sparse user-item ratings matrix}
+\begin{tabular}{|c|c|c|c|c|c|} \hline
+items/users  & \textbf{U1} & \textbf{U2} & \textbf{U3} & \textbf{U4} & \textbf{U5}\\ \hline
+\textbf{I1} & 5 & 3 & - & 1 &  3  \\ \hline
+\textbf{I2} & 4 & - & 2 & 1 &  -  \\ \hline
+\textbf{I3} & 2 & 2 & - & 5 &  - \\ \hline
+\textbf{I4} & 4 & 3 & - & 4 &  2  \\ \hline
+\textbf{I5} & - & 5 & 5 & 4 &  5  \\ \hline
+\end{tabular}
+\end{table}
+The concept behind \textit{matrix factorization} is to find two matrices
+{\large\textit{\textbf{V,W}}} relatively \textit{\textbf{m}} x \textit{\textbf{p}},\textit{\textbf{n}} x \textit{\textbf{p}}. which product
+can approximate a much bigger matrix {\large{\textit{\textbf{R}}} of dimensions \textit{\textbf{m}} x \textit{\textbf{n}}.\\
+    \textit{R} \(\approx\) \textit{V} * \textit{W}
+}\\
+\includegraphics[scale=0.45]{matrix_factorization.png}
+The process consists in a low-rank approximation of the user-item matrix using
+for both users and items some feature vectors which are used to model
+the prediction with a inner vector product of the selected user and item.
 
-This article shows only the plainest form
-of the citation command, using \texttt{{\char'134}cite}.
-This is what is stipulated in the SIGS style specifications.
-No other citation format is endorsed or supported.
 
 \subsection{Tables}
 Because tables cannot be split across pages, the best
@@ -290,17 +298,7 @@ Table 1 is included in the input file; compare the
 placement of the table here with the table in the printed
 dvi output of this document.
 
-\begin{table}
-\centering
-\caption{Frequency of Special Characters}
-\begin{tabular}{|c|c|l|} \hline
-Non-English or Math&Frequency&Comments\\ \hline
-\O & 1 in 1,000& For Swedish names\\ \hline
-$\pi$ & 1 in 5& Common in math\\ \hline
-\$ & 4 in 5 & Used in business\\ \hline
-$\Psi^2_1$ & 1 in 40,000& Unexplained usage\\
-\hline\end{tabular}
-\end{table}
+
 
 To set a wider table, which takes up the whole width of
 the page's live area, use the environment
@@ -340,11 +338,6 @@ displayable with \LaTeX.  If you work with pdf\LaTeX, use files in the
 \textbf{.eps} to \textbf{.pdf} for you on the fly.  More details on
 each of these is found in the \textit{Author's Guide}.
 
-\begin{figure}
-\centering
-\includegraphics{fly}
-\caption{A sample black and white graphic.}
-\end{figure}
 
 \begin{figure}
 \centering
