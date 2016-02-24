@@ -1,3 +1,5 @@
+import java.util.concurrent.TimeUnit
+
 import breeze.linalg.{DenseMatrix, DenseVector, Counter, randomDouble}
 import breeze.optimize.StochasticGradientDescent
 import org.apache.spark.examples.ml.TestALS.Movie
@@ -30,8 +32,9 @@ object ParallelSGD {
 
     val bias_learning_rate = 0.5
     val biasReg = 0.1
-    val numFeatures =15
+    val numFeatures =20
     val numIterations = 25
+    val pool = java.util.concurrent.Executors.newFixedThreadPool(100)
 
 
 
@@ -103,71 +106,82 @@ object ParallelSGD {
         println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
 
 
-        for(iteration <- 0 to numIterations ){
-            println("Iteration "+iteration+" out of "+numIterations)
+        for(iteration <- 0 to numIterations ) {
+            println("Iteration " + iteration + " out of " + numIterations)
             println("Current prediction")
-            println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
-            userMatrix.zipWithIndex.foreach{
+            println(predictRating(userMatrix.apply(cachedUsers.apply(0)), itemMatrix.apply(cachedItems.apply(0))))
+            userMatrix.zipWithIndex.foreach {
                 userRow =>
                     val loopIndex = userRow._2
                     val uid = cachedUsers.apply(loopIndex)
                     val iid = cachedItems.apply(loopIndex)
 
-                    val pr_rating = predictRating(userMatrix.apply(uid),itemMatrix.apply(iid))
+                    val pr_rating = predictRating(userMatrix.apply(uid), itemMatrix.apply(iid))
                     //val entry = ratingMatrix.entries.filter(e=> e.i == userRow._2 && e.j == userRow._2)
                     //val value = ratings.filter(r=> r.movieId == iid && r.userId == uid).first().rating //[TODO] optimize with a cached dataset
-                    val temp = ratings.filter(r=> r.movieId == iid && r.userId == uid)
-                    val test= ratings.collect()
+                    val temp = ratings.filter(r => r.movieId == iid && r.userId == uid)
+                    val test = ratings.collect()
 
-                    if(temp.collect().length == 0){
-                        println("Non existing"+uid+","+iid)
+                    if (temp.collect().length == 0) {
+                        println("Non existing" + uid + "," + iid)
                     }
                     else {
-                        
+
                         val value = temp.first().rating
 
                         val userVector = userMatrix.apply(uid)
                         val itemVector = itemMatrix.apply(iid)
-                        val err = value - pr_rating
-
-
-                        userVector.update(user_bias_index,userVector.apply(user_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * userVector.apply(user_bias_index)))
-                        itemVector.update(item_bias_index,itemVector.apply(item_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * itemVector.apply(item_bias_index)))
-
-
-                        for (featureIndex <- feature_offset to numFeatures) {
-                            val uF = userVector.apply(featureIndex)
-                            val iF = itemVector.apply(featureIndex)
-
-                            val deltaUserFeature = err * iF - preventOverFitting * uF
-                            userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
-
-
-                            val deltaItemFeature = err * uF - preventOverFitting * iF
-                            itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
-
-                        }
+                        pool.execute(new Runnable {
+                            override def run(): Unit = {
+                                update(userVector, itemVector, value, uid, iid, currentLearningRate)
+                            }
+                        })
 
                     }
 
-
-
-
+                    currentLearningRate *= learningRateDecay
 
             }
-            currentLearningRate *= learningRateDecay
-
         }
-
-
-
-
+        pool.awaitTermination(Int.MaxValue,TimeUnit.DAYS)
         val micros = (System.nanoTime - time) / 1000
         println("%d microseconds".format(micros))
 
         testOutput(userMatrix,itemMatrix,ratings,cachedUsers,cachedItems)
 
 
+    }
+    def update(userVector:Array[Double], itemVector:Array[Double], realValue:Float, uid:Int,iid:Int,currentLearningRate:Double )= synchronized{
+
+        val pr_rating = predictRating(userVector,itemVector)
+        val err = realValue - pr_rating
+        userVector.synchronized{
+            userVector.update(user_bias_index,userVector.apply(user_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * userVector.apply(user_bias_index)))
+        }
+        itemVector.synchronized {
+            itemVector.update(item_bias_index, itemVector.apply(item_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * itemVector.apply(item_bias_index)))
+        }
+
+    
+        for (featureIndex <- feature_offset to numFeatures) {
+            val uF = userVector.apply(featureIndex)
+            val iF = itemVector.apply(featureIndex)
+        
+            val deltaUserFeature = err * iF - preventOverFitting * uF
+
+            userVector.synchronized {
+                userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
+            }
+            val deltaItemFeature = err * uF - preventOverFitting * iF
+
+            itemVector.synchronized {
+                itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
+            }
+        }
+    
+
+
+        
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
         println("Test prediction on all users one item each")

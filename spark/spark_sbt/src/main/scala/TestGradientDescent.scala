@@ -56,7 +56,7 @@ object TestGradientDescent {
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
 
 
-        val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
+        val totUsers = ratings.map(_.userId).distinct().collect()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
 
