@@ -31,7 +31,7 @@ object TestGradientDescent {
     val bias_learning_rate = 0.5
     val biasReg = 0.1
     val numFeatures = 20
-    val numIterations = 100
+    val numIterations = 50
 
 
 
@@ -103,6 +103,8 @@ object TestGradientDescent {
         println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
 
 
+
+
         for(iteration <- 0 to numIterations ){
             println("Iteration "+iteration+" out of "+numIterations)
             println("Current prediction")
@@ -116,8 +118,8 @@ object TestGradientDescent {
                     val pr_rating = predictRating(userMatrix.apply(uid),itemMatrix.apply(iid))
                     //val entry = ratingMatrix.entries.filter(e=> e.i == userRow._2 && e.j == userRow._2)
                     //val value = ratings.filter(r=> r.movieId == iid && r.userId == uid).first().rating //[TODO] optimize with a cached dataset
-                    val temp = ratings.filter(r=> r.movieId == iid && r.userId == uid)
-                    val test= ratings.collect()
+                    val temp = training.filter(r=> r.movieId == iid && r.userId == uid)
+                    //val test= ratings.collect()
 
                     if(temp.collect().length == 0){
                         println("Non existing"+uid+","+iid)
@@ -164,9 +166,36 @@ object TestGradientDescent {
         val micros = (System.nanoTime - time) / 1000
         println("%d microseconds".format(micros))
 
+        println("rmse training "+rmse(userMatrix,itemMatrix,training,cachedUsers,cachedItems))
+        println("rmse test "+rmse(userMatrix,itemMatrix,splits(1),cachedUsers,cachedItems))
         testOutput(userMatrix,itemMatrix,ratings,cachedUsers,cachedItems)
 
 
+
+
+    }
+    def rmse (userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]],ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Double={
+        val res = userMatrix.zipWithIndex.map{
+            userRow=>
+                val loopIndex = userRow._2
+                val uid = cachedUsers.apply(loopIndex)
+                val iid = cachedItems.apply(loopIndex)
+
+                val pr_rating = predictRating(userMatrix.apply(uid),itemMatrix.apply(iid))
+                val temp = ratings.filter(r=> r.movieId == iid && r.userId == uid)
+
+                if(temp.collect().length > 0) {
+                    val realValue = temp.first().rating
+                    math.pow(realValue - pr_rating,2)
+                }
+                else
+                    0
+
+
+
+        }.sum
+
+        Math.sqrt(res / cachedUsers.length)
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
         println("Test prediction on all users one item each")
