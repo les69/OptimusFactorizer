@@ -31,7 +31,7 @@ object TestGradientDescent {
     val bias_learning_rate = 0.5
     val biasReg = 0.1
     val numFeatures = 20
-    val numIterations = 50
+    val numIterations = 25
 
 
 

@@ -43,8 +43,8 @@
       <file leaf-file-name="TestGradientDescent.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.62085307">
-              <caret line="169" column="64" selection-start-line="169" selection-start-column="64" selection-end-line="169" selection-end-column="64" />
+            <state vertical-scroll-proportion="-1.1800948">
+              <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
               <folding>
                 <element signature="e#0#70#0" expanded="true" />
               </folding>
@@ -817,12 +817,12 @@
       <workItem from="1456161870364" duration="5174000" />
       <workItem from="1456254485203" duration="3287000" />
       <workItem from="1456317354332" duration="6295000" />
-      <workItem from="1456436855378" duration="4154000" />
+      <workItem from="1456436855378" duration="4180000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19039000" />
+    <option name="totallyTimeSpent" value="19065000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -1174,8 +1174,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.62085307">
-          <caret line="169" column="64" selection-start-line="169" selection-start-column="64" selection-end-line="169" selection-end-column="64" />
+        <state vertical-scroll-proportion="-1.1800948">
+          <caret line="33" column="26" selection-start-line="33" selection-start-column="26" selection-end-line="33" selection-end-column="26" />
           <folding>
             <element signature="e#0#70#0" expanded="true" />
           </folding>
