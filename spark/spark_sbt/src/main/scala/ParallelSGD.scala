@@ -33,20 +33,22 @@ object ParallelSGD {
     val bias_learning_rate = 0.5
     val biasReg = 0.1
     val numFeatures =20
-    val numIterations = 25
-    val pool = java.util.concurrent.Executors.newFixedThreadPool(100)
+    val numIterations = 50
+    val pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
 
 
 
     def main(args: Array[String]) {
 
         val conf = new SparkConf().setAppName(s"TestGradient")
+        conf.set("spark.executor.extraJavaOptions","-Xss10000")
         val sc = new SparkContext(conf)
         sc.setLogLevel("WARN")
         // Load training data in LIBSVM format.
         val sqlContext = new SQLContext(sc)
         import sqlContext.implicits._
         val time = System.nanoTime()
+
 
         val ratingsPath  = "ml-latest/ratings-1m.dat"
         val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
@@ -65,10 +67,11 @@ object ParallelSGD {
 
         val globalAvg = ratings.map(x=>x.rating).collect().sum / ratings.count().toInt
 
-        val (cachedUsers,cachedItems)=  cache(ratings,totUsers)
-
-
         val training = splits(0).cache()
+        val (cachedUsers,cachedItems)=  cache(training,totUsers)
+
+
+
 
 
         val numUsers = ratings.map(_.userId).distinct().count()
@@ -101,7 +104,7 @@ object ParallelSGD {
 
         var currentLearningRate = learningRate
 
-        println("Real value for user with item"+cachedUsers.apply(0),cachedItems.apply(0)+" value: "+ratings.filter(f=> f.movieId == cachedItems.apply(0) && f.userId==cachedUsers.apply(0)).first().rating)
+        println("Real value for user with item"+cachedUsers.apply(0),cachedItems.apply(0)+" value: "+training.filter(f=> f.movieId == cachedItems.apply(0) && f.userId==cachedUsers.apply(0)).first().rating)
         println("Current prediction")
         println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
 
@@ -116,11 +119,10 @@ object ParallelSGD {
                     val uid = cachedUsers.apply(loopIndex)
                     val iid = cachedItems.apply(loopIndex)
 
-                    val pr_rating = predictRating(userMatrix.apply(uid), itemMatrix.apply(iid))
+                    //val pr_rating = predictRating(userMatrix.apply(uid), itemMatrix.apply(iid))
                     //val entry = ratingMatrix.entries.filter(e=> e.i == userRow._2 && e.j == userRow._2)
-                    //val value = ratings.filter(r=> r.movieId == iid && r.userId == uid).first().rating //[TODO] optimize with a cached dataset
-                    val temp = ratings.filter(r => r.movieId == iid && r.userId == uid)
-                    val test = ratings.collect()
+                    //val value = ratings.filter(r=> r.movieId == iid && r.userId == uid).first().rating
+                    val temp = training.filter(r => r.movieId == iid && r.userId == uid)
 
                     if (temp.collect().length == 0) {
                         println("Non existing" + uid + "," + iid)
@@ -138,16 +140,16 @@ object ParallelSGD {
                         })
 
                     }
-
+                    //pool.awaitTermination(10,TimeUnit.SECONDS)
                     currentLearningRate *= learningRateDecay
 
             }
         }
-        pool.awaitTermination(Int.MaxValue,TimeUnit.DAYS)
+        pool.awaitTermination(100,TimeUnit.SECONDS)
         val micros = (System.nanoTime - time) / 1000
         println("%d microseconds".format(micros))
 
-        testOutput(userMatrix,itemMatrix,ratings,cachedUsers,cachedItems)
+        testOutput(userMatrix,itemMatrix,splits(1).cache(),cachedUsers,cachedItems)
 
 
     }

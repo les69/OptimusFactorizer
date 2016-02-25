@@ -55,8 +55,8 @@
       <file leaf-file-name="ParallelSGD.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/ParallelSGD.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.8278041">
-              <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.023696683">
+              <caret line="147" column="33" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
               </folding>
@@ -281,7 +281,7 @@
     <configuration default="false" name="ParallelSGD" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="ParallelSGD" />
-      <option name="VM_PARAMETERS" value="-Dspark.master=local[2]" />
+      <option name="VM_PARAMETERS" value="-Dspark.master=local[2] " />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -816,12 +816,12 @@
       <workItem from="1456161720881" duration="129000" />
       <workItem from="1456161870364" duration="5174000" />
       <workItem from="1456254485203" duration="3287000" />
-      <workItem from="1456317354332" duration="977000" />
+      <workItem from="1456317354332" duration="6294000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9567000" />
+    <option name="totallyTimeSpent" value="14884000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -1093,8 +1093,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/ParallelSGD.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.8278041">
-          <caret line="34" column="23" selection-start-line="34" selection-start-column="23" selection-end-line="34" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.023696683">
+          <caret line="147" column="33" selection-start-line="147" selection-start-column="33" selection-end-line="147" selection-end-column="33" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
           </folding>
