@@ -43,8 +43,8 @@
       <file leaf-file-name="TestGradientDescent.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.4446228">
-              <caret line="208" column="0" selection-start-line="208" selection-start-column="0" selection-end-line="210" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.5778491">
+              <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -56,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/src/main/scala/OptimizedSGD.scala">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+              <caret line="154" column="20" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="58" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -97,9 +97,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/main/scala/ParallelSGD.scala" />
-        <option value="$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/VectorFactorItem.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/OptimizedSGD.scala" />
+        <option value="$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala" />
       </list>
     </option>
   </component>
@@ -236,7 +236,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Application.OptimizedSGD">
+  <component name="RunManager" selected="Application.TestGradientDescent">
     <configuration default="false" name="TestGradientDescent" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" value="TestGradientDescent" />
@@ -755,8 +755,8 @@
     </list>
     <recent_temporary>
       <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Application.OptimizedSGD" />
-        <item index="1" class="java.lang.String" itemvalue="Application.TestGradientDescent" />
+        <item index="0" class="java.lang.String" itemvalue="Application.TestGradientDescent" />
+        <item index="1" class="java.lang.String" itemvalue="Application.OptimizedSGD" />
         <item index="2" class="java.lang.String" itemvalue="Application.ParallelSGD" />
       </list>
     </recent_temporary>
@@ -812,12 +812,12 @@
       <workItem from="1456254485203" duration="3287000" />
       <workItem from="1456317354332" duration="6295000" />
       <workItem from="1456436855378" duration="5763000" />
-      <workItem from="1456505716241" duration="14579000" />
+      <workItem from="1456505716241" duration="18488000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35227000" />
+    <option name="totallyTimeSpent" value="39136000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -833,7 +833,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33975658" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33975658" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296146" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21299255" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -870,7 +870,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala</url>
-          <line>102</line>
+          <line>105</line>
           <properties />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
@@ -887,24 +887,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="scala-line">
           <url>file://$PROJECT_DIR$/src/main/scala/OptimizedSGD.scala</url>
-          <line>127</line>
-          <properties />
-          <option name="timeStamp" value="20" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/OptimizedSGD.scala</url>
-          <line>107</line>
+          <line>106</line>
           <properties />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="scala-line">
-          <url>file://$PROJECT_DIR$/src/main/scala/OptimizedSGD.scala</url>
-          <line>73</line>
-          <properties />
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="24" />
+      <option name="time" value="26" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1224,7 +1212,7 @@
     <entry file="file://$PROJECT_DIR$/src/main/scala/OptimizedSGD.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="125" column="0" selection-start-line="125" selection-start-column="0" selection-end-line="125" selection-end-column="0" />
+          <caret line="154" column="20" selection-start-line="154" selection-start-column="20" selection-end-line="154" selection-end-column="58" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
@@ -1233,8 +1221,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.4446228">
-          <caret line="208" column="0" selection-start-line="208" selection-start-column="0" selection-end-line="210" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.5778491">
+          <caret line="48" column="8" selection-start-line="48" selection-start-column="8" selection-end-line="48" selection-end-column="8" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>

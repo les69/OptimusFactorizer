@@ -30,7 +30,7 @@ object OptimizedSGD {
 
     val bias_learning_rate = 0.5
     val biasReg = 0.1
-    val numFeatures = 20
+    val numFeatures = 5
     val numIterations = 25
 
 
@@ -45,7 +45,7 @@ object OptimizedSGD {
 
 
         val ratingsPath  = "ml-latest/ratings-1m.dat"
-        val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie)
+        //val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie)
 
         //val movies =Array(1,2,3,4,5,6,7,8,9,10)
         //val totUsers =Array(1,2,3,4,5,6,7,8,9,10)
@@ -55,7 +55,8 @@ object OptimizedSGD {
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
 
 
-        val totUsers = ratings.map(_.userId).distinct().collect()
+        val totUsers = ratings.map(_.userId).distinct().collect().take(500)
+        val movies = ratings.map(_.movieId).distinct()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
 
@@ -81,10 +82,8 @@ object OptimizedSGD {
         movies.collect.foreach{
             item =>
                 val tmpVect = DenseVector.fill[Double](numFeatures){Random.nextDouble() * randomNoise}
-                itemMap += item.movieId -> new VectorFactorItem(1.0,1.0,0.0,numFeatures,joinVectors(Array(1.0,1.0,0.0),tmpVect))
+                itemMap += item -> new VectorFactorItem(1.0,1.0,0.0,numFeatures,joinVectors(Array(1.0,1.0,0.0),tmpVect))
         }
-
-
 
         //[TODO] check shuffling
         val userItemMatrix = cacheOpt(ratings,rand.shuffle(totUsers.toSeq).toArray)
@@ -104,7 +103,7 @@ object OptimizedSGD {
         val md5val = md5(i.toString+" "+j.toString)
 
 
-        println("Test prediction for user "+userItemMatrix.head._1+" with item "+userItemMatrix.head._2.head+" and real value"+cachedRatings.apply(md5val))
+        println("Test prediction for user "+userItemMatrix.head._1+" with item "+userItemMatrix.head._2.head+" and real value "+cachedRatings.apply(md5val))
         val time = System.nanoTime()
         for(iteration <- 0 to numIterations ) {
             println("Iteration " + iteration + " out of " + numIterations)
@@ -115,40 +114,45 @@ object OptimizedSGD {
                     val uid = userItem._1
                     val preferencesVector = userItem._2
 
+                    var timing = System.nanoTime()
                     preferencesVector.foreach {
                         iid=>
+
                             val user = userMap.apply(uid)
                             val item = itemMap.apply(iid)
                             val pr_rating = predictRating(user.factors, item.factors)
                             val digest = md5(uid.toString + " " + iid.toString)
+                            val test = cachedRatings.keySet.par.find(k => k == digest) //640833 microseconds!!!
 
-                            val test = cachedRatings.keySet.par.find(k => k == digest)
                             if (!test.isEmpty) {
-                                val value = test.get.toDouble
+
+                                val value = cachedRatings.apply(digest)
                                 val userVector = user.factors
                                 val itemVector = item.factors
-                                val err = value - pr_rating
 
+                                val err = value - pr_rating
                                 userVector.update(user_bias_index, user.userBias + bias_learning_rate * (err - biasReg * preventOverFitting * user.userBias))
                                 itemVector.update(item_bias_index, item.itemBias + bias_learning_rate * (err - biasReg * preventOverFitting * item.itemBias))
                                 user.userBias = userVector.apply(user_bias_index)
                                 item.itemBias = itemVector.apply(item_bias_index)
-
                                 for (featureIndex <- feature_offset to numFeatures) {
+
+
                                     val uF = userVector.apply(featureIndex)
                                     val iF = itemVector.apply(featureIndex)
 
+
                                     val deltaUserFeature = err * iF - preventOverFitting * uF
                                     userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
-
-
                                     val deltaItemFeature = err * uF - preventOverFitting * iF
                                     itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
-
                                 }
+
 
                             }
                     }
+                    var micros = (System.nanoTime - timing) / 1000000000
+                    println("1 %d seconds".format(micros))
                     currentLearningRate *= learningRateDecay
             }
         }

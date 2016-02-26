@@ -39,12 +39,13 @@ object TestGradientDescent {
         // Load training data in LIBSVM format.
         val sqlContext = new SQLContext(sc)
         import sqlContext.implicits._
-        val time = System.nanoTime()
+
 
         val ratingsPath  = "ml-latest/ratings-1m.dat"
         val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
 
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
+        //val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
         val totUsers = ratings.map(_.userId).distinct().collect()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
@@ -87,12 +88,12 @@ object TestGradientDescent {
 
         var currentLearningRate = learningRate
 
-        println("Real value for user with item"+cachedUsers.apply(0),cachedItems.apply(0)+" value: "+ratings.filter(f=> f.movieId == cachedItems.apply(0) && f.userId==cachedUsers.apply(0)).first().rating)
+        println("Real value for user with item "+cachedUsers.apply(0),cachedItems.apply(0)+" value: "+ratings.filter(f=> f.movieId == cachedItems.apply(0) && f.userId==cachedUsers.apply(0)).first().rating)
         println("Current prediction")
         println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
 
 
-
+        val time = System.nanoTime()
 
         for(iteration <- 0 to numIterations ){
             println("Iteration "+iteration+" out of "+numIterations)
@@ -100,6 +101,8 @@ object TestGradientDescent {
             println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
             userMatrix.zipWithIndex.foreach{
                 userRow =>
+
+
                     val loopIndex = userRow._2
                     val uid = cachedUsers.apply(loopIndex)
                     val iid = cachedItems.apply(loopIndex)
@@ -111,7 +114,7 @@ object TestGradientDescent {
                     //val test= ratings.collect()
 
                     if(temp.collect().length == 0){
-                        println("Non existing"+uid+","+iid)
+                        //println("Non existing"+uid+","+iid)
                     }
                     else {
                         val value = temp.first().rating
@@ -139,6 +142,7 @@ object TestGradientDescent {
                         }
 
                     }
+
 
 
 
@@ -186,7 +190,7 @@ object TestGradientDescent {
 
         }.sum
 
-        Math.sqrt(res / cachedUsers.length)
+        Math.sqrt(res / numRatings)
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
         println("Test prediction on all users one item each")
