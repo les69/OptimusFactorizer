@@ -1,15 +1,11 @@
-import breeze.linalg.{DenseMatrix, DenseVector, Counter, randomDouble}
-import breeze.optimize.StochasticGradientDescent
+import breeze.linalg.DenseVector
 import org.apache.spark.examples.ml.TestALS.Movie
-import org.apache.spark.mllib.linalg.Vectors
-import org.apache.spark.mllib.linalg.distributed.{RowMatrix, MatrixEntry, CoordinateMatrix}
-import org.apache.spark.mllib.optimization.{SimpleUpdater, LogisticGradient, GradientDescent}
-import org.apache.spark.mllib.recommendation.MatrixFactorizationModel
-import org.apache.spark.mllib.regression.LabeledPoint
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.SQLContext
-import org.apache.spark.{SparkContext, SparkConf}
+import org.apache.spark.{SparkConf, SparkContext}
 
+import scala.collection.immutable.HashMap
+import scala.collection.mutable.Map
 import scala.util.Random
 
 ///home/Downloads/spark/bin/spark-submit --class TestGradientDescent target/scala-2.10/spark_sbt_2.10-1.0.jar
@@ -48,14 +44,7 @@ object TestGradientDescent {
         val ratingsPath  = "ml-latest/ratings-1m.dat"
         val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
 
-        //val movies =Array(1,2,3,4,5,6,7,8,9,10)
-        //val totUsers =Array(1,2,3,4,5,6,7,8,9,10)
-
-
-
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
-
-
         val totUsers = ratings.map(_.userId).distinct().collect()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
@@ -175,6 +164,7 @@ object TestGradientDescent {
 
     }
     def rmse (userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]],ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Double={
+        var numRatings = 0
         val res = userMatrix.zipWithIndex.map{
             userRow=>
                 val loopIndex = userRow._2
@@ -186,6 +176,7 @@ object TestGradientDescent {
 
                 if(temp.collect().length > 0) {
                     val realValue = temp.first().rating
+                    numRatings += 1
                     math.pow(realValue - pr_rating,2)
                 }
                 else
@@ -214,6 +205,9 @@ object TestGradientDescent {
     }
     def joinVectors(v1:Array[Double],v2:Array[Double]): Array[Double] ={
         Array(v1.toArray,v2.toArray).flatten
+    }
+    def predictRating(userVector:DenseVector[Double], itemVector:DenseVector[Double]): Double ={
+        userVector dot itemVector
     }
     def predictRating(users:Array[Double], items:Array[Double]): Double ={
 
