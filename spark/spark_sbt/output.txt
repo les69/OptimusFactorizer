@@ -1,0 +1,589 @@
+25 iter, 10 features
+
+(Real value for user with item 1,1193 value: 5.0)
+Current prediction
+3.6094974741873567
+Iteration 0 out of 25
+Current prediction
+3.6094974741873567
+Iteration 1 out of 25
+Current prediction
+4.718798170342806
+Iteration 2 out of 25
+Current prediction
+4.893654534948544
+Iteration 3 out of 25
+Current prediction
+5.0368178644104145
+Iteration 4 out of 25
+Current prediction
+5.017671413374915
+Iteration 5 out of 25
+Current prediction
+4.9099287779852805
+Iteration 6 out of 25
+Current prediction
+4.786715610843486
+Iteration 7 out of 25
+Current prediction
+4.686810270153946
+Iteration 8 out of 25
+Current prediction
+4.623088514852292
+Iteration 9 out of 25
+Current prediction
+4.594122096382344
+Iteration 10 out of 25
+Current prediction
+4.591937487910323
+Iteration 11 out of 25
+Current prediction
+4.606190659333995
+Iteration 12 out of 25
+Current prediction
+4.6266832982181425
+Iteration 13 out of 25
+Current prediction
+4.645799971176763
+Iteration 14 out of 25
+Current prediction
+4.659767155212103
+Iteration 15 out of 25
+Current prediction
+4.667578089555725
+Iteration 16 out of 25
+Current prediction
+4.670085462198311
+Iteration 17 out of 25
+Current prediction
+4.6698081474025575
+Iteration 18 out of 25
+Current prediction
+4.66986998836726
+Iteration 19 out of 25
+Current prediction
+4.672536783280787
+Iteration 20 out of 25
+Current prediction
+4.678534267675868
+Iteration 21 out of 25
+Current prediction
+4.687288465124743
+Iteration 22 out of 25
+Current prediction
+4.697549782461749
+Iteration 23 out of 25
+Current prediction
+4.707957011557471
+Iteration 24 out of 25
+Current prediction
+4.717388170620831
+Iteration 25 out of 25
+Current prediction
+4.725112364306337
+219967522 microseconds
+rmse training 0.49365850371157255
+rmse test 1.1929952809148772
+Test prediction on all users one item each
+Prediction for user 1 for item 1193 predicted value 4.730804998259391 real value 5.0
+Prediction for user 1 for item 661 predicted value 3.01805807814124 real value 3.0
+Prediction for user 1 for item 914 predicted value 3.027388342505881 real value 3.0
+Prediction for user 1 for item 3408 predicted value 4.081137154142126 real value 4.0
+Prediction for user 1 for item 2355 predicted value 5.095067135897934 real value 5.0
+Prediction for user 1 for item 1197 predicted value 3.8353039053924953 real value 3.0
+Prediction for user 1 for item 1287 predicted value 5.047146034408883 real value 5.0
+Prediction for user 1 for item 2804 predicted value 5.036696805008707 real value 5.0
+Prediction for user 1 for item 594 predicted value 4.0320458858246555 real value 4.0
+Prediction for user 1 for item 919 predicted value 4.276759981343786 real value 4.0
+Prediction for user 1 for item 595 predicted value 4.8502209547123885 real value 5.0
+Prediction for user 1 for item 938 predicted value 4.004902804848898 real value 4.0
+Prediction for user 1 for item 2398 predicted value 4.002782161991465 real value 4.0
+Prediction for user 1 for item 2918 predicted value 4.0028009727644545 real value 4.0
+Prediction for user 1 for item 1035 predicted value 4.957074787260351 real value 5.0
+Prediction for user 1 for item 2791 predicted value 3.965961629328537 real value 4.0
+Prediction for user 1 for item 2687 predicted value 2.9772004835178283 real value 3.0
+Prediction for user 1 for item 2018 predicted value 3.9800668692481254 real value 4.0
+Prediction for user 1 for item 3105 predicted value 4.566603415220487 real value 5.0
+Prediction for user 1 for item 2797 predicted value 3.700879309949623 real value 4.0
+Prediction for user 1 for item 2321 predicted value 2.6181754580519723 real value 3.0
+Prediction for user 1 for item 720 predicted value 2.67896182670279 real value 3.0
+Prediction for user 1 for item 1270 predicted value 3.3326560259866778 real value 5.0
+Prediction for user 1 for item 527 predicted value 3.8424457660371103 real value 5.0
+Prediction for user 1 for item 2340 predicted value 2.6884095284298426 real value 3.0
+Prediction for user 1 for item 48 predicted value 4.770836011996413 real value 5.0
+Prediction for user 1 for item 1097 predicted value 3.884553152900625 real value 4.0
+Prediction for user 1 for item 1721 predicted value 2.1246011778197653 real value 4.0
+Prediction for user 1 for item 1545 predicted value 3.734937621025699 real value 4.0
+Prediction for user 1 for item 745 predicted value 2.7477388258060347 real value 3.0
+Prediction for user 1 for item 2294 predicted value 3.744453552145569 real value 4.0
+Prediction for user 1 for item 3186 predicted value 3.8564757924991953 real value 4.0
+Prediction for user 1 for item 1566 predicted value 4.081400588922288 real value 4.0
+Prediction for user 1 for item 588 predicted value 3.9477310814040854 real value 4.0
+Prediction for user 1 for item 1907 predicted value 3.955749451523382 real value 4.0
+Prediction for user 1 for item 783 predicted value 3.966231358508737 real value 4.0
+Prediction for user 1 for item 1836 predicted value 4.972745275943024 real value 5.0
+Prediction for user 1 for item 1022 predicted value 4.97598859849497 real value 5.0
+Prediction for user 1 for item 2762 predicted value 3.8954192608634344 real value 4.0
+Prediction for user 1 for item 150 predicted value 4.65768868579207 real value 5.0
+Prediction for user 1 for item 1 predicted value 3.8623613113816857 real value 5.0
+Prediction for user 1 for item 1961 predicted value 4.153857677777425 real value 5.0
+Prediction for user 1 for item 1962 predicted value 3.9518499913110894 real value 4.0
+Prediction for user 1 for item 2692 predicted value 4.149630400865658 real value 4.0
+Prediction for user 1 for item 260 predicted value 4.514587558278084 real value 4.0
+Prediction for user 1 for item 1028 predicted value 5.263392606388199 real value 5.0
+Prediction for user 1 for item 1029 predicted value 5.256975485151154 real value 5.0
+Prediction for user 1 for item 1207 predicted value 4.1802065461340385 real value 4.0
+Prediction for user 1 for item 2028 predicted value 4.925378564215665 real value 5.0
+Prediction for user 1 for item 531 predicted value 4.060314800060754 real value 4.0
+Prediction for user 1 for item 3114 predicted value 3.997732381949292 real value 4.0
+Prediction for user 1 for item 608 predicted value 3.955572026400128 real value 4.0
+Prediction for user 1 for item 1246 predicted value 3.8313263539403133 real value 4.0
+Prediction for user 2 for item 1357 predicted value 5.0083036095012625 real value 5.0
+Prediction for user 2 for item 3068 predicted value 4.020827207808393 real value 4.0
+Prediction for user 2 for item 1537 predicted value 4.027467698549582 real value 4.0
+Prediction for user 2 for item 647 predicted value 3.0393418681338886 real value 3.0
+Prediction for user 2 for item 2194 predicted value 4.035513099204229 real value 4.0
+Prediction for user 2 for item 648 predicted value 3.3530849012414286 real value 4.0
+Prediction for user 2 for item 2268 predicted value 5.023071597017758 real value 5.0
+Prediction for user 2 for item 2628 predicted value 3.0282531111050877 real value 3.0
+Prediction for user 2 for item 1103 predicted value 4.203398333901619 real value 3.0
+Prediction for user 2 for item 2916 predicted value 3.0226852706780667 real value 3.0
+Prediction for user 2 for item 3468 predicted value 5.079279112172394 real value 5.0
+Prediction for user 2 for item 1210 predicted value 3.536106474816436 real value 4.0
+Prediction for user 2 for item 1792 predicted value 3.054117790976812 real value 3.0
+Prediction for user 2 for item 1687 predicted value 3.0560135829794164 real value 3.0
+Prediction for user 2 for item 1213 predicted value 6.070627500947339 real value 2.0
+Prediction for user 2 for item 3578 predicted value 4.102422138614315 real value 5.0
+Prediction for user 2 for item 2881 predicted value 3.0519699923793073 real value 3.0
+Prediction for user 2 for item 3030 predicted value 4.046663782864553 real value 4.0
+Prediction for user 2 for item 1217 predicted value 3.0535089936061435 real value 3.0
+Prediction for user 2 for item 3105 predicted value 4.029082958233542 real value 4.0
+Prediction for user 2 for item 434 predicted value 2.183645692430774 real value 2.0
+Prediction for user 2 for item 2126 predicted value 3.1914694999827424 real value 3.0
+Prediction for user 2 for item 3107 predicted value 2.219252969855592 real value 2.0
+Prediction for user 2 for item 3108 predicted value 3.241091055816798 real value 3.0
+Prediction for user 2 for item 3035 predicted value 4.248905331565463 real value 4.0
+Prediction for user 2 for item 1253 predicted value 3.2703310788089026 real value 3.0
+Prediction for user 2 for item 1610 predicted value 5.29077310158944 real value 5.0
+Prediction for user 2 for item 292 predicted value 4.158862501859309 real value 3.0
+Prediction for user 2 for item 2236 predicted value 5.29408557146477 real value 5.0
+Prediction for user 2 for item 3071 predicted value 4.323678321987143 real value 4.0
+Prediction for user 2 for item 902 predicted value 2.3592211557871368 real value 2.0
+Prediction for user 2 for item 368 predicted value 4.460088022725116 real value 4.0
+Prediction for user 2 for item 1259 predicted value 5.859598635162076 real value 5.0
+Prediction for user 2 for item 3147 predicted value 5.402055498689483 real value 5.0
+Prediction for user 2 for item 1544 predicted value 4.4048805233171295 real value 4.0
+Prediction for user 2 for item 1293 predicted value 5.408783548078492 real value 5.0
+Prediction for user 2 for item 1188 predicted value 4.345762390143345 real value 4.0
+Prediction for user 2 for item 3255 predicted value 4.371286350270691 real value 4.0
+Prediction for user 2 for item 3256 predicted value 2.3746596158772775 real value 2.0
+Prediction for user 2 for item 3257 predicted value 3.3694837381035088 real value 3.0
+Prediction for user 2 for item 110 predicted value 5.354479071521324 real value 5.0
+Prediction for user 2 for item 2278 predicted value 3.3620872706040323 real value 3.0
+Prediction for user 2 for item 2490 predicted value 3.361755747210687 real value 3.0
+Prediction for user 2 for item 1834 predicted value 4.352792184557592 real value 4.0
+Prediction for user 2 for item 3471 predicted value 5.342033013284135 real value 5.0
+Prediction for user 2 for item 589 predicted value 4.333036729363322 real value 4.0
+Prediction for user 2 for item 1690 predicted value 3.3360924445506908 real value 3.0
+Prediction for user 2 for item 3654 predicted value 3.3288026421265697 real value 3.0
+Prediction for user 2 for item 2852 predicted value 3.325916598542984 real value 3.0
+Prediction for user 2 for item 1945 predicted value 5.313408157909184 real value 5.0
+Prediction for user 2 for item 982 predicted value 4.143581352951699 real value 4.0
+Prediction for user 2 for item 1873 predicted value 4.312278879346731 real value 4.0
+Prediction for user 2 for item 2858 predicted value 2.0714813406046435 real value 4.0
+Prediction for user 2 for item 1225 predicted value 5.2916351878303605 real value 5.0
+Prediction for user 2 for item 2028 predicted value 4.496741628953519 real value 4.0
+Prediction for user 2 for item 515 predicted value 5.233412329334677 real value 5.0
+Prediction for user 2 for item 442 predicted value 3.2192357140524677 real value 3.0
+Prediction for user 2 for item 2312 predicted value 4.123855326597385 real value 3.0
+Prediction for user 2 for item 265 predicted value 4.201071062742028 real value 4.0
+Prediction for user 2 for item 1408 predicted value 3.2371922141757037 real value 3.0
+Prediction for user 2 for item 1084 predicted value 4.19895159010833 real value 3.0
+Prediction for user 2 for item 3699 predicted value 2.2623141780775575 real value 2.0
+Prediction for user 2 for item 480 predicted value 4.870442451231368 real value 5.0
+Prediction for user 2 for item 1442 predicted value 4.0141152620897955 real value 4.0
+Prediction for user 2 for item 2067 predicted value 5.008829269529122 real value 5.0
+Prediction for user 2 for item 1265 predicted value 3.099377817639133 real value 3.0
+Prediction for user 2 for item 1370 predicted value 4.113386670848778 real value 5.0
+Prediction for user 2 for item 1193 predicted value 5.049137286573812 real value 5.0
+Prediction for user 2 for item 1801 predicted value 4.123470988533145 real value 3.0
+Prediction for user 2 for item 1372 predicted value 3.0469588722619196 real value 3.0
+Prediction for user 2 for item 2353 predicted value 4.052983468336855 real value 4.0
+Prediction for user 2 for item 3334 predicted value 4.035911294598324 real value 4.0
+Prediction for user 2 for item 2427 predicted value 2.2241099725904605 real value 2.0
+Prediction for user 2 for item 590 predicted value 5.119005983108242 real value 5.0
+Prediction for user 2 for item 1196 predicted value 2.531145511797474 real value 5.0
+Prediction for user 2 for item 1552 predicted value 3.291388069943551 real value 3.0
+Prediction for user 2 for item 736 predicted value 4.139863852576006 real value 4.0
+Prediction for user 2 for item 1198 predicted value 4.423644666430437 real value 4.0
+Prediction for user 2 for item 593 predicted value 5.3474824097898725 real value 5.0
+Prediction for user 2 for item 2359 predicted value 3.3903122037017743 real value 3.0
+Prediction for user 2 for item 95 predicted value 2.35992269765891 real value 2.0
+Prediction for user 2 for item 2717 predicted value 3.1892653137332445 real value 3.0
+Prediction for user 2 for item 2571 predicted value 4.213716240689317 real value 4.0
+Prediction for user 2 for item 1917 predicted value 4.102810779499986 real value 3.0
+Prediction for user 2 for item 2396 predicted value 4.1996650977094605 real value 4.0
+Prediction for user 2 for item 3735 predicted value 4.120849795936857 real value 3.0
+Prediction for user 2 for item 1953 predicted value 4.127167335554025 real value 4.0
+Prediction for user 2 for item 1597 predicted value 3.188185405965312 real value 3.0
+Prediction for user 2 for item 3809 predicted value 3.175669813453002 real value 3.0
+Prediction for user 2 for item 1954 predicted value 5.119889035242949 real value 5.0
+Prediction for user 2 for item 1955 predicted value 4.1456420975077295 real value 4.0
+Prediction for user 2 for item 235 predicted value 3.1433383793108374 real value 3.0
+Prediction for user 2 for item 1124 predicted value 5.135186632213335 real value 5.0
+Prediction for user 2 for item 1957 predicted value 5.132918654557436 real value 5.0
+Prediction for user 2 for item 163 predicted value 4.141327434254429 real value 4.0
+Prediction for user 2 for item 21 predicted value 1.1673236594485368 real value 1.0
+Prediction for user 2 for item 165 predicted value 3.1822407940753474 real value 3.0
+Prediction for user 2 for item 2321 predicted value 3.2712093688114745 real value 3.0
+Prediction for user 2 for item 1090 predicted value 2.2675235615909854 real value 2.0
+Prediction for user 2 for item 380 predicted value 5.2857121087618015 real value 5.0
+Prediction for user 2 for item 2501 predicted value 5.310277606914343 real value 5.0
+Prediction for user 2 for item 349 predicted value 4.324900251141792 real value 4.0
+Prediction for user 2 for item 457 predicted value 4.3587084655837165 real value 4.0
+Prediction for user 2 for item 1096 predicted value 4.377369489154908 real value 4.0
+Prediction for user 2 for item 920 predicted value 5.401478352827997 real value 5.0
+Prediction for user 2 for item 459 predicted value 4.106084624117533 real value 3.0
+Prediction for user 2 for item 1527 predicted value 4.22142277750693 real value 4.0
+Prediction for user 2 for item 3418 predicted value 4.1759900168779955 real value 4.0
+Prediction for user 2 for item 1385 predicted value 3.275126411451016 real value 3.0
+Prediction for user 2 for item 3451 predicted value 4.278077969700389 real value 4.0
+Prediction for user 2 for item 3095 predicted value 4.283528954498885 real value 4.0
+Prediction for user 2 for item 780 predicted value 3.300373017982077 real value 3.0
+Prediction for user 2 for item 498 predicted value 3.292807930823238 real value 3.0
+Prediction for user 2 for item 2728 predicted value 3.2995806994021786 real value 3.0
+Prediction for user 2 for item 2002 predicted value 5.288655269563959 real value 5.0
+Prediction for user 2 for item 1962 predicted value 5.250756515846123 real value 5.0
+Prediction for user 2 for item 1784 predicted value 5.107732651664054 real value 5.0
+Prediction for user 2 for item 2943 predicted value 4.165961306187667 real value 4.0
+Prediction for user 2 for item 2006 predicted value 3.431267767407244 real value 3.0
+Prediction for user 2 for item 318 predicted value 5.15225030298959 real value 5.0
+Prediction for user 2 for item 1207 predicted value 4.170358430483535 real value 4.0
+Prediction for user 2 for item 1968 predicted value 2.267161456971696 real value 2.0
+Prediction for user 2 for item 3678 predicted value 3.3609643873652852 real value 3.0
+Prediction for user 2 for item 1244 predicted value 4.150765636597102 real value 3.0
+Prediction for user 2 for item 356 predicted value 4.855991962401943 real value 5.0
+Prediction for user 2 for item 1245 predicted value 1.973186370224738 real value 2.0
+Prediction for user 2 for item 1246 predicted value 4.16131529155924 real value 5.0
+Prediction for user 2 for item 3893 predicted value 1.0034833502373584 real value 1.0
+Prediction for user 2 for item 1247 predicted value 4.991820126306624 real value 5.0
+Prediction for user 3 for item 3421 predicted value 4.014411669346307 real value 4.0
+Prediction for user 3 for item 1641 predicted value 2.0395738109624233 real value 2.0
+Prediction for user 3 for item 648 predicted value 3.0430134965824642 real value 3.0
+Prediction for user 3 for item 1394 predicted value 4.037296708372782 real value 4.0
+Prediction for user 3 for item 3534 predicted value 3.1340369653053752 real value 3.0
+Prediction for user 3 for item 104 predicted value 4.08864147293398 real value 4.0
+Prediction for user 3 for item 2735 predicted value 4.077485930763864 real value 4.0
+Prediction for user 3 for item 1210 predicted value 3.9504211424505375 real value 4.0
+Prediction for user 3 for item 1431 predicted value 2.9907753351072164 real value 3.0
+Prediction for user 3 for item 3868 predicted value 2.9793812586999824 real value 3.0
+Prediction for user 3 for item 1079 predicted value 3.7574827658331498 real value 5.0
+Prediction for user 3 for item 2997 predicted value 4.135368067160039 real value 3.0
+Prediction for user 3 for item 1615 predicted value 3.7730940239911863 real value 5.0
+Prediction for user 3 for item 1291 predicted value 4.583843294123354 real value 4.0
+Prediction for user 3 for item 1259 predicted value 5.5628485438681645 real value 5.0
+Prediction for user 3 for item 653 predicted value 3.7850905987604393 real value 4.0
+Prediction for user 3 for item 2167 predicted value 3.7861887121190714 real value 5.0
+Prediction for user 3 for item 1580 predicted value 3.986399397202929 real value 3.0
+Prediction for user 3 for item 3619 predicted value 2.7532154660152948 real value 2.0
+Prediction for user 3 for item 260 predicted value 5.792360646540922 real value 5.0
+Prediction for user 3 for item 2858 predicted value 4.302646305577392 real value 4.0
+Prediction for user 3 for item 3114 predicted value 3.565081326332567 real value 3.0
+Prediction for user 3 for item 1049 predicted value 4.53122631265935 real value 4.0
+Prediction for user 3 for item 1261 predicted value 1.5665672786453135 real value 1.0
+Prediction for user 3 for item 552 predicted value 4.549475234925666 real value 4.0
+Prediction for user 3 for item 480 predicted value 4.276408146972897 real value 4.0
+Prediction for user 3 for item 1265 predicted value 2.5468565079803276 real value 2.0
+Prediction for user 3 for item 1266 predicted value 3.740036243941489 real value 5.0
+Prediction for user 3 for item 733 predicted value 5.502097008689094 real value 5.0
+Prediction for user 3 for item 1196 predicted value 4.099321067947989 real value 4.0
+Prediction for user 3 for item 590 predicted value 3.9897893848522394 real value 4.0
+Prediction for user 3 for item 2355 predicted value 5.225306869767084 real value 5.0
+Prediction for user 3 for item 1197 predicted value 3.7698271854313954 real value 5.0
+Prediction for user 3 for item 1198 predicted value 5.090051535215655 real value 5.0
+Prediction for user 3 for item 1378 predicted value 5.086297060874703 real value 5.0
+Prediction for user 3 for item 593 predicted value 3.349193317285935 real value 3.0
+Prediction for user 3 for item 1379 predicted value 3.725433838405261 real value 4.0
+Prediction for user 3 for item 3552 predicted value 5.218959989704033 real value 5.0
+Prediction for user 3 for item 1304 predicted value 5.192765260746407 real value 5.0
+Prediction for user 3 for item 1270 predicted value 3.1931275809603017 real value 3.0
+Prediction for user 3 for item 2470 predicted value 4.1705753985913425 real value 4.0
+Prediction for user 3 for item 3168 predicted value 4.150340203928727 real value 4.0
+Prediction for user 3 for item 2617 predicted value 2.151912521201983 real value 2.0
+Prediction for user 3 for item 1961 predicted value 4.12722725800163 real value 4.0
+Prediction for user 3 for item 3671 predicted value 5.110477468613257 real value 5.0
+Prediction for user 3 for item 2006 predicted value 4.30162689066661 real value 4.0
+Prediction for user 3 for item 2871 predicted value 4.066235961777311 real value 4.0
+Prediction for user 3 for item 2115 predicted value 4.076268737369991 real value 4.0
+Prediction for user 3 for item 1968 predicted value 3.9816124178045116 real value 4.0
+Prediction for user 3 for item 1136 predicted value 4.948260944549962 real value 5.0
+Prediction for user 3 for item 2081 predicted value 4.029074423695237 real value 4.0
+Prediction for user 4 for item 3468 predicted value 4.9539435272592796 real value 5.0
+Prediction for user 4 for item 1210 predicted value 3.273176391305809 real value 3.0
+Prediction for user 4 for item 2951 predicted value 4.148990434128465 real value 4.0
+Prediction for user 4 for item 1214 predicted value 4.141268165254966 real value 4.0
+Prediction for user 4 for item 1036 predicted value 3.9216974813309196 real value 4.0
+Prediction for user 4 for item 260 predicted value 4.956520483958812 real value 5.0
+Prediction for user 4 for item 2028 predicted value 4.469099239851052 real value 5.0
+Prediction for user 4 for item 480 predicted value 3.936613610673629 real value 4.0
+Prediction for user 4 for item 1196 predicted value 2.1282571421424095 real value 2.0
+Prediction for user 4 for item 1198 predicted value 4.449481017782589 real value 5.0
+Prediction for user 4 for item 1954 predicted value 5.130924755111009 real value 5.0
+Prediction for user 4 for item 1097 predicted value 3.924033887540269 real value 4.0
+Prediction for user 4 for item 3418 predicted value 3.945644183825405 real value 4.0
+Prediction for user 4 for item 3702 predicted value 4.148788790047663 real value 4.0
+Prediction for user 4 for item 2366 predicted value 4.155249532304854 real value 4.0
+Prediction for user 4 for item 1387 predicted value 5.151817057614518 real value 5.0
+Prediction for user 4 for item 3527 predicted value 1.1958206327686125 real value 1.0
+Prediction for user 4 for item 1201 predicted value 5.176434211532567 real value 5.0
+Prediction for user 4 for item 2692 predicted value 5.0387046559395205 real value 5.0
+Prediction for user 4 for item 2947 predicted value 4.9959849437713695 real value 5.0
+Prediction for user 4 for item 1240 predicted value 4.991798966462563 real value 5.0
+Prediction for user 5 for item 2987 predicted value 4.048836494153948 real value 4.0
+Prediction for user 5 for item 2333 predicted value 4.074401477776782 real value 4.0
+Prediction for user 5 for item 1175 predicted value 5.0941288132320945 real value 5.0
+Prediction for user 5 for item 39 predicted value 3.139942559784127 real value 3.0
+Prediction for user 5 for item 288 predicted value 2.1889823693772676 real value 2.0
+Prediction for user 5 for item 2337 predicted value 5.207050460392152 real value 5.0
+Prediction for user 5 for item 1535 predicted value 4.250876840678095 real value 4.0
+Prediction for user 5 for item 1392 predicted value 4.288981306179986 real value 4.0
+Prediction for user 5 for item 2268 predicted value 3.5914799595251905 real value 2.0
+Prediction for user 5 for item 1466 predicted value 2.6826297230666603 real value 3.0
+Prediction for user 5 for item 860 predicted value 2.340555635907408 real value 2.0
+Prediction for user 5 for item 1683 predicted value 3.367669417136415 real value 3.0
+Prediction for user 5 for item 866 predicted value 4.381825951079386 real value 4.0
+Prediction for user 5 for item 1684 predicted value 3.403526551246562 real value 3.0
+Prediction for user 5 for item 2916 predicted value 1.6677023194703713 real value 1.0
+Prediction for user 5 for item 2770 predicted value 4.398168004455026 real value 4.0
+Prediction for user 5 for item 215 predicted value 3.39016753317342 real value 3.0
+Prediction for user 5 for item 1759 predicted value 4.359731771989038 real value 4.0
+Prediction for user 5 for item 501 predicted value 1.3471277057516229 real value 1.0
+Prediction for user 5 for item 3578 predicted value 2.216556910865478 real value 2.0
+Prediction for user 5 for item 506 predicted value 4.215545577418272 real value 4.0
+Prediction for user 5 for item 1250 predicted value 5.153603905227292 real value 5.0
+Prediction for user 5 for item 3793 predicted value 2.713504936668688 real value 2.0
+Prediction for user 5 for item 509 predicted value 4.102248229152465 real value 4.0
+Prediction for user 5 for item 41 predicted value 4.04344913728672 real value 4.0
+Prediction for user 5 for item 1610 predicted value 3.8606188199226925 real value 4.0
+Prediction for user 5 for item 2058 predicted value 1.0161025562155865 real value 1.0
+Prediction for user 5 for item 3799 predicted value 2.956452149434521 real value 3.0
+Prediction for user 5 for item 2997 predicted value 4.262697445299706 real value 5.0
+Prediction for user 5 for item 47 predicted value 2.21968122878471 real value 3.0
+Prediction for user 5 for item 2700 predicted value 3.1661886209093026 real value 4.0
+Prediction for user 5 for item 296 predicted value 3.1188445008900785 real value 4.0
+Prediction for user 5 for item 581 predicted value 2.0818048258395603 real value 3.0
+Prediction for user 5 for item 1617 predicted value 2.048761384877369 real value 3.0
+Prediction for user 5 for item 728 predicted value 2.7216788966905128 real value 4.0
+Prediction for user 5 for item 299 predicted value 2.0079695697559408 real value 3.0
+Prediction for user 5 for item 3079 predicted value 0.9823988479216536 real value 2.0
+Prediction for user 5 for item 2560 predicted value 2.948171647129973 real value 4.0
+Prediction for user 5 for item 1909 predicted value 1.919066435198393 real value 3.0
+Prediction for user 5 for item 150 predicted value 1.0256009479397656 real value 2.0
+Prediction for user 5 for item 224 predicted value 2.246324859726391 real value 3.0
+Prediction for user 5 for item 3728 predicted value 1.2481473212686205 real value 2.0
+Prediction for user 5 for item 229 predicted value 2.248618486019338 real value 3.0
+Prediction for user 5 for item 6 predicted value 1.274431270085446 real value 2.0
+Prediction for user 5 for item 3006 predicted value 2.285414238123464 real value 3.0
+Prediction for user 5 for item 2858 predicted value 2.769392987698739 real value 4.0
+Prediction for user 5 for item 1046 predicted value 2.717715760998308 real value 5.0
+Prediction for user 5 for item 515 predicted value 3.043236344430895 real value 4.0
+Prediction for user 5 for item 800 predicted value 1.1049799987070124 real value 2.0
+Prediction for user 5 for item 50 predicted value 4.098351208060145 real value 5.0
+Prediction for user 5 for item 52 predicted value 2.6775746734824155 real value 2.0
+Prediction for user 5 for item 1191 predicted value 1.1555801919396524 real value 2.0
+Prediction for user 5 for item 1192 predicted value 4.1502352572820715 real value 5.0
+Prediction for user 5 for item 733 predicted value 4.38714469324491 real value 1.0
+Prediction for user 5 for item 3081 predicted value 2.1899398232702527 real value 3.0
+Prediction for user 5 for item 377 predicted value 3.207303176316624 real value 4.0
+Prediction for user 5 for item 2353 predicted value 2.589236960850457 real value 3.0
+Prediction for user 5 for item 1268 predicted value 1.256991554044511 real value 2.0
+Prediction for user 5 for item 3083 predicted value 2.700048910580223 real value 5.0
+Prediction for user 5 for item 2427 predicted value 3.8735240570493255 real value 5.0
+Prediction for user 5 for item 3513 predicted value 2.712043722866628 real value 1.0
+Prediction for user 5 for item 2428 predicted value 1.7539437912213354 real value 3.0
+Prediction for user 5 for item 2355 predicted value 4.099175389395099 real value 5.0
+Prediction for user 5 for item 2282 predicted value 1.766615470523783 real value 3.0
+Prediction for user 5 for item 3514 predicted value 0.7830462404271403 real value 2.0
+Prediction for user 5 for item 1554 predicted value 1.7862280832149673 real value 3.0
+Prediction for user 5 for item 1912 predicted value 1.7828762958311906 real value 3.0
+Prediction for user 5 for item 593 predicted value 2.7574662428139822 real value 4.0
+Prediction for user 5 for item 2359 predicted value 1.7212628673905386 real value 3.0
+Prediction for user 5 for item 2716 predicted value 1.6899128961794947 real value 3.0
+Prediction for user 5 for item 1485 predicted value 1.682206607981416 real value 3.0
+Prediction for user 5 for item 2717 predicted value -0.02226630151762696 real value 1.0
+Prediction for user 5 for item 2571 predicted value 3.7075165815016526 real value 5.0
+Prediction for user 5 for item 2289 predicted value 2.703757167210115 real value 4.0
+Prediction for user 5 for item 162 predicted value 2.8060300146215695 real value 4.0
+Prediction for user 5 for item 1127 predicted value -0.16683858227537984 real value 1.0
+Prediction for user 5 for item 3016 predicted value 2.805751037317932 real value 4.0
+Prediction for user 5 for item 2070 predicted value 0.8409077330626815 real value 2.0
+Prediction for user 5 for item 1704 predicted value 2.6715392827443005 real value 3.0
+Prediction for user 5 for item 3163 predicted value 3.8096980481521374 real value 5.0
+Prediction for user 5 for item 2437 predicted value 0.842979619722699 real value 2.0
+Prediction for user 5 for item 2291 predicted value 3.8250829922592513 real value 5.0
+Prediction for user 5 for item 1635 predicted value 2.680179861967207 real value 4.0
+Prediction for user 5 for item 1279 predicted value -0.13391155350307055 real value 1.0
+Prediction for user 5 for item 2721 predicted value 1.85554010749776 real value 3.0
+Prediction for user 5 for item 2723 predicted value 2.6942283340260738 real value 4.0
+Prediction for user 5 for item 1921 predicted value 2.8577492772028803 real value 4.0
+Prediction for user 5 for item 2725 predicted value 0.8783405635995989 real value 2.0
+Prediction for user 5 for item 1923 predicted value 2.690537470134031 real value 3.0
+Prediction for user 5 for item 2580 predicted value 2.8654245914511107 real value 4.0
+Prediction for user 5 for item 3386 predicted value 0.8957081180899915 real value 2.0
+Prediction for user 5 for item 3744 predicted value -0.07613756543442826 real value 1.0
+Prediction for user 5 for item 968 predicted value 2.6512398154898476 real value 3.0
+Prediction for user 5 for item 896 predicted value 2.9142257957872877 real value 4.0
+Prediction for user 5 for item 3020 predicted value -0.03137264518307424 real value 1.0
+Prediction for user 5 for item 1788 predicted value 1.9755080920138086 real value 3.0
+Prediction for user 5 for item 318 predicted value 2.2480392198177825 real value 3.0
+Prediction for user 5 for item 176 predicted value 3.250542331631671 real value 4.0
+Prediction for user 5 for item 461 predicted value 2.2962853163780945 real value 3.0
+Prediction for user 5 for item 608 predicted value 3.294438190038682 real value 4.0
+Prediction for user 5 for item 1429 predicted value 2.380539161758269 real value 3.0
+Prediction for user 5 for item 2159 predicted value 0.4432769584209607 real value 1.0
+Prediction for user 5 for item 1715 predicted value 2.6963664295306367 real value 4.0
+Prediction for user 5 for item 1643 predicted value 2.69950360090061 real value 3.0
+Prediction for user 5 for item 3249 predicted value 0.49508254820440223 real value 1.0
+Prediction for user 5 for item 3176 predicted value 1.534127830784953 real value 2.0
+Prediction for user 5 for item 1719 predicted value 2.568519203565344 real value 3.0
+Prediction for user 5 for item 2806 predicted value 1.6096233976462955 real value 2.0
+Prediction for user 5 for item 2734 predicted value 2.7263271692891857 real value 2.0
+Prediction for user 5 for item 1649 predicted value 3.6273543293409403 real value 4.0
+Prediction for user 5 for item 321 predicted value 2.664778139334506 real value 3.0
+Prediction for user 5 for item 2013 predicted value 2.6822055987792797 real value 3.0
+Prediction for user 5 for item 3100 predicted value 0.7105548355586294 real value 1.0
+Prediction for user 5 for item 2952 predicted value 2.71282106802273 real value 2.0
+Prediction for user 5 for item 1213 predicted value 4.686191425901391 real value 5.0
+Prediction for user 5 for item 1794 predicted value 2.7008310816052545 real value 3.0
+Prediction for user 5 for item 2599 predicted value 4.674803464469625 real value 5.0
+Prediction for user 5 for item 1500 predicted value 2.679013328052548 real value 3.0
+Prediction for user 5 for item 3105 predicted value 1.8793587621126047 real value 2.0
+Prediction for user 5 for item 2959 predicted value 3.832286232326782 real value 4.0
+Prediction for user 5 for item 1509 predicted value 2.6890886654468376 real value 3.0
+Prediction for user 5 for item 1721 predicted value 0.862527168106688 real value 1.0
+Prediction for user 5 for item 1722 predicted value 1.8689533976784913 real value 2.0
+Prediction for user 5 for item 1650 predicted value 2.7094744093461003 real value 3.0
+Prediction for user 5 for item 908 predicted value 2.6941808905355384 real value 4.0
+Prediction for user 5 for item 1580 predicted value 3.63071195737859 real value 4.0
+Prediction for user 5 for item 1653 predicted value 1.6982632550270662 real value 2.0
+Prediction for user 5 for item 2384 predicted value 2.6937440676315876 real value 3.0
+Prediction for user 5 for item 1729 predicted value 3.683878149917135 real value 4.0
+Prediction for user 5 for item 3476 predicted value 2.689637229553219 real value 3.0
+Prediction for user 5 for item 2890 predicted value 3.6895251339110473 real value 4.0
+Prediction for user 5 for item 3113 predicted value 2.68782115360643 real value 1.0
+Prediction for user 5 for item 2028 predicted value 2.0245280920949735 real value 2.0
+Prediction for user 5 for item 16 predicted value 3.0138572469035245 real value 3.0
+Prediction for user 5 for item 265 predicted value 2.986080207490723 real value 3.0
+Prediction for user 5 for item 2029 predicted value 3.9841449476292943 real value 4.0
+Prediction for user 5 for item 194 predicted value 2.993611608596804 real value 3.0
+Prediction for user 5 for item 551 predicted value 2.6660275699847378 real value 4.0
+Prediction for user 5 for item 1513 predicted value 3.978497934332033 real value 4.0
+Prediction for user 5 for item 3046 predicted value 2.991744453024144 real value 3.0
+Prediction for user 5 for item 2318 predicted value 3.989921319758094 real value 4.0
+Prediction for user 5 for item 1517 predicted value 3.9850182742668756 real value 4.0
+Prediction for user 5 for item 1089 predicted value 4.988240824561141 real value 5.0
+Prediction for user 5 for item 3260 predicted value 3.9980241132486367 real value 4.0
+Prediction for user 5 for item 913 predicted value 4.997569463682967 real value 5.0
+Prediction for user 5 for item 1730 predicted value 4.006039984560367 real value 4.0
+Prediction for user 5 for item 3408 predicted value 3.023582259834285 real value 3.0
+Prediction for user 5 for item 3409 predicted value 3.034954141812374 real value 3.0
+Prediction for user 5 for item 2607 predicted value 2.040863029731028 real value 2.0
+Prediction for user 5 for item 1449 predicted value 4.031844620120229 real value 4.0
+Prediction for user 5 for item 1732 predicted value 2.7153570679534744 real value 5.0
+Prediction for user 5 for item 1733 predicted value 3.031161115121135 real value 3.0
+Prediction for user 5 for item 2390 predicted value 4.004816899397567 real value 4.0
+Prediction for user 5 for item 1734 predicted value 2.684523369384609 real value 4.0
+Prediction for user 5 for item 3266 predicted value 2.0015404241644883 real value 2.0
+Prediction for user 5 for item 3267 predicted value 3.9544028009073724 real value 4.0
+Prediction for user 5 for item 919 predicted value 3.796676672463161 real value 4.0
+Prediction for user 5 for item 3624 predicted value 2.7560608639228468 real value 3.0
+Prediction for user 5 for item 2395 predicted value 4.690234327067095 real value 5.0
+Prediction for user 5 for item 1594 predicted value 0.6597585220963242 real value 1.0
+Prediction for user 5 for item 2683 predicted value 2.594100951248325 real value 3.0
+Prediction for user 5 for item 412 predicted value 1.5485481523516256 real value 2.0
+Prediction for user 5 for item 2759 predicted value 2.48753743327635 real value 3.0
+Prediction for user 5 for item 994 predicted value 4.414390216922078 real value 5.0
+Prediction for user 5 for item 1884 predicted value 2.365982499768287 real value 3.0
+Prediction for user 5 for item 1885 predicted value 3.313163136585157 real value 4.0
+Prediction for user 5 for item 272 predicted value 2.272788608165445 real value 3.0
+Prediction for user 5 for item 24 predicted value 0.2468129685669133 real value 1.0
+Prediction for user 5 for item 3051 predicted value 1.2226686114355294 real value 2.0
+Prediction for user 5 for item 348 predicted value 3.1880830191081597 real value 4.0
+Prediction for user 5 for item 2323 predicted value 3.163668680208116 real value 4.0
+Prediction for user 5 for item 1093 predicted value 1.1611549926684135 real value 2.0
+Prediction for user 5 for item 29 predicted value 4.1409718352661145 real value 5.0
+Prediction for user 5 for item 562 predicted value 2.7065005679752314 real value 4.0
+Prediction for user 5 for item 1095 predicted value 3.139997798059451 real value 4.0
+Prediction for user 5 for item 1527 predicted value 2.223466150341915 real value 3.0
+Prediction for user 5 for item 1529 predicted value 2.6990902031345336 real value 4.0
+Prediction for user 5 for item 3418 predicted value 2.6789825912986136 real value 3.0
+Prediction for user 5 for item 2188 predicted value 0.31365842877254874 real value 1.0
+Prediction for user 5 for item 497 predicted value 2.3347645215080943 real value 3.0
+Prediction for user 5 for item 202 predicted value 1.354674677040061 real value 2.0
+Prediction for user 5 for item 1747 predicted value 1.3868584762648972 real value 2.0
+Prediction for user 5 for item 2908 predicted value 2.679130484590982 real value 4.0
+Prediction for user 5 for item 2762 predicted value 2.6849836701300607 real value 3.0
+Prediction for user 5 for item 2692 predicted value 3.6885939879788796 real value 4.0
+Prediction for user 5 for item 1966 predicted value 1.4073521366837776 real value 2.0
+Prediction for user 5 for item 3499 predicted value 2.4293213950967623 real value 3.0
+Prediction for user 5 for item 353 predicted value 2.699082899912305 real value 2.0
+Prediction for user 5 for item 32 predicted value 3.4361745755431787 real value 4.0
+Prediction for user 5 for item 1243 predicted value 2.469311575383167 real value 3.0
+Prediction for user 5 for item 1897 predicted value 3.4698244121263175 real value 4.0
+Prediction for user 5 for item 1171 predicted value 3.4853745586974307 real value 4.0
+Prediction for user 5 for item 3786 predicted value 2.505633162322822 real value 3.0
+Prediction for user 5 for item 34 predicted value 3.520241646933801 real value 4.0
+Prediction for user 5 for item 356 predicted value 0.5751367685080357 real value 1.0
+Prediction for user 5 for item 357 predicted value 2.7016474513368447 real value 2.0
+Prediction for user 5 for item 36 predicted value 2.9849907768779236 real value 3.0
+Prediction for user 5 for item 714 predicted value 3.9968625721044435 real value 4.0
+Prediction for user 6 for item 2406 predicted value 4.9266646064473685 real value 5.0
+Prediction for user 6 for item 1101 predicted value 3.902302675057116 real value 4.0
+Prediction for user 6 for item 3717 predicted value 3.8765592351523432 real value 4.0
+Prediction for user 6 for item 1030 predicted value 3.8552154370977294 real value 4.0
+Prediction for user 6 for item 1688 predicted value 4.828814375494801 real value 5.0
+Prediction for user 6 for item 1035 predicted value 4.835569059107052 real value 5.0
+Prediction for user 6 for item 3578 predicted value 3.8906654589891336 real value 4.0
+Prediction for user 6 for item 364 predicted value 3.871762116542319 real value 4.0
+Prediction for user 6 for item 3501 predicted value 4.85320413997427 real value 5.0
+Prediction for user 6 for item 3072 predicted value 3.8446682870236106 real value 4.0
+Prediction for user 6 for item 368 predicted value 3.7965084893046526 real value 4.0
+Prediction for user 6 for item 296 predicted value 4.1844787403102615 real value 2.0
+Prediction for user 6 for item 48 predicted value 4.75696538434191 real value 5.0
+Prediction for user 6 for item 3074 predicted value 3.7920975952042975 real value 5.0
+Prediction for user 6 for item 1188 predicted value 3.7790579057135414 real value 4.0
+Prediction for user 6 for item 3508 predicted value 2.80091336674899 real value 3.0
+Prediction for user 6 for item 588 predicted value 3.802082470912103 real value 4.0
+Prediction for user 6 for item 1 predicted value 3.813595253137645 real value 4.0
+Prediction for user 6 for item 1043 predicted value 3.8173425690314104 real value 4.0
+Prediction for user 6 for item 2858 predicted value 1.042117801545022 real value 1.0
+Prediction for user 6 for item 377 predicted value 4.33185314174616 real value 3.0
+Prediction for user 6 for item 590 predicted value 3.5862381020743843 real value 3.0
+Prediction for user 6 for item 595 predicted value 4.771637511210329 real value 4.0
+Prediction for user 6 for item 597 predicted value 5.797618867657739 real value 5.0
+Prediction for user 6 for item 383 predicted value 4.8150623126070125 real value 4.0
+Prediction for user 6 for item 2506 predicted value 3.773728285361243 real value 3.0
+Prediction for user 6 for item 3524 predicted value 3.8386314032007607 real value 3.0
+Prediction for user 6 for item 1566 predicted value 4.645864526502427 real value 4.0
+Prediction for user 6 for item 1569 predicted value 4.645292988599491 real value 4.0
+Prediction for user 6 for item 2006 predicted value 4.454830004437301 real value 4.0
+Prediction for user 6 for item 2081 predicted value 4.35870351344253 real value 4.0
+Prediction for user 6 for item 2082 predicted value 3.3777245362782926 real value 3.0
+Prediction for user 6 for item 3600 predicted value 3.832180513111303 real value 3.0
+Prediction for user 6 for item 3604 predicted value 5.357450279800484 real value 5.0
+Prediction for user 6 for item 2802 predicted value 3.806049731808038 real value 4.0
+Prediction for user 6 for item 3534 predicted value 4.260744656780238 real value 4.0
+Prediction for user 6 for item 3536 predicted value 5.285119802657046 real value 5.0
+Prediction for user 6 for item 1210 predicted value 3.2360548149066557 real value 3.0
+Prediction for user 6 for item 3753 predicted value 5.152769278092899 real value 5.0
+Prediction for user 6 for item 3682 predicted value 3.1573469192610437 real value 3.0
+Prediction for user 6 for item 2017 predicted value 3.1430777330254362 real value 3.0
+Prediction for user 6 for item 3685 predicted value 3.8480553402660655 real value 3.0
+Prediction for user 6 for item 3610 predicted value 3.8167904448565433 real value 3.0
+Prediction for user 6 for item 1296 predicted value 3.1257773555551394 real value 3.0
+Prediction for user 6 for item 838 predicted value 4.094875958263887 real value 4.0
+Prediction for user 6 for item 1007 predicted value 3.076559904298119 real value 3.0
+Prediction for user 6 for item 1947 predicted value 5.0321864202408815 real value 5.0
+Prediction for user 6 for item 2966 predicted value 4.996715831123845 real value 5.0
+
+Process finished with exit code 0

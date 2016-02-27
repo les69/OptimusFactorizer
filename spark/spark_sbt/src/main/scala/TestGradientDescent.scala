@@ -1,3 +1,5 @@
+import java.security.MessageDigest
+
 import breeze.linalg.DenseVector
 import org.apache.spark.examples.ml.TestALS.Movie
 import org.apache.spark.rdd.RDD
@@ -26,8 +28,8 @@ object TestGradientDescent {
 
     val bias_learning_rate = 0.5
     val biasReg = 0.1
-    val numFeatures = 20
-    val numIterations = 25
+    val numFeatures = 10
+    val numIterations = 50
 
 
 
@@ -45,8 +47,8 @@ object TestGradientDescent {
         val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
 
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
-        //val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
-        val totUsers = ratings.map(_.userId).distinct().collect()
+        val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
+        //val totUsers = ratings.map(_.userId).distinct().collect()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
 
@@ -281,6 +283,9 @@ object TestGradientDescent {
 
         }
 
+    }
+    def md5(s: String): String = {
+        MessageDigest.getInstance("MD5").digest(s.getBytes).map("%02x".format(_)).mkString
     }
     
 }
