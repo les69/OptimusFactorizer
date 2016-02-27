@@ -425,6 +425,36 @@ SGD using the various iterations with no synchronization. We also
 have decided to start using the smalles dataset from movielens to understand
 how long it will take to complete. The decision was wise because on the first
 run took around 8.7 hours to complete with a dataser of 1 million of ratings.
+The overall problem was already introduced in the previous chapters of this
+paper and it's the nature of this algorithm to not scale well with big datasets.
+Moreover if we consider our example and using $nIterations = 25, nFeatures = 20
+with nUsers = 6000 and nMovies = 4000$ we would have to compute nIterations *
+nUsers multiplied by the ratedmovies the dot product of the user item factor vectors, and update the values for
+nFeatures times. We can summarize the cost of our iteration as $O(nIterations * nUsers * ratedMovies * nFeatures)$.
+Since the number of users is typically the highest value this doesn't scale well with big datasets where the number of
+users reaches very high numbers and the number of computations becomes enormous.
+Altough the problem of scaling is relative to the algorithm we found out that
+some commonly used data structures and operations we used had a high impact on
+the performance.
+
+\subsection{The optimization game}
+
+In our first try we made a large use of lists and other structures which didn't
+perform very well on a large scale. Hereby there's a table of the common mistake
+we made during the first stage development and how we solved it.\\
+\begin{description}
+  \item[Lists] The first mistake we made was to use simple scala \textbf{Lists}. Altough their semplicity of use
+  they share a common problem: the cost of retrieving an element. The cost of getting an element from a List is $O(n)$,
+  which means the bigger the array the more time it will take to get an element. Luckily Scala gives also other much
+  better performing structures such as \textit{Arrays} and \textit{Dictionaris}, whose cost of getting an element is rispectively
+  $O(C) and O(eC)$. The first one performs slightly better on a large scale but they do both perform much better than Lists.
+  \item[Array] Altough Arrays are good for retrieving and updating elements they're not so good, on a large scale, for the dot product of vectors.
+  We tried to perform a dot product of two Arrays of 5 millions of random values and two \textit{DenseVectors} from the \textit{breeze} library
+  and the result was astonishing: 4948115 vs 39138 microseconds. We ran the experiment multiple times and the magnitude of the difference was the same
+  even using the \textit{parallel collections} to compute the dot product.
+  \item[RDD filtering] We needed to retrieve at each step the
+\end{description}
+
 
 
 

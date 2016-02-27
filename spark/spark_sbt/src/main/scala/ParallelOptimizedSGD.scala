@@ -55,8 +55,6 @@ object ParallelOptimizedSGD {
         //val movies =Array(1,2,3,4,5,6,7,8,9,10)
         //val totUsers =Array(1,2,3,4,5,6,7,8,9,10)
 
-        //test for deploy
-        DenseVector.fill(5000){rand.nextDouble()}.dot(DenseVector.fill(5000){rand.nextDouble()})
 
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
 

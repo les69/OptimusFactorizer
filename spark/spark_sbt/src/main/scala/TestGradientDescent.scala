@@ -28,7 +28,7 @@ object TestGradientDescent {
 
     val bias_learning_rate = 0.5
     val biasReg = 0.1
-    val numFeatures = 10
+    val numFeatures = 25
     val numIterations = 50
 
 
@@ -47,8 +47,8 @@ object TestGradientDescent {
         val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
 
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
-        val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
-        //val totUsers = ratings.map(_.userId).distinct().collect()
+        //val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
+        val totUsers = ratings.map(_.userId).distinct().collect()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
 
@@ -101,7 +101,7 @@ object TestGradientDescent {
             println("Iteration "+iteration+" out of "+numIterations)
             println("Current prediction")
             println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
-            cachedUsers.zipWithIndex.foreach{
+            userMatrix.zipWithIndex.foreach{
                 userRow =>
                     val loopIndex = userRow._2
                     val uid = cachedUsers.apply(loopIndex)
