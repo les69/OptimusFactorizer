@@ -64,20 +64,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="output-1.txt" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/output-1.txt">
+      <file leaf-file-name="build.sbt" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build.sbt">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="83" column="9" selection-start-line="83" selection-start-column="0" selection-end-line="83" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.24077046">
+              <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ParallelOptimizedSGD.scala" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ParallelOptimizedSGD.scala" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/scala/ParallelOptimizedSGD.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.39807382">
+            <state vertical-scroll-proportion="0.0">
               <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
@@ -127,6 +127,7 @@
         <option value="$PROJECT_DIR$/src/main/scala/NonOptimizedSGD.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/TestGradientDescent.scala" />
         <option value="$PROJECT_DIR$/src/main/scala/ParallelOptimizedSGD.scala" />
+        <option value="$PROJECT_DIR$/build.sbt" />
       </list>
     </option>
   </component>
@@ -811,7 +812,7 @@
     </recent_temporary>
   </component>
   <component name="SbtLocalSettings">
-    <option name="lastUpdateTimestamp" value="1456161781576" />
+    <option name="lastUpdateTimestamp" value="1456590454739" />
     <option name="availableProjects">
       <map>
         <entry>
@@ -839,7 +840,7 @@
     <option name="modificationStamps">
       <map>
         <entry key="$USER_HOME$/Developing/spark_test" value="1455538919000" />
-        <entry key="$PROJECT_DIR$" value="1456161604000" />
+        <entry key="$PROJECT_DIR$" value="1456590365000" />
       </map>
     </option>
     <option name="externalProjectsViewState">
@@ -861,12 +862,12 @@
       <workItem from="1456254485203" duration="3287000" />
       <workItem from="1456317354332" duration="6295000" />
       <workItem from="1456436855378" duration="5763000" />
-      <workItem from="1456505716241" duration="33433000" />
+      <workItem from="1456505716241" duration="33940000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="54081000" />
+    <option name="totallyTimeSpent" value="54588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
@@ -1190,14 +1191,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.sbt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/TestSGDSVM.scala">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1312,11 +1305,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/ParallelOptimizedSGD.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.39807382">
+        <state vertical-scroll-proportion="0.0">
           <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.sbt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24077046">
+          <caret line="10" column="42" selection-start-line="10" selection-start-column="42" selection-end-line="10" selection-end-column="42" />
+          <folding />
         </state>
       </provider>
     </entry>
