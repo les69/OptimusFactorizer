@@ -101,10 +101,8 @@ object TestGradientDescent {
             println("Iteration "+iteration+" out of "+numIterations)
             println("Current prediction")
             println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
-            userMatrix.zipWithIndex.foreach{
+            cachedUsers.zipWithIndex.foreach{
                 userRow =>
-
-
                     val loopIndex = userRow._2
                     val uid = cachedUsers.apply(loopIndex)
                     val iid = cachedItems.apply(loopIndex)
