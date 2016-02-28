@@ -6,151 +6,151 @@ Current prediction
 3.6489664131091195
 Iteration 1 out of 50
 Current prediction
-4.721069791149768
+4,721069791149768
 Iteration 2 out of 50
 Current prediction
-5.211809067335212
+5,211809067335212
 Iteration 3 out of 50
 Current prediction
-5.368256636298672
+5,368256636298672
 Iteration 4 out of 50
 Current prediction
-5.403489226260065
+5,403489226260065
 Iteration 5 out of 50
 Current prediction
-5.384250467205779
+5,384250467205779
 Iteration 6 out of 50
 Current prediction
-5.340757306296703
+5,340757306296703
 Iteration 7 out of 50
 Current prediction
-5.279321707747806
+5,279321707747806
 Iteration 8 out of 50
 Current prediction
-5.200631737884267
+5,200631737884267
 Iteration 9 out of 50
 Current prediction
-5.1176852580344265
+5,1176852580344265
 Iteration 10 out of 50
 Current prediction
-5.05467542478311
+5,05467542478311
 Iteration 11 out of 50
 Current prediction
-5.02853011888876
+5,02853011888876
 Iteration 12 out of 50
 Current prediction
-5.034298439871841
+5,034298439871841
 Iteration 13 out of 50
 Current prediction
-5.054757477163072
+5,054757477163072
 Iteration 14 out of 50
 Current prediction
-5.07703053951114
+5,07703053951114
 Iteration 15 out of 50
 Current prediction
-5.09610429035669
+5,09610429035669
 Iteration 16 out of 50
 Current prediction
-5.111398020549961
+5,111398020549961
 Iteration 17 out of 50
 Current prediction
-5.1237457708212615
+5,111398020549961
 Iteration 18 out of 50
 Current prediction
-5.134122406825141
+5,134122406825141
 Iteration 19 out of 50
 Current prediction
-5.143295124645783
+5,143295124645783
 Iteration 20 out of 50
 Current prediction
-5.151773700795537
+5,151773700795537
 Iteration 21 out of 50
 Current prediction
-5.159837027483364
+5,159837027483364
 Iteration 22 out of 50
 Current prediction
-5.167579355987886
+5,167579355987886
 Iteration 23 out of 50
 Current prediction
-5.174962332088209
+5,174962332088209
 Iteration 24 out of 50
 Current prediction
-5.181866721591331
+5,181866721591331
 Iteration 25 out of 50
 Current prediction
-5.188138644670306
+5,188138644670306
 Iteration 26 out of 50
 Current prediction
-5.19362611494026
+5,19362611494026
 Iteration 27 out of 50
 Current prediction
-5.198203772938606
+5,198203772938606
 Iteration 28 out of 50
 Current prediction
-5.2017861247245945
+5,2017861247245945
 Iteration 29 out of 50
 Current prediction
-5.204331401533579
+5,204331401533579
 Iteration 30 out of 50
 Current prediction
-5.205838949849194
+5,205838949849194
 Iteration 31 out of 50
 Current prediction
-5.206342976322488
+5,206342976322488
 Iteration 32 out of 50
 Current prediction
-5.205904877280797
+5,205904877280797
 Iteration 33 out of 50
 Current prediction
-5.204605632851024
+5,204605632851024
 Iteration 34 out of 50
 Current prediction
-5.202539071756275
+5,202539071756275
 Iteration 35 out of 50
 Current prediction
-5.199806315938229
+5,199806315938229
 Iteration 36 out of 50
 Current prediction
-5.196511405540394
+5,196511405540394
 Iteration 37 out of 50
 Current prediction
-5.192757949756486
+5,192757949756486
 Iteration 38 out of 50
 Current prediction
-5.18864659913477
+5,18864659913477
 Iteration 39 out of 50
 Current prediction
-5.184273145771583
+5,184273145771583
 Iteration 40 out of 50
 Current prediction
-5.179727096240684
+5,179727096240684
 Iteration 41 out of 50
 Current prediction
-5.175090606789422
+5,175090606789422
 Iteration 42 out of 50
 Current prediction
-5.170437709690637
+5,170437709690637
 Iteration 43 out of 50
 Current prediction
-5.1658337888410335
+5,1658337888410335
 Iteration 44 out of 50
 Current prediction
-5.16133528106071
+5,16133528106071
 Iteration 45 out of 50
 Current prediction
-5.1569895885732295
+5,1569895885732295
 Iteration 46 out of 50
 Current prediction
-5.152835190227044
+5,152835190227044
 Iteration 47 out of 50
 Current prediction
-5.148901936670094
+5,128901936670094
 Iteration 48 out of 50
 Current prediction
-5.145211510137902
+5,095211510137902
 Iteration 49 out of 50
 Current prediction
-5.141778024514756
+5,011778024514756
 Iteration 50 out of 50
 Current prediction
 5.138608737113888

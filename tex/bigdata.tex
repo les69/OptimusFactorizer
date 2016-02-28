@@ -413,6 +413,18 @@ which goes perfectly with the latter peculiarity of functional languages.
 \subsection{Spark}
 \subsection{Flink}
 \subsection{MovieLens Dataset Structure}
+In our project we used mostly two datasets from Movielens: the 1 million ratings
+and the full dataset.
+\begin{table}
+\centering
+\caption{MovieLens datasets}
+\begin{tabular}{|c|c|c|c|} \hline
+-  & \textbf{Ratings} & \textbf{Users} & \textbf{Movies}\\ \hline
+\textbf{1 Million dataset} & 1.000.000 & 6.000 & 4.000 \\ \hline
+\textbf{Full dataset} & 22.000.000 & 240.000 & 33.000  \\ \hline
+\end{tabular}
+\end{table}
+
 
 
 
@@ -427,8 +439,8 @@ how long it will take to complete. The decision was wise because on the first
 run took around 8.7 hours to complete with a dataser of 1 million of ratings.
 The overall problem was already introduced in the previous chapters of this
 paper and it's the nature of this algorithm to not scale well with big datasets.
-Moreover if we consider our example and using $nIterations = 25, nFeatures = 20
-with nUsers = 6000 and nMovies = 4000$ we would have to compute nIterations *
+Moreover if we consider our example and using $nIterations = 25$, $nFeatures = 20$
+with $nUsers = 6000$ and $nMovies = 4000$ we would have to compute nIterations *
 nUsers multiplied by the ratedmovies the dot product of the user item factor vectors, and update the values for
 nFeatures times. We can summarize the cost of our iteration as $O(nIterations * nUsers * ratedMovies * nFeatures)$.
 Since the number of users is typically the highest value this doesn't scale well with big datasets where the number of
@@ -437,30 +449,104 @@ Altough the problem of scaling is relative to the algorithm we found out that
 some commonly used data structures and operations we used had a high impact on
 the performance.
 
+\subsection{The algorithm}
+In our implementation we used a variant of the simple SGD called biased SGD
+which considers also some bias related to users and items.
+Biases are really important in our example, because ratings are personal
+driven decisions makes them differ from person to person. Let's say that
+the overall average is 3.6 (that's the real average in our dataset) and
+Start Wars is a movie above the average which means it tends to be rated
+0.5 more than other films. On the other hand we have a critical user Bob,
+who tends to give lower than average ratings to movies around 0.3,in our
+case the starting point for the prediction would be (3.6 + 0.5 - 0.3) = 3.8.
+The predicted rating will be\\
+\textit{predictedRating = $\mu$ + userbias + itembias + vectorFactorProduct}
+
+\begin{description}
+    \item[Epoch Loop] The first step of the algorithm is to iterate a given number of epochs and update the users. This
+    is the basic loop
+    \item[User-Item Loop] The user-item loop is executed each time inside the former loop. This is a nested loop
+    which goes through all the user and for each of them all the items for which they do have a non-zero rating.
+    For each of this couple of user-items we first predict the value for the item and compute the relative error
+    as follows: $error = predictedValue - realValue$. The value is predicted with the dot product of the
+    factor vectors associated to the relative user and item. Here we also update the biases related
+    to both user and items with the following formula $bias = bias + alpha * (err - biasRegulator * preventOverfitting * bias)$.
+    This allows us to adapt the user bias for any given rating; alpha is a float value, usually around 0.5
+    used to help the system's precision in the bias computation. PreventOverfitting is another float value
+    used to deacrease the chance of overfitting the data, in our example is always around 0.1. It has been already mentioned during
+    this paper under the name of $\lambda$, used to reduce the impact magnitude of each rating.
+    \item[Feature Loop] The feature loop is an iteration for all the features associated to the user and item vector factor;
+    since the number of features is the same for both user and item factors we can solve everything in a single loop.
+
+
+\end{description}
+
+
+
 \subsection{The optimization game}
 
 In our first try we made a large use of lists and other structures which didn't
 perform very well on a large scale. Hereby there's a table of the common mistake
 we made during the first stage development and how we solved it.\\
 \begin{description}
-  \item[Lists] The first mistake we made was to use simple scala \textbf{Lists}. Altough their semplicity of use
+  \item[Lists] The first mistake we made was to use simple scala \textit{Lists}. Altough their semplicity of use
   they share a common problem: the cost of retrieving an element. The cost of getting an element from a List is $O(n)$,
   which means the bigger the array the more time it will take to get an element. Luckily Scala gives also other much
   better performing structures such as \textit{Arrays} and \textit{Dictionaris}, whose cost of getting an element is rispectively
-  $O(C) and O(eC)$. The first one performs slightly better on a large scale but they do both perform much better than Lists.
+  $O(C)$ and $O(eC)$. The first one performs slightly better on a large scale but they do both perform much better than Lists.
   \item[Array] Altough Arrays are good for retrieving and updating elements they're not so good, on a large scale, for the dot product of vectors.
   We tried to perform a dot product of two Arrays of 5 millions of random values and two \textit{DenseVectors} from the \textit{breeze} library
   and the result was astonishing: 4948115 vs 39138 microseconds. We ran the experiment multiple times and the magnitude of the difference was the same
   even using the \textit{parallel collections} to compute the dot product.
-  \item[RDD filtering] We needed to retrieve at each step the
+  \item[RDD filtering] We needed to retrieve at each step the real rating from the dataset and order to compute this operation we filtered
+  directly the distributed Dataset. Even though the dataset is distributed it had a very high cost of information retrieval, a value around 132080 microseconds.
+  We have then decided to cache all the ratings using an \textit{md5 digest} computed using the \textit{userID} a space and the \textit{movieID} to have
+  a unique value (e.g. "2293 345"). This operations has a non negligible cost but after the initial setup the improvement was noticeable: 48 microseconds compared
+  to the previous 132080.
 \end{description}
 
 
 
 
+
 \section{Results}
+Before running the tests on the final version with the full dataset we ran some examples
+on our laptops which has a much more limited computational power.
+
+\begin{enumerate}
+  \item The first test was run on a local machine with 25 iterations and 15 features.In picture[2] we can see the slow convergence with the typical curve of SGD with a
+  very high peak in the beginning and then a fall until convergence to the real rating, 5.0 in our case. The overall iteration took around 5 minutes to complete with an
+  accettable error: rmse = 1.09
+
+
+  \item The second item
+  \item The third etc \ldots
+\end{enumerate}
+
+\begin{figure}
+    \caption{Figure 2}
+    \centering
+    \includegraphics[scale=0.175]{chart.png}
+\end{figure}
+
+\subsection{The parallel version}
+We analyzed the iterative version and in order to proceede in the parallelization
+we had to find some indipendent parts in our code. We made the assumption
+that all users may be processes indipendently even though the items will be shared.
+We solved this problem using concurrency on the items allowing only one of the
+parallel executions to have it. \\
+
+
 
 \section{Conclusions}
+Research not always means finding the new disruptive innovation
+or the coolest algorithm; most of the times you try
+you make mistakes and most important of all you \textit{learn}.
+We learned that very likely Scala is not the best programming language
+for not parallel algorithms; maybe a C++ solution would have been faster as
+expected. Maybe Stochastic Gradient Descent is not the best approach for matrix
+factorization, which would explain why there is no Scala implementation yet
+instead of the much more spreaded ALS.
 
 
 %
@@ -480,49 +566,5 @@ we made during the first stage development and how we solved it.\\
 %\balancecolumns
 \appendix
 %Appendix A
-\section{Headings in Appendices}
-The rules about hierarchical headings discussed above for
-the body of the article are different in the appendices.
-In the \textbf{appendix} environment, the command
-\textbf{section} is used to
-indicate the start of each Appendix, with alphabetic order
-designation (i.e. the first is A, the second B, etc.) and
-a title (if you include one).  So, if you need
-hierarchical structure
-\textit{within} an Appendix, start with \textbf{subsection} as the
-highest level. Here is an outline of the body of this
-document in Appendix-appropriate form:
-\subsection{Introduction}
-\subsection{The Body of the Paper}
-\subsubsection{Type Changes and  Special Characters}
-\subsubsection{Math Equations}
-\paragraph{Inline (In-text) Equations}
-\paragraph{Display Equations}
-\subsubsection{Citations}
-\subsubsection{Tables}
-\subsubsection{Figures}
-\subsubsection{Theorem-like Constructs}
-\subsubsection*{A Caveat for the \TeX\ Expert}
-\subsection{Conclusions}
-\subsection{Acknowledgments}
-\subsection{Additional Authors}
-This section is inserted by \LaTeX; you do not insert it.
-You just add the names and information in the
-\texttt{{\char'134}additionalauthors} command at the start
-of the document.
-\subsection{References}
-Generated by bibtex from your ~.bib file.  Run latex,
-then bibtex, then latex twice (to resolve references)
-to create the ~.bbl file.  Insert that ~.bbl file into
-the .tex source file and comment out
-the command \texttt{{\char'134}thebibliography}.
-% This next section command marks the start of
-% Appendix B, and does not continue the present hierarchy
-\section{More Help for the Hardy}
-The sig-alternate.cls file itself is chock-full of succinct
-and helpful comments.  If you consider yourself a moderately
-experienced to expert user of \LaTeX, you may find reading
-it useful but please remember not to change it.
-%\balancecolumns % GM June 2007
-% That's all folks!
+
 \end{document}

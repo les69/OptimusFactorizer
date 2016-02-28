@@ -78,17 +78,7 @@ object OptimizedSGD {
                 cachedRatings += digest -> r.rating.toDouble
         }
 
-        val testmd5 = md5("6 2966")
-        var time = System.nanoTime()
-        ratings.filter(r => r.movieId == 2966 && r.userId == 6)
-        var micros = (System.nanoTime - time) / 1000
-        println("rdd %d microseconds".format(micros))
 
-        time = System.nanoTime()
-        cachedRatings.apply(testmd5)
-        micros = (System.nanoTime - time) / 1000
-        println("dict %d microseconds".format(micros))
-        assert(true)
 
 
 
@@ -98,13 +88,12 @@ object OptimizedSGD {
                 val tmpVect = DenseVector.fill[Double](numFeatures){Random.nextDouble() * randomNoise}
                 userMap += user -> new VectorFactorItem(globalAvg.toDouble,0.0,1.0,numFeatures,joinVectors(Array(globalAvg,0.0,1.0),tmpVect))
         }
-        var itemMap =  new HashMap[Int, VectorFactorItem]
+        var itemMap =  new HashMap[Int, Array[Double]]
         movies.collect.foreach{
             item =>
-                val tmpVect = DenseVector.fill[Double](numFeatures){Random.nextDouble() * randomNoise}
-                itemMap += item -> new VectorFactorItem(1.0,1.0,0.0,numFeatures,joinVectors(Array(1.0,1.0,0.0),tmpVect))
+                val tmpVect = Array.fill[Double](numFeatures){Random.nextDouble() * randomNoise}
+                itemMap += item -> joinVectors(Array(1.0,1.0,0.0),tmpVect)
         }
-
 
 
         val userMatrix = totUsers.map {
@@ -132,16 +121,12 @@ object OptimizedSGD {
         println(predictRating(userMatrix.apply(cachedUsers.apply(0)), itemMatrix.apply(cachedItems.apply(0))))
 
 
-
         for (iteration <- 0 to numIterations) {
-            println("Iteration " + iteration + " out of " + numIterations)
-            println("Current prediction")
+            println("rmse training "+rmse(userMatrix,itemMap,training,cachedUsers,cachedItems))
+            println("rmse test "+rmse(userMatrix,itemMap,splits(1),cachedUsers,cachedItems))
             println(predictRating(userMatrix.apply(cachedUsers.apply(0)), itemMatrix.apply(cachedItems.apply(0))))
 
-            userMatrix.zipWithIndex.foreach{
-                userRow=>
-            }
-
+            updateUser(userMatrix,itemMap,cachedRatings,cachedUsers,cachedItems,currentLearningRate)
 
             /**
               * to remember:
@@ -151,14 +136,13 @@ object OptimizedSGD {
 
 
         }
-        println("rmse training "+rmse(userMatrix,itemMatrix,training,cachedUsers,cachedItems))
-        println("rmse test "+rmse(userMatrix,itemMatrix,splits(1),cachedUsers,cachedItems))
+
         testOutput(userMatrix,itemMatrix,ratings,cachedUsers,cachedItems)
     }
 
 
 
-    def updateUser(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]],ratings:Map[String,Double], cachedUsers:Array[Int], cachedItems:Array[Int], currentLearningRate:Double): Unit= {
+    def updateUser(userMatrix:Array[Array[Double]],itemMatrix:HashMap[Int,Array[Double]],ratings:HashMap[String,Double], cachedUsers:Array[Int], cachedItems:Array[Int], currentLearningRate:Double): Unit= {
         userMatrix.zipWithIndex.foreach {
             userRow =>
                 val loopIndex = userRow._2
@@ -167,42 +151,43 @@ object OptimizedSGD {
                 val userVector = userMatrix.apply(uid)
                 val itemVector = itemMatrix.apply(iid)
 
-                itemVector.synchronized {
-                    val pr_rating = predictRating(userVector, itemVector)
-                    val value = ratings.apply(uid.toString+" "+iid.toString)
-                    val err = value - pr_rating
 
-                    userVector.update(user_bias_index, userVector.apply(user_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * userVector.apply(user_bias_index)))
-                    itemVector.update(item_bias_index, itemVector.apply(item_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * itemVector.apply(item_bias_index)))
+                val pr_rating = predictRating(userVector, itemVector)
+                val value = ratings.apply(uid.toString+" "+iid.toString)
+                val err = value - pr_rating
 
-
-                    for (featureIndex <- feature_offset to numFeatures) {
-                        val uF = userVector.apply(featureIndex)
-                        val iF = itemVector.apply(featureIndex)
-
-                        val deltaUserFeature = err * iF - preventOverFitting * uF
-                        userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
+                userVector.update(user_bias_index, userVector.apply(user_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * userVector.apply(user_bias_index)))
+                itemVector.update(item_bias_index, itemVector.apply(item_bias_index) + bias_learning_rate * (err - biasReg * preventOverFitting * itemVector.apply(item_bias_index)))
 
 
-                        val deltaItemFeature = err * uF - preventOverFitting * iF
-                        itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
+                for (featureIndex <- feature_offset to numFeatures) {
+                    val uF = userVector.apply(featureIndex)
+                    val iF = itemVector.apply(featureIndex)
 
-                    }
-                    itemVector.notifyAll()
+                    val deltaUserFeature = err * iF - preventOverFitting * uF
+                    userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
+
+
+                    val deltaItemFeature = err * uF - preventOverFitting * iF
+                    itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
+
                 }
+
 
             }
 
     }
-    def rmse (userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]],ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Double={
+    def rmse (userMatrix:Array[Array[Double]],itemMatrix:HashMap[Int,Array[Double]],ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Double={
         var numRatings = 0
-        val res = userMatrix.zipWithIndex.map{
+        val res = cachedUsers.zipWithIndex.map{
             userRow=>
                 val loopIndex = userRow._2
                 val uid = cachedUsers.apply(loopIndex)
                 val iid = cachedItems.apply(loopIndex)
+                val v1 = userMatrix.apply(uid)
+                val v2 = itemMatrix.apply(iid)
 
-                val pr_rating = predictRating(userMatrix.apply(uid),itemMatrix.apply(iid))
+                val pr_rating = predictRating(v1,v2)
                 val temp = ratings.filter(r=> r.movieId == iid && r.userId == uid)
 
                 if(temp.collect().length > 0) {

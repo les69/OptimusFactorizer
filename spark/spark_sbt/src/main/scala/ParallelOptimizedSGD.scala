@@ -179,7 +179,6 @@ object ParallelOptimizedSGD {
                         itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
                     }
 
-                    item.notifyAll
                 }
 
         }

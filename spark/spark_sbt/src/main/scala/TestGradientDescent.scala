@@ -47,8 +47,8 @@ object TestGradientDescent {
         val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
 
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
-        //val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
-        val totUsers = ratings.map(_.userId).distinct().collect()
+        val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
+        //val totUsers = ratings.map(_.userId).distinct().collect()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
 
@@ -98,8 +98,11 @@ object TestGradientDescent {
         val time = System.nanoTime()
 
         for(iteration <- 0 to numIterations ){
-            println("Iteration "+iteration+" out of "+numIterations)
-            println("Current prediction")
+            //println("Iteration "+iteration+" out of "+numIterations)
+            //println("Current prediction")
+            println("rmse training "+rmse(userMatrix,itemMatrix,training,cachedUsers,cachedItems))
+            println("rmse test "+rmse(userMatrix,itemMatrix,splits(1),cachedUsers,cachedItems))
+
             println(predictRating(userMatrix.apply(cachedUsers.apply(0)),itemMatrix.apply(cachedItems.apply(0))))
             userMatrix.zipWithIndex.foreach{
                 userRow =>
@@ -169,7 +172,7 @@ object TestGradientDescent {
     }
     def rmse (userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]],ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Double={
         var numRatings = 0
-        val res = userMatrix.zipWithIndex.map{
+        val res = cachedUsers.zipWithIndex.map{
             userRow=>
                 val loopIndex = userRow._2
                 val uid = cachedUsers.apply(loopIndex)

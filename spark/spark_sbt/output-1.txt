@@ -2,85 +2,35 @@ output using 500 users with the 1m dataset 25 iterations with 20 features
 
 (Real value for user with item 1,1193 value: 5.0)
 Current prediction
-3.6521317377000035
+3,6521317377000035
 Iteration 0 out of 25
 Current prediction
-3.6521317377000035
-Iteration 1 out of 25
-Current prediction
-4.724491595313723
-Iteration 2 out of 25
-Current prediction
-4.894780712980309
-Iteration 3 out of 25
-Current prediction
-5.038154251399618
-Iteration 4 out of 25
-Current prediction
-5.01862984175368
-Iteration 5 out of 25
-Current prediction
-4.910386129568263
-Iteration 6 out of 25
-Current prediction
-4.7871717752434355
-Iteration 7 out of 25
-Current prediction
-4.688493144002371
-Iteration 8 out of 25
-Current prediction
-4.6280295059883425
-Iteration 9 out of 25
-Current prediction
-4.605028693613035
-Iteration 10 out of 25
-Current prediction
-4.611702692308028
-Iteration 11 out of 25
-Current prediction
-4.636971871607573
-Iteration 12 out of 25
-Current prediction
-4.66882348503826
-Iteration 13 out of 25
-Current prediction
-4.697172948811375
-Iteration 14 out of 25
-Current prediction
-4.716457364564057
-Iteration 15 out of 25
-Current prediction
-4.726207261011745
-Iteration 16 out of 25
-Current prediction
-4.729542625136607
-Iteration 17 out of 25
-Current prediction
-4.7307758756002665
-Iteration 18 out of 25
-Current prediction
-4.733431925693081
-Iteration 19 out of 25
-Current prediction
-4.739314732618266
-Iteration 20 out of 25
-Current prediction
-4.748558118370228
-Iteration 21 out of 25
-Current prediction
-4.760199163030813
-Iteration 22 out of 25
-Current prediction
-4.772822993295536
-Iteration 23 out of 25
-Current prediction
-4.785051595383106
-Iteration 24 out of 25
-Current prediction
-4.795827779818792
-Iteration 25 out of 25
-Current prediction
-4.804524757329373
+3,6521317377000035
+4,724491595313723
+4,894780712980309
+5,038154251399618
+5,01862984175368
+4,910386129568263
+4,7871717752434355
+4,688493144002371
+4,6280295059883425
+4,605028693613035
+4,611702692308028
+4,636971871607573
+4,66882348503826
+4,697172948811375
+4,716457364564057
+4,726207261011745
+4,729542625136607
+4,7307758756002665
+4,733431925693081
+4,739314732618266
+4,748558118370228
+4,760199163030813
+4,772822993295536
+4,785051595383106
+4,795827779818792
+4,804524757329373
 218874534 microseconds
 rmse training 0.4691208979865427
 rmse test 1.1584810445340314
