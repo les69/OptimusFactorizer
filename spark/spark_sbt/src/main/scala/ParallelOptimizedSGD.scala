@@ -212,7 +212,7 @@ object ParallelOptimizedSGD {
                 Math.pow(rating.rating - pr_val, 2)
         }.sum
 
-        Math.sqrt(res / ratings.collect.length
+        Math.sqrt(res / ratings.collect.length)
 
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
