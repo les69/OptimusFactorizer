@@ -111,19 +111,23 @@ object ParallelOptimizedSGD {
         println("Test prediction for user "+userItemMatrix.head._1+" with item "+userItemMatrix.head._2.head+" and real value "+cachedRatings.apply(md5val))
         val time = System.nanoTime()
         for(iteration <- 0 to numIterations ) {
-            println("Iteration " + iteration + " out of " + numIterations)
-            println("Current prediction")
-            println(predictRating(testUser.factors, testItem.factors))
+            //println("Iteration " + iteration + " out of " + numIterations)
+            //println("Current prediction")
+            //println(predictRating(testUser.factors, testItem.factors))
+            println("rmse training "+rmse(userMap,itemMap,training))
+            println("rmse test "+rmse(userMap,itemMap,splits(1)))
             userItemMatrix.foreach {
                 userItem =>
                     val uid = userItem._1
                     val preferencesVector = userItem._2
                     //println("Starting new thread for user "+uid)
-                    pool.execute(new Runnable {
+                    /**pool.execute(new Runnable {
                         override def run(): Unit = {
                             updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
                         }
-                    })
+                    })**/
+                    updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
+
 
 
 
