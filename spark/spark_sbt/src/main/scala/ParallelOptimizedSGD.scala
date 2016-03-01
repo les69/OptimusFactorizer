@@ -32,8 +32,8 @@ object ParallelOptimizedSGD {
 
     val bias_learning_rate = 0.5
     val biasReg = 0.1
-    val numFeatures = 50
-    val numIterations = 100
+    val numFeatures = 30
+    val numIterations = 50
     var pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
     var threadPool = List
 
@@ -114,8 +114,13 @@ object ParallelOptimizedSGD {
             //println("Iteration " + iteration + " out of " + numIterations)
             //println("Current prediction")
             //println(predictRating(testUser.factors, testItem.factors))
-            println("rmse training "+rmse(userMap,itemMap,training))
-            println("rmse test "+rmse(userMap,itemMap,splits(1)))
+
+            //just debug
+            if(iteration % 5 == 0) {
+                println("rmse training " + rmse(userMap, itemMap, training))
+                println("rmse test " + rmse(userMap, itemMap, splits(1)))
+            }
+
             userItemMatrix.foreach {
                 userItem =>
                     val uid = userItem._1
@@ -196,16 +201,18 @@ object ParallelOptimizedSGD {
         var count = 0
         val res = ratings.collect.map{
             rating=>
-                if(rating.userId <= 500) {
+               /** if(rating.userId <= 500) {
                     val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
                     count += 1
                     Math.pow(rating.rating - pr_val, 2)
                 }
                 else
-                    0
+                    0**/
+                val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
+                Math.pow(rating.rating - pr_val, 2)
         }.sum
 
-        Math.sqrt(res / count)
+        Math.sqrt(res / ratings.collect.length
 
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
