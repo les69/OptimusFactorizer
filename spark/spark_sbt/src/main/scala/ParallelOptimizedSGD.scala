@@ -33,7 +33,7 @@ object ParallelOptimizedSGD {
     val bias_learning_rate = 0.5
     val biasReg = 0.1
     val numFeatures = 30
-    val numIterations = 50
+    val numIterations = 100
     var pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
     var threadPool = List
 
@@ -126,7 +126,7 @@ object ParallelOptimizedSGD {
                     val uid = userItem._1
                     val preferencesVector = userItem._2
                     //println("Starting new thread for user "+uid)
-                    /**pool.execute(new Runnable {
+                   /** pool.execute(new Runnable {
                         override def run(): Unit = {
                             updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
                         }
@@ -137,10 +137,10 @@ object ParallelOptimizedSGD {
 
 
             }
-            println("Waiting for tasks to terminate")
-            pool.shutdown()
-            pool.awaitTermination(10000,TimeUnit.SECONDS)
-            pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
+            //println("Waiting for tasks to terminate")
+            //pool.shutdown()
+            //pool.awaitTermination(10000,TimeUnit.SECONDS)
+            //pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
 
             currentLearningRate *= learningRateDecay
 
@@ -201,18 +201,19 @@ object ParallelOptimizedSGD {
         var count = 0
         val res = ratings.collect.map{
             rating=>
-               /** if(rating.userId <= 500) {
+                if(rating.userId <= 500) {
                     val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
                     count += 1
                     Math.pow(rating.rating - pr_val, 2)
                 }
                 else
-                    0**/
+                    0/**
                 val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
-                Math.pow(rating.rating - pr_val, 2)
+                Math.pow(rating.rating - pr_val, 2)**/
         }.sum
 
-        Math.sqrt(res / ratings.collect.length)
+        Math.sqrt(res / count)
+        //Math.sqrt(res / ratings.collect.length)
 
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
