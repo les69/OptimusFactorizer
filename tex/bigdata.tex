@@ -380,6 +380,34 @@ and try to optimize it with a distributed version.
 
 \subsection{Alternating Least Square}
 
+\subsection{Machine Learning and BigData}
+%[TODO] check correctness of definitions
+Data by itself is useless if there is no way to extract information from it.
+That's why BigData goes always in couple with machine learning or data mining;
+these two different but linked branches of computer science aims to extract or predict
+relevant data from a huge amount of information. \textit{Data Mining} is a
+field of computer science where algorithms tries to find patterns and correlations
+analyzing data; there are some subcategories in data mining known as \textit{text mining}
+and \textit{process mining}. Text mining is used to find correlations between words
+in a text file, the most famous example is a search engines; search engines needs to
+find the approriate result matching the keywords analyzing the words in a webpage, the most
+common approach is \textbf{PageRank}. We can also use data mining to extract
+relevant information from our log files in order to detect errors, bottlenecs
+or anomal behaviours (attacks or viruses); this is called \textbf{process mining}.\\
+Machine learning is another branch of computer science used to make predictions
+after "teaching" the machine how to learn from data. The typical approach is
+to use a dataset called \textit{training data} (usually 80$\%$ of the dataset) to
+build a model. The training phase is where our algorithm makes predictions using
+the data and compute the error relative to the real value, and subsequently
+improve the predictions until convergence (e.g. when reaching a threshold for which
+the error is acceptable). After reaching the convergence threshold we have to
+test our data with unknown data (usually the remaining 20$\%$ of the dataset)
+and then compute the predictions on the latter. Typically
+the error is slightly higher with the test dataset (if we have the same error it means we have a wrong model),
+otherwise if the difference is significant it means that we are \textit{overfitting} the model. Overfitting means
+that we are training our model wrongly and it does not learn from the hidden correlations
+between values but instead from the noise relate to that.
+
 
 \section{Technologies and Challanges}
 
@@ -426,9 +454,21 @@ and the full dataset.
 \end{table}
 
 
+\subsection{The machines}
+During our test we used different machines for testing and for production (in other
+words real external server). For local testing we used\\
+\begin{table}
+\centering
+\caption{Computer}
+\begin{tabular}{|c|c|c|c|} \hline
+\textbf{OS} & \textbf{$\#$CPU} & \textbf{$\#$Threads} & \textbf{RAM}\\ \hline
+\textbf{Mac OS X} & 2 & 4 & 8 GB \\ \hline
+\textbf{Ubuntu 14.04 remote} & 4 & 8 & 8 GB  \\ \hline
+\end{tabular}
+\end{table}
 
 
-
+\subsection{Libraries}
 
 
 \section{Implementation}
@@ -504,7 +544,6 @@ we made during the first stage development and how we solved it.\\
   a unique value (e.g. "2293 345"). This operations has a non negligible cost but after the initial setup the improvement was noticeable: 48 microseconds compared
   to the previous 132080.
 \end{description}
-
 
 
 

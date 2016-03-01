@@ -102,6 +102,7 @@ object TestALS {
 
         val model = als.fit(training.toDF())
 
+
         val predictions = model.transform(test.toDF()).cache()
 
         // Evaluate the model.
