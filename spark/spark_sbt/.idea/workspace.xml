@@ -57,8 +57,8 @@
       <file leaf-file-name="ParallelOptimizedSGD.scala" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/ParallelOptimizedSGD.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.7566226">
-              <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.5778146">
+              <caret line="215" column="8" selection-start-line="215" selection-start-column="8" selection-end-line="215" selection-end-column="8" />
               <folding>
                 <element signature="e#0#34#0" expanded="true" />
               </folding>
@@ -843,12 +843,12 @@
       <workItem from="1456833521129" duration="1121000" />
       <workItem from="1456860044950" duration="176000" />
       <workItem from="1456870980677" duration="181000" />
-      <workItem from="1456872666873" duration="2177000" />
+      <workItem from="1456872666873" duration="2251000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67427000" />
+    <option name="totallyTimeSpent" value="67501000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1680" height="1050" extended-state="0" />
@@ -1366,8 +1366,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/ParallelOptimizedSGD.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7566226">
-          <caret line="35" column="27" selection-start-line="35" selection-start-column="27" selection-end-line="35" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.5778146">
+          <caret line="215" column="8" selection-start-line="215" selection-start-column="8" selection-end-line="215" selection-end-column="8" />
           <folding>
             <element signature="e#0#34#0" expanded="true" />
           </folding>
