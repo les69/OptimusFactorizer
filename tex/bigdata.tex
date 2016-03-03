@@ -134,8 +134,8 @@ art of recommendation systems.\\
 \textit{Collaborative Filtering} is the current buzzword in the
 world of recommendations, came to notoriety after the Netflix Prize
 challenge. In this paper we aim to analyze the current implementations
-of two different algorithms used for Collaborative Filtering: \textbf{ALS} and \textbf{Stochastic
-Gradient Descent} in combination with the common frameworks \texttt{Spark} and  \texttt{Flink}.
+of two different algorithms used for Collaborative Filtering: \textbf{Alternating Least Squares} (ALS) and \textbf{Stochastic
+Gradient Descent} (SGD) in combination with the common frameworks \texttt{Spark} and  \texttt{Flink}.
 \end{abstract}
 
 
@@ -147,22 +147,22 @@ Gradient Descent} in combination with the common frameworks \texttt{Spark} and  
 Recommender systems are now trending due to the overwhelming availability
 of data. These systems have the ability to discover hidden relationships between
 users and items, and use these patterns to improve the user's taste prediction.
-Reserachers discovered a "neighbourhood" of users with a similar taste
+Researchers discovered a "neighbourhood" of users with a similar taste
 which can be revealed by their previous actions: both implicit and explicit.
 \texttt{Collaborative filtering} is by far the most common approach adapted also by
 some of the biggest companies in the IT sector such as: \textbf{Amazon}, \textbf{Facebook} and \textbf{Netflix}.
-Altough it's massive presence in the market \texttt{CF} is not the only approach
-available for a recommender system, but it is actually the successor of
+Although it's massive presence in the market, \texttt{CF} is not the only approach
+available for a recommendation system, but it is actually the successor of
 \texttt{Content-Based filtering}. The latter aims to profile a user searching
 the correlation with the item's peculiarity. By item peculiarity we refer to
 its implicit and explicit characteristics, for example a song's genre,
 subgenre, writer, composer, year of composition, beats per second etc.
 The problem with this approach lays in the difficult of retrieving all the necessary
 information, which sometimes are not even available or discloable.
-Furthermore with the raise of the BigData paradigm some frameworks started to grow from
-the accademic world to the Apache Foundation: \textbf{Flink} and \textbf{Spark}.
+Furthermore with the raise of the Big Data paradigm some frameworks started to grow from
+the academic world to the Apache Foundation: \textbf{Flink} and \textbf{Spark}.
 Those frameworks can be seen an extension of the Hadoop ecosystem, and both of them
-have their own pros and contros which will be briefly analyzed further in this paper.
+have their own pros and cons which will be briefly analyzed further in this paper.
 
 
 
@@ -173,7 +173,7 @@ have their own pros and contros which will be briefly analyzed further in this p
 
 The paper is structured as follow: description in more details
 of \texttt{Collaborative Filtering} with it's problems, what are
-the most commong algorithms used with \texttt{CF} and a brief
+the most common algorithms used with \texttt{CF} and a brief
 introduction to both \textbf{Flink} and \textbf{Spark}.
 
 
@@ -184,7 +184,7 @@ introduction to both \textbf{Flink} and \textbf{Spark}.
 Collaborative Filtering can be subsenquently defined in two
 different approaches:
 
-\subsubsection{Memory-based Content Filtering}
+\subsubsection{Memory-based Collaborative Filtering}
 In \texttt{memory-based CF} uses user ratings to compute similarity
 between user and items and subsequently make a recommendation. Usually
 this approach involves "neighboring" algorithms such as \textbf{K-Nearest Neighbours}
@@ -197,14 +197,14 @@ is calculated using the \textbf{cosine similarity}.\\
 The recommendation is made by finding the top K similar users and aggregate their
 user-item matrices to find the appropriate recommendation.
 The typical problem of this approach is the difficult with scaling
-when the data gets bigger. Due to the \texttt{BigData} paradigm expansion
+when the data gets bigger. Due to the \texttt{Big Data} paradigm expansion
 this approach has been deprecated favoring the following approach.
 
 
-\subsubsection{Model-based Content Filtering}
+\subsubsection{Model-based Collaborative Filtering}
 The most common approach to \texttt{CF} is through the factorization
 of a very big and sparse matrix.[3] For example during the Netflix
-Prize at the participans were given a matrix of 8.5 billions of ratings,
+Prize at the participants were given a matrix of 8.5 billions of ratings,
 of which only 100 millions were non zero values.
 \textit{Model-based CF} uses machine-learning and data mining algorithms
 to uncover the latent factor model between users and items to
@@ -233,7 +233,7 @@ CF can be exploited to perturbate its prediction system with a technique
 called \textit{shilling attacks}. This happens when the input system (e.g. ratings)
 are given in the correct way trying to alter the recommendations to the one
 favoured by the attacker. It has also been noticed that these kind of attacks affect
-more user-based CF algorithms insted of item-based.[5]
+more user-based CF algorithms instead of item-based.[5]
 
 \subsubsection{Sparsity}
 
@@ -242,7 +242,7 @@ usually very sparse due to the typical proportion for which  \(nUsers \ll nItems
 As said previously the matrix which was given had only 100M ratings out of
 8.5 billions of records. This problem is solved using matrix factorization.
 
-
+%[TODO] correct all the formulas
 \section{Matrix Factorization}
 
 During the last decade a huge effort has been applied to solve the problem of
@@ -270,7 +270,7 @@ The concept behind \textit{matrix factorization} is to find two matrices
 $V,W$ relatively \textit{\textbf{m}} x \textit{\textbf{p}},\textit{\textbf{n}} x \textit{\textbf{p}}. which product
 can approximate a much bigger matrix $R$ of dimensions \textit{\textbf{m}} x \textit{\textbf{n}}.\\
     %\textit{R} \(\approx\) \textit{V} * \textit{W}
-    $R \approx V * W $
+    $R \approx V * W^T $
 }\\
 \includegraphics[scale=0.45]{matrix_factorization.png}
 The process consists in a low-rank approximation of the user-item matrix using
@@ -287,7 +287,7 @@ and \textbf{predicted value}. In our paper we are going to use the
 Where respectively \textit{prij} is the prediction for the rating
 given by the user \textit{i} for an item \textit{j} and \textit{rij}
 is the real rating for the former user and item.
-The prediction is obtained with the dot product of the user-item vectors,(u\textit{i},v\textit{j})
+The prediction is obtained with the dot product of the user-item vectors,(\textit{ui},\textit{vj})
 
 \begin{equation}
     { prediction_{ij} = \bar{u}_{i} * \bar{v}_{j} }
@@ -301,7 +301,7 @@ learn the factor vectors (u\textit{i},v\textit{j}) [6]
 
 However solving the approximation with the former approach leads to the overfitting of data.
 Overfitting means that our model is learning through the noise in the training data instead
-of the underlying relations for which we expect to work. Altough the performance will continue
+of the underlying relations for which we expect to work. Although the performance will continue
 improving with the training data it will get worse on unseen data. This usually happens
 when we are using a too complex model or we have too many free parameters, and the latter is our case.
 The solution is to apply regularization penzaling the magnitude of the feature vectors proportionally with a constant
@@ -379,6 +379,7 @@ In this paper we will propose a functional implementation of this algorithm,
 and try to optimize it with a distributed version.
 
 \subsection{Alternating Least Square}
+
 
 \subsection{Machine Learning and BigData}
 %[TODO] check correctness of definitions
