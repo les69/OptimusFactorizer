@@ -22,7 +22,7 @@ object ParallelOptimizedSGD {
     // val rand = RandomUtils.getRandom(42L)
     val rand = new Random(42L)
     val learningRate = 0.1
-    val preventOverFitting = 0.2
+    val preventOverFitting = 0.1
     val randomNoise = 0.1
     val learningRateDecay = 1.0
 
@@ -30,10 +30,10 @@ object ParallelOptimizedSGD {
     val item_bias_index = 2
     val feature_offset = 3
 
-    val bias_learning_rate = 0.2
+    val bias_learning_rate = 0.1
     val biasReg = 0.1
     val numFeatures = 30
-    val numIterations = 100
+    val numIterations = 200
     var pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
     var threadPool = List
 
@@ -126,21 +126,21 @@ object ParallelOptimizedSGD {
                     val uid = userItem._1
                     val preferencesVector = userItem._2
                     //println("Starting new thread for user "+uid)
-                   /** pool.execute(new Runnable {
+                   pool.execute(new Runnable {
                         override def run(): Unit = {
                             updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
                         }
-                    })**/
-                    updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
+                    })
+                   // updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
 
 
 
 
             }
-            //println("Waiting for tasks to terminate")
-            //pool.shutdown()
-            //pool.awaitTermination(10000,TimeUnit.SECONDS)
-            //pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
+            println("Waiting for tasks to terminate")
+            pool.shutdown()
+            pool.awaitTermination(10000,TimeUnit.SECONDS)
+            pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
 
             currentLearningRate *= learningRateDecay
 
