@@ -22,7 +22,7 @@ object ParallelOptimizedSGD {
     // val rand = RandomUtils.getRandom(42L)
     val rand = new Random(42L)
     val learningRate = 0.1
-    val preventOverFitting = 0.1
+    val preventOverFitting = 0.2
     val randomNoise = 0.1
     val learningRateDecay = 1.0
 
@@ -30,7 +30,7 @@ object ParallelOptimizedSGD {
     val item_bias_index = 2
     val feature_offset = 3
 
-    val bias_learning_rate = 0.5
+    val bias_learning_rate = 0.2
     val biasReg = 0.1
     val numFeatures = 30
     val numIterations = 100
@@ -61,7 +61,7 @@ object ParallelOptimizedSGD {
 
 
         val totUsers = ratings.map(_.userId).distinct().collect()
-        //val totUsers = ratings.map(_.userId).distinct().takeOrdered(500)
+        //val totUsers = ratings.map(_.userId).distinct().takeOrdered(1000)
         val movies = ratings.map(_.movieId).distinct()
 
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
@@ -112,8 +112,8 @@ object ParallelOptimizedSGD {
         val time = System.nanoTime()
         for(iteration <- 0 to numIterations ) {
             //println("Iteration " + iteration + " out of " + numIterations)
-            //println("Current prediction")
-            //println(predictRating(testUser.factors, testItem.factors))
+            println("Current prediction")
+            println(predictRating(testUser.factors, testItem.factors))
 
             //just debug
             if(iteration % 5 == 0) {
@@ -197,23 +197,32 @@ object ParallelOptimizedSGD {
     def md5(s: String): String = {
         MessageDigest.getInstance("MD5").digest(s.getBytes).map("%02x".format(_)).mkString
     }
-    def rmse (userMatrix:HashMap[Int,VectorFactorItem],itemMatrix:HashMap[Int,VectorFactorItem],ratings:RDD[Rating]): Double={
-        var count = 0
+    def rmse(userMatrix:HashMap[Int,VectorFactorItem],itemMatrix:HashMap[Int,VectorFactorItem],ratings:RDD[Rating]): Double={
+        val res = ratings.map{
+            rating=>
+                val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
+                Math.pow(rating.rating - pr_val, 2)
+        }.mean()
+        Math.sqrt(res)
+
+    }
+    def rmse_test (userMatrix:HashMap[Int,VectorFactorItem],itemMatrix:HashMap[Int,VectorFactorItem],ratings:RDD[Rating]): Double={
+        var counter = 0
         val res = ratings.collect.map{
             rating=>
-               /** if(rating.userId <= 500) {
+                if(rating.userId <= 1000) {
                     val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
-                    count += 1
+                    counter += 1
                     Math.pow(rating.rating - pr_val, 2)
                 }
                 else
-                    0**/
-                val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
-                Math.pow(rating.rating - pr_val, 2)
+                    0
+                //val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
+                //Math.pow(rating.rating - pr_val, 2)
         }.sum
 
-        //Math.sqrt(res / count)
-        Math.sqrt(res / ratings.collect.length)
+        Math.sqrt(res / counter)
+        //Math.sqrt(res)
 
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
