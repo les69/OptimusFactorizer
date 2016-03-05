@@ -108,6 +108,7 @@ object ParallelOptimizedSGD {
         val md5val = md5(i.toString+" "+j.toString)
 
 
+        println("Serial running with 200 iterations and 30 features")
         println("Test prediction for user "+userItemMatrix.head._1+" with item "+userItemMatrix.head._2.head+" and real value "+cachedRatings.apply(md5val))
         val time = System.nanoTime()
         for(iteration <- 0 to numIterations ) {
@@ -126,21 +127,21 @@ object ParallelOptimizedSGD {
                     val uid = userItem._1
                     val preferencesVector = userItem._2
                     //println("Starting new thread for user "+uid)
-                   pool.execute(new Runnable {
+                  /** pool.execute(new Runnable {
                         override def run(): Unit = {
                             updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
                         }
-                    })
-                   // updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
+                    })**/
+                    updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
 
 
 
 
             }
-            println("Waiting for tasks to terminate")
-            pool.shutdown()
-            pool.awaitTermination(10000,TimeUnit.SECONDS)
-            pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
+           // println("Waiting for tasks to terminate")
+           // pool.shutdown()
+           // pool.awaitTermination(10000,TimeUnit.SECONDS)
+            //pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
 
             currentLearningRate *= learningRateDecay
 
@@ -187,6 +188,7 @@ object ParallelOptimizedSGD {
                         val deltaItemFeature = err * uF - preventOverFitting * iF
                         itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
                     }
+                    item.notifyAll()
 
                 }
 
