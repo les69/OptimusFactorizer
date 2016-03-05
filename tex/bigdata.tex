@@ -379,6 +379,38 @@ In this paper we will propose a functional implementation of this algorithm,
 and try to optimize it with a distributed version.
 
 \subsection{Alternating Least Square}
+Because both \textit{ui} and \textit{vj} are unknowns, Equation 5 is not convex. However, if we fix one of the unknowns, the optimization problem becomes quadratic and can be solved optimally. ALS is the techniques that rotate between fixing the {ui} ’s and fixing the {vj} ’s. When all {ui} ’s are fixed, the system
+recomputes the {vj} ’s by solving a least-squares problem, and vice versa. This ensures that each step decreases Equation 5 until convergence. In this section, the cost function is defined as,\\
+           \begin{equation}
+     		Q(U, V)= {\sum\limits_{(i,j) \in K} {(pr_{i,j} - r_{i,j})}^{2} + \lambda(u_{i}^{2} + v_{j}^{2}) }
+			\end{equation}
+\\The detailed description is as following, \\
+\begin{algorithm}
+    \caption{Matrix Factorization with ALS}
+
+    \begin{algorithmic}[2]
+        \Require
+            \Statex R is the user-item matrix,
+            \Statex U and V are the factor vectors initialized with values from 0.0 to 1.0,
+            \Statex $\alpha$ is the learning rate,
+            \Statex $\lambda$ the magnitude reduction,
+            \Statex K is the number of iterations
+            \Statex rmse is expected RMSE
+            \Statex ri is the ith row of R, rj is the jth column of R 
+    \For{$k$ to  $K$ or RMSE > rmse}
+        \State fix V, and caculate the partial derivative for ui, and make it equal to 0, we have 
+        \State $u_i = (V^TV+ \lambda I)^{-1}V^Tr_i$
+        \State update all the ui
+        \State then fix U, and caculate the partial derivative for vj, and make it equal to 0, we have 
+        \State $v_j = (U^TU+ \lambda I)^{-1}U^Tr_j$
+        \State update all the vj
+    \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+One obvious advantage of ALS is that the system can easily use parallelization. In ALS,
+the system computes each ui independently of the other item factors and computes each vj independently of the other user factors.It means that the algorithm can update all the ui and vj in parallel. This gives rise to potentially massive parallelization of the algorithm and improve the efficiency.
+
 
 
 \subsection{Machine Learning and BigData}
