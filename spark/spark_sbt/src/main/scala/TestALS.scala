@@ -39,8 +39,8 @@ object TestALS {
 
     object Rating {
         def parseRating(str: String): Rating = {
-            //val fields = str.split(",")
-            val fields = str.split("::")
+            val fields = str.split(",")
+            //val fields = str.split("::")
             assert(fields.size == 4)
             Rating(fields(0).toInt, fields(1).toInt, fields(2).toFloat, fields(3).toLong)
         }

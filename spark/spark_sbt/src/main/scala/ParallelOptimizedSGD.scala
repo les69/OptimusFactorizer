@@ -49,7 +49,8 @@ object ParallelOptimizedSGD {
         import sqlContext.implicits._
 
 
-        val ratingsPath  = "ml-latest/ratings-1m.dat"
+        val ratingsPath  = "ml-latest/ratings.csv"
+        //val ratingsPath  = "ml-latest/ratings-1m.dat"
         //val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie)
 
         //val movies =Array(1,2,3,4,5,6,7,8,9,10)
