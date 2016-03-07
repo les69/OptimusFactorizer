@@ -483,8 +483,44 @@ This is very important when dealing with large datasets because it's the peculia
 of functional languages that improves parallelization. The requirement
 for scaling horizontally is to have many independent tasks running in parallel,
 which goes perfectly with the latter peculiarity of functional languages.
+However Scala offers much more than pure functions, hereby follows some of
+the most important aspects of this programming language:\\
 
+\begin{itemize}
+    \item Java Interopability: Scala compiles on a JVM, which means that basically we
+    can use all the libraries written for Java
+    \item Strong static typing: helps the developer to detect bugs and errors at compile time by design
+    \item Type inference: the type of the variable doesn't have to be declared but it is infered.
+    \item Pattern Matching: pattern matching is a useful tool for guiding the code flow using
+    patterns to match which branch to follow in the code.
+    \item Non-alphanumeric identifiers: operators such + or - can be used as \texttt{add} or \texttt{substract}, or
+    there can be more user defined (see the dot product between vectors from breeze).
+    \item Anonymous functions as objects
+    \item The expression oriented paradigm: all parts of the code of a Scala program yelds a result, which means they're all
+    expressions and \textbf{not statements}. The difference is subtle but essential: statements does not yeld a result, they
+    just does something;e.g. \texttt{double gamma = 10;}. Meanwhile expressions are always evaluated, for example the if-else does
+    always have to return a value, when this is not true for object oriented languages; e.g. \texttt{val gamma = if(condition) 3 add 5 else pow(2,2)}.
+    \item reassignable variables: not common in functional programming Scala supports the riassignment of variables with the
+    keyword \texttt{var} instead of \texttt{val} (altough its use is recommended only if strictly needed).
+    \item tail recursion: computing a recursion as last operation of the function is called tail recursion; it's known for improving
+    performance and memory usage.
+\end{itemize}
 \subsection{Spark}
+
+\subsection{Libraries}
+We used a variety of different softwares in order
+to take care of some crucial aspects of our project such
+as performance and deployability.
+
+\begin{description}
+    \item[Spark 1.6.0]
+    \item[Scala 2.10.6]
+    \item[Sbt 13.8] for managing dependencies and packaging the project
+    \item[Spark MLLib 2.10] for machine learning tasks
+    \item[Breeze 11.2] for scala, for machine learning optimization
+    \item[Mahout 0.9] for other machine learning optimization
+
+\end{description}
 
 \subsection{MovieLens Dataset Structure}
 In our project we used mostly two datasets from Movielens: the 1 million ratings
@@ -514,7 +550,6 @@ words real external server). See the machines table for more details\\
 \end{table}
 
 
-\subsection{Libraries}
 
 
 \section{Implementation}
