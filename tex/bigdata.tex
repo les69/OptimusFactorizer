@@ -502,7 +502,7 @@ and the full dataset.
 
 \subsection{The machines}
 During our test we used different machines for testing and for production (in other
-words real external server). For local testing we used\\
+words real external server). See the machines table for more details\\
 \begin{table}
 \centering
 \caption{Computer}
@@ -643,6 +643,53 @@ we had to find some indipendent parts in our code. We made the assumption
 that all users may be processes indipendently even though the items will be shared.
 We solved this problem using concurrency on the items allowing only one of the
 parallel executions to have it. \\
+We have sliced the execution assigning theoretically a thread to each slide
+until the environment allows us to. In our case the maximum was 1500, but with
+some fine tuning of the heap and stack parameters one can allocate around 100 thousands
+of Java threads.[11]\\
+
+\begin{algorithm}
+    \caption{Matrix Factorization with parallel SGD}
+
+    \begin{algorithmic}[1]
+        \Require
+            \Statex R is the user-item matrix,
+            \Statex V and W are the factor vectors initialized with values from 0.0 to 1.0,
+            \Statex $\alpha$ is the learning rate,
+            \Statex $\lambda$ the magnitude reduction,
+            \Statex K is the number of iterations
+            \Statex F is the number of features
+    \State shuffle(Ratings)
+    \For{$i$ to  $K$ }
+        \State run a thread for each user until the maximum number or the limit is reached
+        \For{ each user $u$ }
+            \For{ each item $i$ rated by $u$}
+                \State lock(item $i$)
+                \State $predictedRating = V[u] * W[i]^{t}$
+                \State $error = R[u,i] - predictedRating$
+                    \For{each feature $f \in F$}
+                        \State $V[u,f] = V[u,f] + \alpha * (error * W[i,f] - \lambda * V[u,f])$
+                        \State $W[i,f] = V[u,f] + \alpha * (error * V[i,f] - \lambda * W[u,f])$
+                    \EndFor
+                \State unlock(item $i$)
+            \EndFor
+        \EndFor
+    \State wait for all threads to join
+    \EndFor
+    \end{algorithmic}
+\end{algorithm}
+
+Altough the parallel version of our algorithm needs some locking system
+due to the concurrency on the items vector when reading and updating it
+there is a theoretical approach to a more distributed version. The key
+of this approach is to create a graph with all the interdepences between
+users and items, where the edges are the correlations. If we have
+more connected components, those will be fully independant from the others
+because there will be no concurrency issue between items, therefore we
+will be able to compute those on different machines and collect the results in the end.
+The only problem is relative to the possible number of connected components which
+is by nature of the problem very small, if not only one.
+
 
 
 
