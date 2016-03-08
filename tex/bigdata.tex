@@ -269,7 +269,6 @@ items/users  & \textbf{U1} & \textbf{U2} & \textbf{U3} & \textbf{U4} & \textbf{U
 The concept behind \textit{matrix factorization} is to find two matrices
 $V,W$ relatively \textit{\textbf{m}} x \textit{\textbf{p}},\textit{\textbf{n}} x \textit{\textbf{p}}. which product
 can approximate a much bigger matrix $R$ of dimensions \textit{\textbf{m}} x \textit{\textbf{n}}.\\
-    %\textit{R} \(\approx\) \textit{V} * \textit{W}
     $R \approx V * W^T $
 }\\
 \includegraphics[scale=0.45]{matrix_factorization.png}
@@ -304,7 +303,7 @@ Overfitting means that our model is learning through the noise in the training d
 of the underlying relations for which we expect to work. Although the performance will continue
 improving with the training data it will get worse on unseen data. This usually happens
 when we are using a too complex model or we have too many free parameters, and the latter is our case.
-The solution is to apply regularization penzaling the magnitude of the feature vectors proportionally with a constant
+The solution is to apply regularization penalizing the magnitude of the feature vectors proportionally with a constant
 factor \(\lambda\) obtaining the following and well known formula for low-rank approximation:\\
 
 
@@ -325,7 +324,7 @@ The goal of \textit{Stochastic Gradient Descent} is to find a value
 $\theta^{*} \in R^{k} (k \geq 1) $ that minimizes a given loss $L(\theta)$.
 The algorithm makes use of noisy observations $\bar{L}^{\prime}(\theta)$
 of $L^{\prime}(\theta)$, the function's gradient with respect to $\theta$.
-Starti with some initial value $\theta_{0}$, SGD refines the parameter
+Starting with some initial value $\theta_{0}$, SGD refines the parameter
 value by iterating the stochastic difference equation[7]
 
 \begin{equation}
@@ -380,8 +379,9 @@ In this paper we will propose a functional implementation of this algorithm,
 and try to optimize it with a distributed version.
 
 \subsection{Alternating Least Square}
-Because both \textit{ui} and \textit{vj} are unknowns, Equation 5 is not convex. However, if we fix one of the unknowns, the optimization problem becomes quadratic and can be solved optimally. ALS is the techniques that rotate between fixing the {ui} ’s and fixing the {vj} ’s. When all {ui} ’s are fixed, the system
-recomputes the {vj} ’s by solving a least-squares problem, and vice versa. This ensures that each step decreases Equation 5 until convergence. In this section, the cost function is defined as,\\
+Because both $u_{i}$ and $v_{j}$ are unknowns, Equation 5 is not convex. However, if we fix one of the unknowns, the optimization problem becomes quadratic and can be solved optimally.
+ALS is the techniques that rotate between fixing the  $u_{i}$'s and fixing the  $v_{j}$'s. When all  $u_{i}$'s are fixed, the system
+recomputes the  $v_{j}$'s by solving a least-squares problem, and vice versa. This ensures that each step decreases Equation 5 until convergence. In this section, the cost function is defined as,\\
            \begin{equation}
      		Q(U, V)= {\sum\limits_{(i,j) \in K} {(pr_{i,j} - r_{i,j})}^{2} + \lambda(u_{i}^{2} + v_{j}^{2}) }
 			\end{equation}
@@ -410,12 +410,12 @@ recomputes the {vj} ’s by solving a least-squares problem, and vice versa. Thi
 \end{algorithm}
 
 One obvious advantage of ALS is that the system can easily use parallelization. In ALS,
-the system computes each ui independently of the other item factors and computes each vj independently of the other user factors.It means that the algorithm can update all the ui and vj in parallel. This gives rise to potentially massive parallelization of the algorithm and improve the efficiency.
+the system computes each ui independently of the other item factors and computes each vj independently of the other user factors.
+It means that the algorithm can update all the ui and vj in parallel. This gives rise to potentially massive parallelization of the algorithm and improve the efficiency.
 
 
 
 \subsection{Machine Learning and BigData}
-%[TODO] check correctness of definitions
 Machine learning is ideal for exploiting the opportunities hidden in big data.
 It delivers on the promise of extracting value from big and disparate data sources with far less reliance on human
 direction. It is data driven and runs at machine scale.
@@ -435,8 +435,8 @@ and \textit{process mining}. Text mining is used to find correlations between wo
 in a text file, the most famous example is a search engines; search engines needs to
 find the approriate result matching the keywords analyzing the words in a webpage, the most
 common approach is \textbf{PageRank}. We can also use data mining to extract
-relevant information from our log files in order to detect errors, bottlenecs
-or anomal behaviours (attacks or viruses); this is called \textbf{process mining}.\\
+relevant information from our log files in order to detect errors, bottlenecks
+or unusual behaviours (attacks or viruses); this is called \textbf{process mining}.\\
 Machine learning is another branch of computer science used to make predictions
 after "teaching" the machine how to learn from data. The typical approach is
 to use a dataset called \textit{training data} (usually 80$\%$ of the dataset) to
@@ -461,10 +461,11 @@ Our challange in this paper will be to develop, where needed,
 and compare the two most common approaches to matrix factorization using
 the \textit{Spark} framework. There's already an implemented version
 of the \textit{Alternating Least Square} with scala, which we'll use
-to do our tests. Our goal will be to implement the \textit{Stochastic Gradient Descent}
+to do our tests. Our goal will be to implement from scratch
+the \textit{Stochastic Gradient Descent}
 starting from the naive iterative version and optimize it aiming to reach
 a distributed version.
-We have also choose to user \textbf{Scala}, a functional programming language
+We have also choose to use \textbf{Scala}, a functional programming language
 to develop the SGD factorization; functional programming languages seems
 to be better involved in the bigdata paradigm due to their ability
 to facilitate parallelization.
@@ -505,7 +506,22 @@ the most important aspects of this programming language:\\
     \item tail recursion: computing a recursion as last operation of the function is called tail recursion; it's known for improving
     performance and memory usage.
 \end{itemize}
+
 \subsection{Spark}
+\textit{Spark} is an open-source processing engine for distributed data processing
+and data analytics. Spark was born as a university project to solve
+some performance problems with Hadoop on a large scale, and rapidly
+became one of the most widely adopted frameworks for data analysis.\\
+Spark offers an ecosystem with the support of the most innovative tools
+such as \textit{Streaming}, machine learning libraries for big datasets (and also
+for streaming, which is not available for the competitor \textit{Flink}), dataframes
+libraries and many other features.\\
+Altough Spark has on it's own ecosystem, one of the reasons we choose to use it insead of it's competitor
+Flink is due to the number of libraries available on the internet and the wide support given by the community.
+The latter is the biggest problem with Flink, which has basically no online support due to it's relative youth, and
+made us choose Spark over it.
+
+
 
 \subsection{Libraries}
 We used a variety of different softwares in order
@@ -523,7 +539,7 @@ as performance and deployability.
 \end{description}
 
 \subsection{MovieLens Dataset Structure}
-In our project we used mostly two datasets from Movielens: the 1 million ratings
+In our project we used mostly two datasets from \textit{Movielens}: the 1 million ratings
 and the full dataset.
 \begin{table}
 \centering
@@ -553,9 +569,9 @@ words real external server). See the machines table for more details\\
 
 
 \section{Implementation}
-The first step of our reserach was to develop a "naive" version of
+The first step of our research was to develop a "naive" version of
 SGD using the various iterations with no synchronization. We also
-have decided to start using the smalles dataset from movielens to understand
+have decided to start using the smallest dataset from movielens to understand
 how long it will take to complete. The decision was wise because on the first
 run took around 8.7 hours to complete with a dataser of 1 million of ratings.
 The overall problem was already introduced in the previous chapters of this
@@ -675,7 +691,7 @@ which is a good result (see figure 3).
 \subsection{The parallel version}
 We analyzed the iterative version and in order to proceede in the parallelization
 we had to find some indipendent parts in our code. We made the assumption
-that all users may be processes indipendently even though the items will be shared.
+that all users may be processed indipendently even though the items will be shared.
 We solved this problem using concurrency on the items allowing only one of the
 parallel executions to have it. \\
 We have sliced the execution assigning theoretically a thread to each slide
@@ -729,14 +745,34 @@ is by nature of the problem very small, if not only one.
 
 
 \section{Conclusions}
-Research not always means finding the new disruptive innovation
-or the coolest algorithm; most of the times you try
-you make mistakes and most important of all you \textit{learn}.
-We learned that very likely Scala is not the best programming language
-for not parallel algorithms; maybe a C++ solution would have been faster as
-expected. Maybe Stochastic Gradient Descent is not the best approach for matrix
-factorization, which would explain why there is no Scala implementation yet
-instead of the much more spreaded ALS.
+
+Research not always means finding the new disruptive algorithm
+which will solve all the world's problems. Reserach means
+trying what others did not before and compare the results from
+what was previously done, and it does not have to be always best
+than before. We have tried to implement a version of the Stochastic
+Gradient Descent with Scala for Spark, where no there are no implementations
+of it (there are altough some SGD implementations for other purposes, which we failed to adapt
+to our scenario). At first the results were not encouraging since
+our algorithm was particularly slow compared to it's counterparty.
+However we managed to reduce the running time by a factor of 10 and more,
+reaching a satisfying result with the parallel version. Sgd ,as most of the
+machine learning algorithms, was developed to work with small
+ datasets. Most of the machine learning algorithms are not developed for
+large scale computing and most of the times they need to be adapted
+and converted to more efficent paradigms such as \textit{MapReduce}.
+Probably with another more efficent programming language such as c++ we could have
+reached better performances.\\
+The key word of this project has been \textbf{parallelization}, because there is
+space for optimization everywhere but it has some limits, and in order
+to break them the only path is parallel execution.
+
+\section{Future work}
+
+The research in this field is always "green" and soon there will be more
+efficent algorithms and techniques.\\
+There are already some very complicated lock-free algorithms for matrix factorization
+with SGD, and more are going to come.
 
 
 %
