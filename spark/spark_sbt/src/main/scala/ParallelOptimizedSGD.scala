@@ -33,7 +33,7 @@ object ParallelOptimizedSGD {
     val bias_learning_rate = 0.1
     val biasReg = 0.1
     val numFeatures = 30
-    val numIterations = 200
+    val numIterations = 15
     var pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
     var threadPool = List
 
@@ -49,8 +49,7 @@ object ParallelOptimizedSGD {
         import sqlContext.implicits._
 
 
-        val ratingsPath  = "ml-latest/ratings.csv"
-        //val ratingsPath  = "ml-latest/ratings-1m.dat"
+        val ratingsPath  = "ml-latest/ratings-1m.dat"
         //val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie)
 
         //val movies =Array(1,2,3,4,5,6,7,8,9,10)
@@ -128,21 +127,20 @@ object ParallelOptimizedSGD {
                     val uid = userItem._1
                     val preferencesVector = userItem._2
                     //println("Starting new thread for user "+uid)
-                  /** pool.execute(new Runnable {
+                    pool.execute(new Runnable {
                         override def run(): Unit = {
                             updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
                         }
-                    })**/
-                    updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
+                    })
 
 
 
 
             }
-           // println("Waiting for tasks to terminate")
-           // pool.shutdown()
-           // pool.awaitTermination(10000,TimeUnit.SECONDS)
-            //pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
+            println("Waiting for tasks to terminate")
+            pool.shutdown()
+            pool.awaitTermination(10000,TimeUnit.SECONDS)
+            pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
 
             currentLearningRate *= learningRateDecay
 

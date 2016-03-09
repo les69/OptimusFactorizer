@@ -687,6 +687,32 @@ which is a good result (see figure 3).
     \includegraphics[scale=0.4]{sgdrmseserial.png}
 \end{figure}
 
+\subsection{Profiling ALS}
+
+We give less space to this algorithm since it's behaviour and performance
+is well known, since is the most adopted for this task. However it is
+a good metric of comparison between our implementation of SGD.\\
+We have conducted several test with respect to: error of predictions and performances.
+
+\begin{enumerate}
+    \item The first test is to compare the error on predictions of the algorithm related to the number of iterations.
+        We could do at maximum 20 iterations before the machine break down with a stack overflow message. However the error
+        was quite low and in the end converged around 0.86, as can be seen in Figure 4. In this test we have used the smaller
+        dataset presente in the table above (1M ratings).
+    \item The second test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
+    running time of ~4.8 minutes. Furthermore we have noticed a reduction of the rmse (10 iterations) to the value 0.81, which is the best one
+    we had in all the tests so far.
+    \item Last but not least we have conducted a test to investigate the different running times between the two different versions of ALS : the naive
+    and the weighted one. ADD RESULTS HERE
+\end{enumerate}
+
+All this test have been conducted on a laptot due to some billing problems with the remote server.
+
+\begin{figure}
+    \caption{Figure 4}
+    \centering
+    \includegraphics[scale=0.4]{alsrmse.png}
+\end{figure}
 
 \subsection{The parallel version}
 We analyzed the iterative version and in order to proceede in the parallelization
@@ -773,6 +799,7 @@ The research in this field is always "green" and soon there will be more
 efficent algorithms and techniques.\\
 There are already some very complicated lock-free algorithms for matrix factorization
 with SGD, and more are going to come.
+
 
 
 %

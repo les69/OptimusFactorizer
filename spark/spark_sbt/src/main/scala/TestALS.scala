@@ -39,8 +39,8 @@ object TestALS {
 
     object Rating {
         def parseRating(str: String): Rating = {
-            val fields = str.split(",")
-            //val fields = str.split("::")
+            //val fields = str.split(",")
+            val fields = str.split("::")
             assert(fields.size == 4)
             Rating(fields(0).toInt, fields(1).toInt, fields(2).toFloat, fields(3).toLong)
         }
@@ -58,14 +58,23 @@ object TestALS {
 
     def main(args: Array[String]): Unit = {
 
-        run()
+        //run(0) 3.7638334016698507
+        run(1)
+        //run(5) //0.8940511755361474
+        //run(10) //0.8716105777929495
+        //run(15) //0.8656929171850316
+        //run(20) //0.863464071167232
+        //run(25) stack overflow
+        //run(30)
+        //run(10) max dataset 0.81233459384
     }
 
-    def run() {
+    def run(maxIter:Int): Unit={
         val rank = 10
-        val maxIter = 15
+        //val maxIter = 15
         val regParam = 0.1
-        val ratingsPath  = "ml-latest/ratings.csv"
+        //val ratingsPath  = "ml-latest/ratings.csv"
+        val ratingsPath  = "ml-latest/ratings-1m.dat"
         val conf = new SparkConf().setAppName(s"MovieLensALS")
         val sc = new SparkContext(conf)
         val sqlContext = new SQLContext(sc)
@@ -139,9 +148,9 @@ object TestALS {
             falsePositives.limit(100).collect().foreach(println)
         }**/
 
-        val output = predictions
+        /**val output = predictions
            .select($"userId",$"movieId",$"prediction")
-           .where(predictions("userId") === 1).collect().foreach(println)
+           .where(predictions("userId") === 1).collect().foreach(println)**/
 
         sc.stop()
     }

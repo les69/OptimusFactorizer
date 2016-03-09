@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.12)  8 MAR 2016 19:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.12)  8 MAR 2016 21:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -492,49 +492,60 @@ Overfull \hbox (18.81837pt too wide) in paragraph at lines 687--688
  [][] 
  []
 
+[6 <./chart.png> <./sgdrmseserial.png>]
+<alsrmse.png, id=44, 670.1838pt x 409.53pt>
+File: alsrmse.png Graphic file (type png)
+ <use alsrmse.png>
+Package pdftex.def Info: alsrmse.png used on input line 714.
+(pdftex.def)             Requested size: 268.06877pt x 163.80908pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 692--701
+Overfull \hbox (28.06877pt too wide) in paragraph at lines 714--715
+ [][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 718--727
 
  []
 
-[6 <./chart.png> <./sgdrmseserial.png>]
-Overfull \hbox (2.0325pt too wide) in paragraph at lines 772--776
+
+Overfull \hbox (2.0325pt too wide) in paragraph at lines 798--802
 \T1/aer/m/n/9 There are al-ready some very com-pli-cated lock-free al-go-rithms
 
  []
 
 No file bigdata.bbl.
-[7] (./bigdata.aux) ) 
+[7 <./alsrmse.png>] (./bigdata.aux) ) 
 Here is how much of TeX's memory you used:
- 4377 strings out of 493089
- 60053 string characters out of 6134842
+ 4382 strings out of 493089
+ 60127 string characters out of 6134842
  142704 words of memory out of 5000000
- 7722 multiletter control sequences out of 15000+600000
+ 7726 multiletter control sequences out of 15000+600000
  59748 words of font info for 85 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  41i,10n,35p,269b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8
-r.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx9.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10
-.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cmextra/cm
-ex9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
-6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.
-pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
-></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></
-usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr
-/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/l
-ocal/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/loc
-al/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local
-/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb></usr/local/t
-exlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2015/te
-xmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/f
-onts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1
-/urw/times/utmri8a.pfb>
-Output written on bigdata.pdf (7 pages, 336264 bytes).
+{/usr/local/texlive/2015/texmf-dist/fonts/
+enc/dvips/base/8r.enc}</usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmbx9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmbxti10.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/ams
+fonts/cmextra/cmex9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmmi6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmr8.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/c
+msy6.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cms
+y9.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9
+.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.p
+fb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></us
+r/local/texlive/2015/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local
+/texlive/2015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-
+dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on bigdata.pdf (7 pages, 359823 bytes).
 PDF statistics:
- 103 PDF objects out of 1000 (max. 8388607)
+ 105 PDF objects out of 1000 (max. 8388607)
  71 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 16 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
