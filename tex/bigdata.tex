@@ -247,8 +247,8 @@ As said previously the matrix which was given had only 100M ratings out of
 
 During the last decade a huge effort has been applied to solve the problem of
 big datasets with an incredible amount of data.
-Let denote $R = r_{ij}$ denote a
-user-movie where each element $r_{ij}$ represents a rating given by
+Let denote $R = r_{i,j}$ denote a
+user-movie where each element $r_{i,j}$ represents a rating given by
 a user \textit{i} to an item \textit{j} with a value from 0 to 5; where 0 means
 non rated and 1 to 5 a rating ranging relatively from \textit{very poor} to \textit{awesome}.
 Let also define \textit{m} the number of users and \textit{n} the number of movies in the system.
@@ -275,27 +275,27 @@ can approximate a much bigger matrix $R$ of dimensions \textit{\textbf{m}} x \te
 The process consists in a low-rank approximation of the user-item matrix using
 for both users and items some feature vectors which are used to model
 the prediction with a inner vector product of the selected user and item.\\
-Ideally $r_{ij}$ should correspond to the predicted rating
+Ideally $r_{i,j}$ should correspond to the predicted rating
 but in reality the value will be different. Therefore we need a
 loss function to determine the difference between \textbf{real value}
 and \textbf{predicted value}. In our paper we are going to use the
 \textbf{Root Mean Square Error},\\
 \begin{equation}
-{\sqrt {\frac{1} {N}{\sum\limits_{i,j}^N {(pr_{ij} - {r}_{ij} } })^{2} } }
+{\sqrt {\frac{1} {N}{\sum\limits_{i,j}^N {(pr_{i,j} - {r}_{i,j} } })^{2} } }
 \end{equation}
-Where respectively \textit{prij} is the prediction for the rating
-given by the user \textit{i} for an item \textit{j} and \textit{rij}
+Where respectively $pr_{i,j}$ is the prediction for the rating
+given by the user \textit{i} for an item \textit{j} and $r_{i,j}$
 is the real rating for the former user and item.
-The prediction is obtained with the dot product of the user-item vectors,(\textit{ui},\textit{vj})
+The prediction is obtained with the dot product of the user-item vectors,($u_i$,$v_j$)
 
 \begin{equation}
-    { prediction_{ij} = \bar{u}_{i} * \bar{v}_{j} }
+    { prediction_{i,j} = \bar{u}_{i} * \bar{v}_{j} }
 \end{equation}
 The low rank approximation problem is formulated as follows to
 learn the factor vectors (u\textit{i},v\textit{j}) [6]
 
 \begin{equation}
-    {(u_{i},v_{j}) = \min_{u,v} {\sum\limits_{(u,i) \in K} {(pr_{u,v} - r_{u,v})}^{2} }}
+    {(u_{i},v_{j}) = \min_{u,v} {\sum\limits_{(i,j) \in K} {(pr_{i,j} - r_{i,j})}^{2} }}
 \end{equation}
 
 However solving the approximation with the former approach leads to the overfitting of data.
@@ -308,7 +308,7 @@ factor \(\lambda\) obtaining the following and well known formula for low-rank a
 
 
 \begin{equation}
-    {(u_{i},v_{j}) = \min_{u,v} {\sum\limits_{(u,i) \in K} {(pr_{u,v} - r_{u,v})}^{2} + \lambda(u_{i}^{2} + v_{j}^{2}) }}
+    {(u_{i},v_{j}) = \min_{u,v} {\sum\limits_{(i,j) \in K} {(pr_{i,j} - r_{i,j})}^{2} + \lambda(u_{i}^{2} + v_{j}^{2}) }}
 \end{equation}
 
 
@@ -397,14 +397,16 @@ recomputes the  $v_{j}$'s by solving a least-squares problem, and vice versa. Th
             \Statex $\lambda$ the magnitude reduction,
             \Statex K is the number of iterations
             \Statex rmse is expected RMSE
-            \Statex ri is the ith row of R, rj is the jth column of R
+            \Statex $r_i$ is the $ith$ row of R, $r_j$ is the $jth$ column of R
     \For{$k$ to  $K$ or RMSE > rmse}
-        \State fix V, and caculate the partial derivative for ui, and make it equal to 0, we have
+        \State fix V, caculate the partial derivative for $u_i$ 
+        \State make it equal to 0, we have
         \State $u_i = (V^TV+ \lambda I)^{-1}V^Tr_i$
-        \State update all the ui
-        \State then fix U, and caculate the partial derivative for vj, and make it equal to 0, we have
+        \State update all the $u_i$
+        \State then fix U, caculate the partial derivative for $v_j$
+        \State make it equal to 0, we have
         \State $v_j = (U^TU+ \lambda I)^{-1}U^Tr_j$
-        \State update all the vj
+        \State update all the $v_j$
     \EndFor
     \end{algorithmic}
 \end{algorithm}
@@ -412,7 +414,13 @@ recomputes the  $v_{j}$'s by solving a least-squares problem, and vice versa. Th
 One obvious advantage of ALS is that the system can easily use parallelization. In ALS,
 the system computes each ui independently of the other item factors and computes each vj independently of the other user factors.
 It means that the algorithm can update all the ui and vj in parallel. This gives rise to potentially massive parallelization of the algorithm and improve the efficiency.
-
+\subsubsection{Weighted Alternating Least Square}
+Weighted alternating least squares(W-ALS) is an improved algorithm of ALS in last section. W-ALS aims to train the recommendation system with implicated dataset. In some situation, users don't rate items exactly with values but through their behaviour, which is called implicated ratings. An example of implicit ratings is that when people are watching TV program, they don't actually rating, but the recommendation system can assign user's ratings basing their watching time on the program. W-ALS introduces different confidence levels for which items are preferred by the user
+changing the objective function to be minimized to:
+\begin{equation}
+    {(u_{i},v_{j}) = \min_{u,v} {\sum\limits_{(i,j) \in K} c_{i,j}{(p_{i,j} - r_{i,j})}^{2} + \lambda(u_{i}^{2} + v_{j}^{2}) }}
+\end{equation}
+Here $c_{i,j}$ measures the confidence of the predicted preference $p_{i,j}$. There are many ways to compute the confidence level, but it will out of the discussion in this paper.
 
 
 \subsection{Machine Learning and BigData}
