@@ -4,7 +4,7 @@
 		module="spark_sbt_2.10"
 		revision="1.0"
 		status="integration"
-		publication="20160227172630"
+		publication="20160309102729"
 	>
 		<description>
 		spark_sbt
@@ -27,7 +27,9 @@
 	</configurations>
 	<publications>
 		<artifact name="spark_sbt_2.10" type="pom" ext="pom" conf="pom"/>
-		<artifact name="spark_sbt_2.10" type="jar" ext="jar" conf="optional" e:classifier="download"/>
+		<artifact name="spark_sbt_2.10" type="jar" ext="jar" conf="compile"/>
+		<artifact name="spark_sbt_2.10" type="src" ext="jar" conf="sources" e:classifier="sources"/>
+		<artifact name="spark_sbt_2.10" type="doc" ext="jar" conf="docs" e:classifier="javadoc"/>
 	</publications>
 	<dependencies>
 		<dependency org="org.scala-lang" name="scala-compiler" rev="2.10.6" conf="scala-tool->default,optional(default)"/>
