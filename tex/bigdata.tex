@@ -208,15 +208,15 @@ Prize at the participants were given a matrix of 8.5 billions of ratings,
 of which only 100 millions were non zero values.
 \textit{Model-based CF} uses machine-learning and data mining algorithms
 to uncover the latent factor model between users and items to
-predict the missing ratings.\textbf{latent factor models} are hidden
+predict the missing ratings. \textbf{Latent factor models} are hidden
 relationships between users and items hardly discoverable in the original data;
 usually they may for example denote the quantity of action in a movie or the complexity
-of the characters.These vectors are then used to create the missing values in the user-items
+of the characters. These vectors are then used to create the missing values in the user-items
 matrix.\\
 
 
-Furthermore the model-based content filtering can be expanded in two distinct sections:
-\textit{user and item based content filtering} depending on the priority given to the
+Furthermore the model-based collaborative filtering can be expanded in two distinct sections:
+\textit{user and item based collaborative filtering} depending on the priority given to the
 prediction.
 
 
@@ -710,10 +710,16 @@ We have conducted several test with respect to: error of predictions and perform
     \item The second test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
     running time of ~4.8 minutes. Furthermore we have noticed a reduction of the rmse (10 iterations) to the value 0.81, which is the best one
     we had in all the tests so far.
-    \item Last but not least we have conducted a test to investigate the different running times between the two different versions of ALS : the naive
-    and the weighted one. ADD RESULTS HERE
+    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API and the SparkALS partial using Spark API which is partially paralleled, ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, both movie and user are supposed to have 10 features while the training has 5 iteration. For the SparkALS, it is run in 2 slices as when I try to run with 5 slice I got some out of Memory error. The running times are shown in table, it is interesting that the partial paralleled version has the worst performance, because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance. 
+\begin{table}
+\centering
+\caption{Running times}
+\begin{tabular}{|c|c|c|c|} \hline
+-  & \textbf{LocalALS} & \textbf{SparkALS} & \textbf{ALS }\\ \hline
+\textbf{Matrix 3.900* 6.040} & about 2792s  & over 5400s & about 1 mins\\ \hline
+\end{tabular}
+\end{table}
 \end{enumerate}
-
 All this test have been conducted on a laptot due to some billing problems with the remote server.
 
 \begin{figure}
