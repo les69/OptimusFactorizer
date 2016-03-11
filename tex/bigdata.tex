@@ -392,7 +392,7 @@ recomputes the  $v_{j}$'s by solving a least-squares problem, and vice versa. Th
     \begin{algorithmic}[2]
         \Require
             \Statex R is the user-item matrix,
-            \Statex U and V are the factor vectors initialized with values from 0.0 to 1.0,
+            \Statex U and V are the factor matrixs initialized with values from 0.0 to 1.0,
             \Statex $\alpha$ is the learning rate,
             \Statex $\lambda$ the magnitude reduction,
             \Statex K is the number of iterations
@@ -412,15 +412,15 @@ recomputes the  $v_{j}$'s by solving a least-squares problem, and vice versa. Th
 \end{algorithm}
 
 One obvious advantage of ALS is that the system can easily use parallelization. In ALS,
-the system computes each ui independently of the other item factors and computes each vj independently of the other user factors.
-It means that the algorithm can update all the ui and vj in parallel. This gives rise to potentially massive parallelization of the algorithm and improve the efficiency.
+the system computes each $u_i$ independently of the other item factors and computes each $v_j$ independently of the other user factors.
+It means that the algorithm can update all the $u_i$ and $v_j$ in parallel. This gives rise to potentially massive parallelization of the algorithm and improve the training efficiency.
 \subsubsection{Weighted Alternating Least Square}
-Weighted alternating least squares(W-ALS) is an improved algorithm of ALS in last section. W-ALS aims to train the recommendation system with implicated dataset. In some situation, users don't rate items exactly with values but through their behaviour, which is called implicated ratings. An example of implicit ratings is that when people are watching TV program, they don't actually rating, but the recommendation system can assign user's ratings basing their watching time on the program. W-ALS introduces different confidence levels for which items are preferred by the user
+Weighted alternating least squares(W-ALS) is an improved algorithm of ALS. W-ALS aims to train the recommendation system with implicated dataset. In some situation, users don't rate items exactly with values but through their behaviour, which is called implicated ratings. An example of implicit ratings is that when people are watching TV program, they don't actually rating, but the recommendation system can assign user's ratings basing their watching time on the program. W-ALS introduces different confidence levels for which items are preferred by the user
 changing the objective function to be minimized to:
 \begin{equation}
     {(u_{i},v_{j}) = \min_{u,v} {\sum\limits_{(i,j) \in K} c_{i,j}{(p_{i,j} - r_{i,j})}^{2} + \lambda(u_{i}^{2} + v_{j}^{2}) }}
 \end{equation}
-Here $c_{i,j}$ measures the confidence of the predicted preference $p_{i,j}$. There are many ways to compute the confidence level, but it will out of the discussion in this paper.
+Here $c_{i,j}$ measures the confidence of the predicted preference $p_{i,j}$. There are many ways to compute the confidence level, but it is out of the discussion in this paper.
 
 
 \subsection{Machine Learning and BigData}
@@ -548,7 +548,7 @@ as performance and deployability.
 
 \subsection{MovieLens Dataset Structure}
 In our project we used mostly two datasets from \textit{Movielens}: the 1 million ratings
-and the full dataset.
+and the full dataset, as shown in \textbf{Table 2}.
 \begin{table}
 \centering
 \caption{MovieLens datasets}
@@ -562,7 +562,7 @@ and the full dataset.
 
 \subsection{The machines}
 During our test we used different machines for testing and for production (in other
-words real external server). See the machines table for more details\\
+words real external server). See \textbf{Table 3} for more details\\
 \begin{table}
 \centering
 \caption{Computer}
@@ -710,7 +710,7 @@ We have conducted several test with respect to: error of predictions and perform
     \item The second test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
     running time of ~4.8 minutes. Furthermore we have noticed a reduction of the rmse (10 iterations) to the value 0.81, which is the best one
     we had in all the tests so far.
-    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API and the SparkALS partial using Spark API which is partially paralleled, ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, both movie and user are supposed to have 10 features while the training has 5 iteration. For the SparkALS, it is run in 2 slices as when I try to run with 5 slice I got some out of Memory error. The running times are shown in table, it is interesting that the partial paralleled version has the worst performance, because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance. 
+    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, both movie and user are supposed to have 10 features while the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 4}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance. 
 \begin{table}
 \centering
 \caption{Running times}
@@ -720,7 +720,7 @@ We have conducted several test with respect to: error of predictions and perform
 \end{tabular}
 \end{table}
 \end{enumerate}
-All this test have been conducted on a laptot due to some billing problems with the remote server.
+All this test have been conducted on a laptop due to some billing problems with the remote server.
 
 \begin{figure}
     \caption{Figure 4}
