@@ -129,7 +129,7 @@ Zhiheng Xu\\
 \maketitle
 \begin{abstract}
 
-In this paper we provide an extensive analysis of the actual state of the
+In this paper we provide an analysis of the state of the
 art of recommendation systems.\\
 \textit{Collaborative Filtering} is the current buzzword in the
 world of recommendations, came to notoriety after the Netflix Prize
@@ -149,11 +149,13 @@ of data. These systems have the ability to discover hidden relationships between
 users and items, and use these patterns to improve the user's taste prediction.
 Researchers discovered a "neighbourhood" of users with a similar taste
 which can be revealed by their previous actions: both implicit and explicit.
-\texttt{Collaborative filtering} is by far the most common approach adapted also by
+\textit{Collaborative filtering} is by far the most common approach adapted also by
 some of the biggest companies in the IT sector such as: \textbf{Amazon}, \textbf{Facebook} and \textbf{Netflix}.
-Although it's massive presence in the market, \texttt{CF} is not the only approach
+Amazon only recommendations accounts for the 35 \% of  \textbf{all sales}, a massive
+number if considered in proportion to their sales \cite{quora:collaborative-sales}.
+Although it's massive presence in the market, \textit{CF} is not the only approach
 available for a recommendation system, but it is actually the successor of
-\texttt{Content-Based filtering}. The latter aims to profile a user searching
+\textit{Content-Based filtering}. The latter aims to profile a user searching
 the correlation with the item's peculiarity. By item peculiarity we refer to
 its implicit and explicit characteristics, for example a song's genre,
 subgenre, writer, composer, year of composition, beats per second etc.
@@ -162,19 +164,21 @@ information, which sometimes are not even available or discloable.
 Furthermore with the raise of the Big Data paradigm some frameworks started to grow from
 the academic world to the Apache Foundation: \textbf{Flink} and \textbf{Spark}.
 Those frameworks can be seen an extension of the Hadoop ecosystem, and both of them
-have their own pros and cons which will be briefly analyzed further in this paper.
+have their own pros and cons. In our paper we will use and briefly introduce only
+the latter one.
 
 
-
+The paper is structured as follow: the description in details of what
+collaborative filtering is, pro and contros and alternatives. Then
+an extensive description of the application of Matrix Factorization to
+collaborative filtering, and the considered algorithms: \textit{Alternating Least Square}
+and \textit{Stochastic Gradient Descent}. Last part is our implementation
+with failures, successes and results.
 
 
 
 \section{Collaborative Filtering}
 
-The paper is structured as follow: description in more details
-of \texttt{Collaborative Filtering} with it's problems, what are
-the most common algorithms used with \texttt{CF} and a brief
-introduction to both \textbf{Flink} and \textbf{Spark}.
 
 
 
@@ -190,7 +194,7 @@ between user and items and subsequently make a recommendation. Usually
 this approach involves "neighboring" algorithms such as \textbf{K-Nearest Neighbours}
 to build relationships between users. The similarity between two users
 is calculated using the \textbf{cosine similarity}.\\
-\textbf{Cosine similarity} is a measure of similarity between two vectors of an inner product space that measures the cosine of the angle between them.[4]
+\textbf{Cosine similarity} is a measure of similarity between two vectors of an inner product space that measures the cosine of the angle between them \cite{cosine-similarity}.
 \begin{equation}
 \cos ({\bf t},{\bf e})= {{\bf t} {\bf e} \over \|{\bf t}\| \|{\bf e}\|} = \frac{ \sum_{i=1}^{n}{{\bf t}_i{\bf e}_i} }{ \sqrt{\sum_{i=1}^{n}{({\bf t}_i)^2}} \sqrt{\sum_{i=1}^{n}{({\bf e}_i)^2}} }
 \end{equation}
@@ -203,9 +207,9 @@ this approach has been deprecated favoring the following approach.
 
 \subsubsection{Model-based Collaborative Filtering}
 The most common approach to \texttt{CF} is through the factorization
-of a very big and sparse matrix.[3] For example during the Netflix
+of a very big and sparse matrix.For example during the Netflix
 Prize at the participants were given a matrix of 8.5 billions of ratings,
-of which only 100 millions were non zero values.
+of which only 100 millions were non zero values \cite{netflix-prize} .
 \textit{Model-based CF} uses machine-learning and data mining algorithms
 to uncover the latent factor model between users and items to
 predict the missing ratings. \textbf{Latent factor models} are hidden
@@ -233,7 +237,7 @@ CF can be exploited to perturbate its prediction system with a technique
 called \textit{shilling attacks}. This happens when the input system (e.g. ratings)
 are given in the correct way trying to alter the recommendations to the one
 favoured by the attacker. It has also been noticed that these kind of attacks affect
-more user-based CF algorithms instead of item-based.[5]
+more user-based CF algorithms instead of item-based.\cite{survery-cf}
 
 \subsubsection{Sparsity}
 
@@ -242,7 +246,6 @@ usually very sparse due to the typical proportion for which  \(nUsers \ll nItems
 As said previously the matrix which was given had only 100M ratings out of
 8.5 billions of records. This problem is solved using matrix factorization.
 
-%[TODO] correct all the formulas
 \section{Matrix Factorization}
 
 During the last decade a huge effort has been applied to solve the problem of
@@ -292,7 +295,7 @@ The prediction is obtained with the dot product of the user-item vectors,($u_i$,
     { prediction_{i,j} = \bar{u}_{i} * \bar{v}_{j} }
 \end{equation}
 The low rank approximation problem is formulated as follows to
-learn the factor vectors (u\textit{i},v\textit{j}) [6]
+learn the factor vectors (u\textit{i},v\textit{j}) \cite{recommender}
 
 \begin{equation}
     {(u_{i},v_{j}) = \min_{u,v} {\sum\limits_{(i,j) \in K} {(pr_{i,j} - r_{i,j})}^{2} }}
@@ -325,7 +328,7 @@ $\theta^{*} \in R^{k} (k \geq 1) $ that minimizes a given loss $L(\theta)$.
 The algorithm makes use of noisy observations $\bar{L}^{\prime}(\theta)$
 of $L^{\prime}(\theta)$, the function's gradient with respect to $\theta$.
 Starting with some initial value $\theta_{0}$, SGD refines the parameter
-value by iterating the stochastic difference equation[7]
+value by iterating the stochastic difference equation \cite{gemulla}
 
 \begin{equation}
     {\theta_{n+1} = \theta_{n} - \epsilon_{n} \bar{L}^{\prime}(\theta_{n})}
@@ -342,7 +345,7 @@ obtained iterating through every single sample until a minimum is reached with
 the following step: $w= w - aplha * d{\frac dw}(Q_{i}(w)) $
 In our case $Q(u,i)$ is represented by equation(5), and is the equation
 we want to minimize.
-The iterative version of the algorithm can be sketched this way:[8]\\
+The iterative version of the algorithm can be sketched this way:\cite{mahout}\\
 
 \begin{algorithm}
     \caption{Matrix Factorization with SGD}
@@ -399,7 +402,7 @@ recomputes the  $v_{j}$'s by solving a least-squares problem, and vice versa. Th
             \Statex rmse is expected RMSE
             \Statex $r_i$ is the $ith$ row of R, $r_j$ is the $jth$ column of R
     \For{$k$ to  $K$ or RMSE > rmse}
-        \State fix V, caculate the partial derivative for $u_i$ 
+        \State fix V, caculate the partial derivative for $u_i$
         \State make it equal to 0, we have
         \State $u_i = (V^TV+ \lambda I)^{-1}V^Tr_i$
         \State update all the $u_i$
@@ -432,7 +435,7 @@ data sources and the huge variety of variables and amounts of data involved.
 And unlike traditional analysis, machine learning thrives on growing datasets.
 The more data fed into a machine learning system, the more it can learn and apply
 the results to higher quality insights.
-Freed from the limitations of human scale thinking and analysis, machine learning is able to discover and display the patterns buried in the data.[9]
+Freed from the limitations of human scale thinking and analysis, machine learning is able to discover and display the patterns buried in the data.\cite{skytree}
 Data by itself is useless if there is no way to extract information from it.
 That's why BigData goes always in couple with machine learning or data mining;
 these two different but linked branches of computer science aims to extract or predict
@@ -463,8 +466,8 @@ between values but instead from the noise relate to that.
 
 \section{Technologies and Challanges}
 
-Up to now we have described what is the so-called
-state of the art in the reserarch enviroment.
+Up to now we have described what is the
+state of the art in this branch of the reserarch.
 Our challange in this paper will be to develop, where needed,
 and compare the two most common approaches to matrix factorization using
 the \textit{Spark} framework. There's already an implemented version
@@ -658,7 +661,7 @@ The results from our tests proved the correctness of our implementation of SGD a
 the ALS implementation.
 
 \begin{enumerate}
-  \item The first test was run on a local machine with 25 iterations and 15 features.In picture[2] we can see the slow convergence with the typical curve of SGD with a
+  \item The first test was run on a local machine with 25 iterations and 15 features.In picture(2) we can see the slow convergence with the typical curve of SGD with a
   very high peak in the beginning and then a fall until convergence to the real rating, 5.0 in our case. The overall iteration took around 45 minutes to complete with an
   accettable error: rmse = 1.09 (using a reduced version of the dataset)
   \item The second test was a run on the remote server using the extended version of the dataset with  50 iterations and more features, 30. The algorithm with no optimization
@@ -679,7 +682,7 @@ the ALS implementation.
 The most important factor and indicator of the whole algorithm is the \textit{root mean
 square error}. The rmse indicates the "correctness" of the algorithm, in our case
 a good value would be from 0.8 to 1.1 at maximum. The typical value for this dataset
-is around 0.9[10].\\
+is around 0.9 \cite{mymedialite}.\\
 Altough the algorithm was correct in our first batch of test the \textit{rmse} was
 around 1.29, which is not the best value we could get. We tried to fine tune some
 parameters, starting with the number of iterations and the number of features, the ones
@@ -710,7 +713,7 @@ We have conducted several test with respect to: error of predictions and perform
     \item The second test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
     running time of ~4.8 minutes. Furthermore we have noticed a reduction of the rmse (10 iterations) to the value 0.81, which is the best one
     we had in all the tests so far.
-    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, both movie and user are supposed to have 10 features while the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 4}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance. 
+    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, both movie and user are supposed to have 10 features while the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 4}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance.
 \begin{table}
 \centering
 \caption{Running times}
@@ -737,7 +740,7 @@ parallel executions to have it. \\
 We have sliced the execution assigning theoretically a thread to each slide
 until the environment allows us to. In our case the maximum was 1500, but with
 some fine tuning of the heap and stack parameters one can allocate around 100 thousands
-of Java threads.[11]\\
+of Java threads.\cite{stack}\\
 
 \begin{algorithm}
     \caption{Matrix Factorization with parallel SGD}
@@ -786,42 +789,38 @@ is by nature of the problem very small, if not only one.
 
 \section{Conclusions}
 
-Research not always means finding the new disruptive algorithm
-which will solve all the world's problems. Reserach means
-trying what others did not before and compare the results from
-what was previously done, and it does not have to be always best
-than before. We have tried to implement a version of the Stochastic
-Gradient Descent with Scala for Spark, where no there are no implementations
-of it (there are altough some SGD implementations for other purposes, which we failed to adapt
-to our scenario). At first the results were not encouraging since
-our algorithm was particularly slow compared to it's counterparty.
-However we managed to reduce the running time by a factor of 10 and more,
-reaching a satisfying result with the parallel version. Sgd ,as most of the
-machine learning algorithms, was developed to work with small
- datasets. Most of the machine learning algorithms are not developed for
-large scale computing and most of the times they need to be adapted
-and converted to more efficent paradigms such as \textit{MapReduce}.
-Probably with another more efficent programming language such as c++ we could have
-reached better performances.\\
-The key word of this project has been \textbf{parallelization}, because there is
-space for optimization everywhere but it has some limits, and in order
-to break them the only path is parallel execution.
+Altough the already existing implementations of collaborative
+filtering algorithms (ALS) have excellent running times we
+have developed a starting point for an SGD implementation in Scala
+which performances are of the same magnitude, minutes and not hours.
+This means optimization and parallelization is key to success, and
+there is always space for optimization, not always for parallelization though.
+It has been intresting to discover how the appropriate data structures can make
+such a big difference when using enormous quantities of data. What is
+used in the "classical programming" is never the same when applied thousands
+or millions of times, even the smallest operation can make the difference.
+Another very important aspect we learned to take care of is \textbf{indipencency};
+indipendecy of operations can make the difference between serial execution and parallel,
+and serious performance improvements. Being able to parallelize parts of the algorithm
+can reduce drastically the running time, both using more threads or machine clusters.
+However due to its definition, every SGD step depends to the next one and make it hard
+to be executed in parallel. This has required from us a some study and investigation
+on which parts can be made independant and which others can not, resulting with
+a \textit{item-locked} implementation.
 
 \section{Future work}
 
-The research in this field is always "green" and soon there will be more
-efficent algorithms and techniques.\\
-There are already some very complicated lock-free algorithms for matrix factorization
-with SGD, and more are going to come.
-
-
+SGD is very promising and the research in this branch (collaborative filtering)
+is going faster than ever to adapt itself to the increasing size of datasets.
+The future work will be to have a fully parallelizable version of SGD, for which
+there are already some proposals of very complex and not naive algorithms.
 
 %
 % The following two commands are all you need in the
 % initial runs of your .tex file to
 % produce the bibliography for the citations in your paper.
 \bibliographystyle{abbrv}
-\bibliography{sigproc}  % sigproc.bib is the name of the Bibliography in this case
+\bibliography{bigdata}  % sigproc.bib is the name of the Bibliography in this case
 % You must have a proper ".bib" file
 %  and remember to run:
 % latex bibtex latex latex
