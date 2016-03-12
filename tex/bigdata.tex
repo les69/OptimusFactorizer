@@ -189,7 +189,7 @@ Collaborative Filtering can be subsenquently defined in two
 different approaches:
 
 \subsubsection{Memory-based Collaborative Filtering}
-In \texttt{memory-based CF} uses user ratings to compute similarity
+In \textit{memory-based CF} uses user ratings to compute similarity
 between user and items and subsequently make a recommendation. Usually
 this approach involves "neighboring" algorithms such as \textbf{K-Nearest Neighbours}
 to build relationships between users. The similarity between two users
@@ -201,12 +201,12 @@ is calculated using the \textbf{cosine similarity}.\\
 The recommendation is made by finding the top K similar users and aggregate their
 user-item matrices to find the appropriate recommendation.
 The typical problem of this approach is the difficult with scaling
-when the data gets bigger. Due to the \texttt{Big Data} paradigm expansion
+when the data gets bigger. Due to the \textit{Big Data} paradigm expansion
 this approach has been deprecated favoring the following approach.
 
 
 \subsubsection{Model-based Collaborative Filtering}
-The most common approach to \texttt{CF} is through the factorization
+The most common approach to \textit{CF} is through the factorization
 of a very big and sparse matrix.For example during the Netflix
 Prize at the participants were given a matrix of 8.5 billions of ratings,
 of which only 100 millions were non zero values \cite{netflix-prize} .
@@ -718,8 +718,8 @@ We have conducted several test with respect to: error of predictions and perform
 \centering
 \caption{Running times}
 \begin{tabular}{|c|c|c|c|} \hline
--  & \textbf{LocalALS} & \textbf{SparkALS} & \textbf{ALS }\\ \hline
-\textbf{Matrix 3.900* 6.040} & about 2792s  & over 5400s & about 1 mins\\ \hline
+\textbf{Matrix}  & \textbf{LocalALS} & \textbf{SparkALS} & \textbf{ALS }\\ \hline
+3.900 * 6.040 & about 2792s  & about 5400s & about 1m\\ \hline
 \end{tabular}
 \end{table}
 \end{enumerate}

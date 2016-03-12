@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.12)  12 MAR 2016 11:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.2.12)  12 MAR 2016 12:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -497,14 +497,10 @@ Overfull \hbox (18.81837pt too wide) in paragraph at lines 698--699
  [][] 
  []
 
-[6 <./chart.png>]
-Overfull \hbox (45.44911pt too wide) in paragraph at lines 720--724
- [][] 
- []
-
-<alsrmse.png, id=43, 670.1838pt x 409.53pt>
+[6 <./chart.png>] <alsrmse.png, id=43, 670.1838pt x 409.53pt>
 File: alsrmse.png Graphic file (type png)
- <use alsrmse.png>
+
+<use alsrmse.png>
 Package pdftex.def Info: alsrmse.png used on input line 731.
 (pdftex.def)             Requested size: 268.06877pt x 163.80908pt.
 
@@ -545,7 +541,7 @@ t/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts
 urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/
 utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts/type1/urw/times/utmri8a.pf
 b>
-Output written on bigdata.pdf (8 pages, 367175 bytes).
+Output written on bigdata.pdf (8 pages, 366095 bytes).
 PDF statistics:
  108 PDF objects out of 1000 (max. 8388607)
  73 compressed objects within 1 object stream
