@@ -274,7 +274,11 @@ $V,W$ relatively \textit{\textbf{m}} x \textit{\textbf{p}},\textit{\textbf{n}} x
 can approximate a much bigger matrix $R$ of dimensions \textit{\textbf{m}} x \textit{\textbf{n}}.\\
     $R \approx V * W^T $
 }\\
+\begin{figure}
+    \caption{Matrix factorization}
+    \centering
 \includegraphics[scale=0.45]{matrix_factorization.png}
+\end{figure}
 The process consists in a low-rank approximation of the user-item matrix using
 for both users and items some feature vectors which are used to model
 the prediction with a inner vector product of the selected user and item.\\
@@ -402,12 +406,12 @@ recomputes the  $v_{j}$'s by solving a least-squares problem, and vice versa. Th
             \Statex rmse is expected RMSE
             \Statex $r_i$ is the $ith$ row of R, $r_j$ is the $jth$ column of R
     \For{$k$ to  $K$ or RMSE > rmse}
-        \State fix V, caculate the partial derivative for $u_i$
-        \State make it equal to 0, we have
+        \State fix V, calculate the partial derivative for $u_i$
+        \State make it equal to 0, then have
         \State $u_i = (V^TV+ \lambda I)^{-1}V^Tr_i$
         \State update all the $u_i$
-        \State then fix U, caculate the partial derivative for $v_j$
-        \State make it equal to 0, we have
+        \State then fix U, calculate the partial derivative for $v_j$
+        \State make it equal to 0, then have
         \State $v_j = (U^TU+ \lambda I)^{-1}U^Tr_j$
         \State update all the $v_j$
     \EndFor
@@ -672,7 +676,7 @@ the ALS implementation.
   which is an improvement of the 400$\%$ compared to the previous version.
 \end{enumerate}
 \begin{figure}
-    \caption{Figure 2}
+    \caption{SGD factorization convergence}
     \centering
     \includegraphics[scale=0.175]{chart.png}
 \end{figure}
@@ -693,7 +697,7 @@ which was too high and was influencing too much the prediction. Using a value ar
 the error of a factor of 32$\%$, with a resulting rmse = 0.9 on the test data and 0.88 on the training data,
 which is a good result (see figure 3).
 \begin{figure}
-    \caption{Figure 3}
+    \caption{SGD RMSE comparison}
     \centering
     \includegraphics[scale=0.4]{sgdrmseserial.png}
 \end{figure}
@@ -713,20 +717,20 @@ We have conducted several test with respect to: error of predictions and perform
     \item The second test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
     running time of ~4.8 minutes. Furthermore we have noticed a reduction of the rmse (10 iterations) to the value 0.81, which is the best one
     we had in all the tests so far.
-    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, both movie and user are supposed to have 10 features while the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 4}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance.
+    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 4}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance because the Spark API is already optimized.
 \begin{table}
 \centering
 \caption{Running times}
 \begin{tabular}{|c|c|c|c|} \hline
 \textbf{Matrix}  & \textbf{LocalALS} & \textbf{SparkALS} & \textbf{ALS }\\ \hline
-3.900 * 6.040 & about 2792s  & about 5400s & about 1m\\ \hline
+3.900 * 6.040 & about 2792s  & about 5400s & about 65s\\ \hline
 \end{tabular}
 \end{table}
 \end{enumerate}
 All this test have been conducted on a laptop due to some billing problems with the remote server.
 
 \begin{figure}
-    \caption{Figure 4}
+    \caption{ASL RMSE}
     \centering
     \includegraphics[scale=0.4]{alsrmse.png}
 \end{figure}
