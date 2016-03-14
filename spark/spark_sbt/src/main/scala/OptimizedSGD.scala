@@ -32,8 +32,8 @@ object OptimizedSGD {
 
     val bias_learning_rate = 0.1
     val biasReg = 0.1
-    val numFeatures = 30
-    val numIterations = 15
+    val numFeatures = 20
+    val numIterations = 25
     var pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
     var threadPool = List
 
@@ -49,8 +49,8 @@ object OptimizedSGD {
         import sqlContext.implicits._
 
 
-        val ratingsPath  = "ml-latest/ratings.csv"
-        //val ratingsPath  = "ml-latest/ratings-1m.dat"
+        //val ratingsPath  = "ml-latest/ratings.csv"
+        val ratingsPath  = "ml-latest/ratings-1m.dat"
         //val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie)
 
         //val movies =Array(1,2,3,4,5,6,7,8,9,10)
@@ -117,11 +117,11 @@ object OptimizedSGD {
             //println("Current prediction")
             //println(predictRating(testUser.factors, testItem.factors))
 
-            /**just debug
+            /**just debug **/
             if(iteration % 5 == 0) {
                 println("rmse training " + rmse(userMap, itemMap, training))
                 println("rmse test " + rmse(userMap, itemMap, splits(1)))
-            }**/
+            }
 
             userItemMatrix.foreach {
                 userItem =>

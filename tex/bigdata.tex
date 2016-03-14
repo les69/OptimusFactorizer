@@ -566,6 +566,19 @@ and the full dataset, as shown in \textbf{Table 2}.
 \end{tabular}
 \end{table}
 
+\subsection{The Book-Crossing dataset}
+In order to compare the algorithms performances we have also added another dataset
+for collaborative filtering (one of those who are free). It's a dataset of
+book ratings ranging from 0 to 10, where 0 means not rated.
+\begin{table}
+\centering
+\caption{Book-Crossing datasets}
+\begin{tabular}{|c|c|c|c|} \hline
+-  & \textbf{Ratings} & \textbf{Users} & \textbf{Books}\\ \hline
+\textbf{Full dataset} & 1.149.780 & 278.858 & 271.379 \\ \hline
+\end{tabular}
+\end{table}
+
 
 \subsection{The machines}
 During our test we used different machines for testing and for production (in other
@@ -672,6 +685,8 @@ the ALS implementation.
   took 8.7 hours to complete with an rmse = 1.078. The result was good but the running time was out of any acceptable range
   \item The third test was run again on the remote server, this time with an higly optimized version of the algorithm. This time the number of iterations was set to 200 with 30 features.
   The running time was 1.78 hours with an rmse = 0.92. Compared to the previous test, the running time would be ~ 44 minutes, which is a big improvment.
+  \item The fourth test was set up on a local machine with an optimized version of SGD and the 1M dataset, with 25 iterations and 20 features. The running time was an astonishing 8.57 minutes,
+  a very good improvement compared to the previous ones (rmse = 0.92).
   \item The last test was set up with the parallel version of the algorithm with the same parameters as the previous. The algorithm took 45 minutes to complete the whole process
   which is an improvement of the 400$\%$ compared to the previous version.
 \end{enumerate}
@@ -789,6 +804,32 @@ The only problem is relative to the possible number of connected components whic
 is by nature of the problem very small, if not only one.
 
 
+\subsection{A different dataset}
+
+We have run some of the test on the Book-Crossing dataset to verify
+the behaviour of the two algorithms and then compare it with the former
+results.
+
+\subsubsection{SGD on Book-Crossing}
+
+The algorithm performed much faster compared to the \textit{MovieLens}
+datasets, with an acceptable rmse value. Altough the number of users and
+books is much higher the algorithm performed much better. The reason behind
+this different performance can be found in the different sparsity of the
+matrices taken in consideration, that's the only reason we found to be acceptable.
+We have also noticed a consistent difference between the \textit{rmse} with the
+training dataset and the test dataset, but other reserchers have found similar differences
+with this dataset \cite{recommender}.
+
+\begin{table}
+\centering
+\caption{Dataset comparison: RMSE and Running}
+\begin{tabular}{|c|c|c|c|} \hline
+\textbf{Dataset} & \textbf{Training} & \textbf{Test} & \textbf{Running time}\\ \hline
+MovieLens 1M & 0.88784915 & 0.92768897 & 8.57s \\ \hline
+Book-Crossing & 0.25676326 & 1.66998831 & 4.278s \\ \hline
+\end{tabular}
+\end{table}
 
 
 \section{Conclusions}
@@ -811,6 +852,8 @@ However due to its definition, every SGD step depends to the next one and make i
 to be executed in parallel. This has required from us a some study and investigation
 on which parts can be made independant and which others can not, resulting with
 a \textit{item-locked} implementation.
+We have also found some memory leaks in the spark environment under Mac OS X, causing
+the algorithms to run much slower after many runs of the algorithm.
 
 \section{Future work}
 

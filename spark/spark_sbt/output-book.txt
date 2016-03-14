@@ -1,0 +1,19 @@
+Serial running with 25 iterations and 20 features
+Test prediction for user 53767 with item 0024182001 and real value 10.0
+rmse training 1.9240192049035372
+rmse test 1.9253166454340451
+rmse training 0.7692984809166804
+rmse test 1.6797576656310456
+rmse training 0.43944361233562773
+rmse test 1.6993473924929585
+rmse training 0.390393538148957
+rmse test 1.7039488906235725
+rmse training 0.37572659416197995
+rmse test 1.7069449068035798
+rmse training 0.3680591675122411
+rmse test 1.7095506063186177
+256717273 microseconds
+rmse training 0.2567632681512854
+rmse test 1.6699883906108763
+
+Process finished with exit code 0
