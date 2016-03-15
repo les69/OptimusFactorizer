@@ -17,20 +17,19 @@ import scala.util.Random
   */
 object OptimizedSGD {
 
-
-
     // val rand = RandomUtils.getRandom(42L)
     val rand = new Random(42L)
     val learningRate = 0.1
     val preventOverFitting = 0.1
     val randomNoise = 0.1
-    val learningRateDecay = 1.0
+    val learningRateDecay = 0.9
 
     val user_bias_index = 1
     val item_bias_index = 2
     val feature_offset = 3
 
-    val bias_learning_rate = 0.1
+    //val bias_learning_rate = 0.01
+    val bias_learning_rate = 0.5
     val biasReg = 0.1
     val numFeatures = 20
     val numIterations = 25
@@ -46,39 +45,25 @@ object OptimizedSGD {
         val sc = new SparkContext(conf)
         sc.setLogLevel("WARN")
         val sqlContext = new SQLContext(sc)
-        import sqlContext.implicits._
 
 
         //val ratingsPath  = "ml-latest/ratings.csv"
         val ratingsPath  = "ml-latest/ratings-1m.dat"
         //val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie)
 
-        //val movies =Array(1,2,3,4,5,6,7,8,9,10)
-        //val totUsers =Array(1,2,3,4,5,6,7,8,9,10)
-
 
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
 
 
-
         val totUsers = ratings.map(_.userId).distinct().collect()
-        //val totUsers = ratings.map(_.userId).distinct().takeOrdered(1000)
+       // val totUsers = ratings.map(_.userId).distinct().takeOrdered(1000)
         val movies = ratings.map(_.movieId).distinct()
-
         val splits = ratings.randomSplit(Array(0.8, 0.2), 0L)
-
         val globalAvg = ratings.map(x=>x.rating).collect().sum / ratings.count().toInt
-
-
         val training = splits(0).cache()
 
 
-        //val numUsers = ratings.map(_.userId).distinct().count()
 
-
-
-
-        //var userMap =  Map.empty[Int,VectorFactorItem]
         var userMap= new HashMap[Int,VectorFactorItem]
         totUsers.foreach{
             user =>
@@ -92,7 +77,6 @@ object OptimizedSGD {
                 itemMap += item -> new VectorFactorItem(1.0,1.0,0.0,numFeatures,joinVectors(Array(1.0,1.0,0.0),tmpVect))
         }
 
-        //[TODO] check shuffling
         val userItemMatrix = cacheOpt(training,rand.shuffle(totUsers.toSeq).toArray)
         var cachedRatings = new HashMap[String,Double]
 
@@ -109,13 +93,10 @@ object OptimizedSGD {
         val md5val = md5(i.toString+" "+j.toString)
 
 
-        println("Serial running with 200 iterations and 30 features")
+        println(s"Serial running with: $numIterations iterations  $numFeatures features $learningRateDecay learningDecay $preventOverFitting lambda")
         println("Test prediction for user "+userItemMatrix.head._1+" with item "+userItemMatrix.head._2.head+" and real value "+cachedRatings.apply(md5val))
         val time = System.nanoTime()
         for(iteration <- 0 to numIterations ) {
-            //println("Iteration " + iteration + " out of " + numIterations)
-            //println("Current prediction")
-            //println(predictRating(testUser.factors, testItem.factors))
 
             /**just debug **/
             if(iteration % 5 == 0) {
@@ -127,22 +108,10 @@ object OptimizedSGD {
                 userItem =>
                     val uid = userItem._1
                     val preferencesVector = userItem._2
-                    //println("Starting new thread for user "+uid)
-                    /** pool.execute(new Runnable {
-                        override def run(): Unit = {
-                            updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
-                        }
-                    })**/
                     updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
 
 
-
-
             }
-            // println("Waiting for tasks to terminate")
-            // pool.shutdown()
-            // pool.awaitTermination(10000,TimeUnit.SECONDS)
-            //pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
 
             currentLearningRate *= learningRateDecay
 
@@ -165,36 +134,32 @@ object OptimizedSGD {
                 val user = userMap.apply(uid)
                 val item = itemMap.apply(iid)
                 val digest = md5(uid.toString + " " + iid.toString)
+                val pr_rating = predictRating(user.factors, item.factors)
 
 
-                item.synchronized {
-                    val pr_rating = predictRating(user.factors, item.factors)
+                val value = ratings.apply(digest)
+                val userVector = user.factors
+                val itemVector = item.factors
 
+                val err = value - pr_rating
+                userVector.update(user_bias_index, user.userBias + bias_learning_rate * (err - biasReg * preventOverFitting * user.userBias))
+                itemVector.update(item_bias_index, item.itemBias + bias_learning_rate * (err - biasReg * preventOverFitting * item.itemBias))
+                user.userBias = userVector.apply(user_bias_index)
+                item.itemBias = itemVector.apply(item_bias_index)
+                for (featureIndex <- feature_offset to numFeatures) {
 
-                    val value = ratings.apply(digest)
-                    val userVector = user.factors
-                    val itemVector = item.factors
-
-                    val err = value - pr_rating
-                    userVector.update(user_bias_index, user.userBias + bias_learning_rate * (err - biasReg * preventOverFitting * user.userBias))
-                    itemVector.update(item_bias_index, item.itemBias + bias_learning_rate * (err - biasReg * preventOverFitting * item.itemBias))
-                    user.userBias = userVector.apply(user_bias_index)
-                    item.itemBias = itemVector.apply(item_bias_index)
-                    for (featureIndex <- feature_offset to numFeatures) {
-
-                        val uF = userVector.apply(featureIndex)
-                        val iF = itemVector.apply(featureIndex)
-                        val deltaUserFeature = err * iF - preventOverFitting * uF
-                        userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
-                        val deltaItemFeature = err * uF - preventOverFitting * iF
-                        itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
-                    }
-                    item.notifyAll()
-
+                    val uF = userVector.apply(featureIndex)
+                    val iF = itemVector.apply(featureIndex)
+                    val deltaUserFeature = err * iF - preventOverFitting * uF
+                    userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
+                    val deltaItemFeature = err * uF - preventOverFitting * iF
+                    itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
                 }
 
+
+
+
         }
-        //println("Task completed for user "+uid)
 
     }
     def md5(s: String): String = {
@@ -220,12 +185,9 @@ object OptimizedSGD {
                 }
                 else
                     0
-            //val pr_val = predictRating(userMatrix.apply(rating.userId).factors, itemMatrix.apply(rating.movieId).factors)
-            //Math.pow(rating.rating - pr_val, 2)
         }.sum
-
         Math.sqrt(res / counter)
-        //Math.sqrt(res)
+
 
     }
     def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Rating], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={

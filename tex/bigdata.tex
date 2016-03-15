@@ -701,21 +701,78 @@ the ALS implementation.
 The most important factor and indicator of the whole algorithm is the \textit{root mean
 square error}. The rmse indicates the "correctness" of the algorithm, in our case
 a good value would be from 0.8 to 1.1 at maximum. The typical value for this dataset
-is around 0.9 \cite{mymedialite}.\\
+is around 0.85 \cite{mymedialite}.\\
 Altough the algorithm was correct in our first batch of test the \textit{rmse} was
 around 1.29, which is not the best value we could get. We tried to fine tune some
 parameters, starting with the number of iterations and the number of features, the ones
 we considered the most relevant in the algorithm. However we were wrong, the
 error was not decreasing as expected but only of few decimal values.
 The key to our high value was in the \textit{bias learning rate} or $\alpha$ in the pseudocode,
-which was too high and was influencing too much the prediction. Using a value around 0.1 we decreased
-the error of a factor of 32$\%$, with a resulting rmse = 0.9 on the test data and 0.88 on the training data,
+which was too high and was influencing too much the prediction. Using a value around 0.01 we decreased
+the error of a factor of 32$\%$, with a resulting rmse = 0.88 on the test data and 0.84 on the training data,
 which is a good result (see figure 3).
 \begin{figure}
     \caption{SGD RMSE comparison}
     \centering
     \includegraphics[scale=0.4]{sgdrmseserial.png}
 \end{figure}
+
+\subsubsection{Tuning alpha}
+As said previously we found out that the best $\alpha$ value ( \textit{bias learning rate} in our code),
+is approximately 0.01. In this paragraph we will analyze the algorithm behaviour with different values
+starting from 0.7 (the numbers above caused some integer overflows).
+
+\begin{figure}
+    \caption{SGD alpha comparison}
+    \centering
+    \includegraphics[scale=0.35]{alpha.png}
+\end{figure}
+
+As can be seen in the figure, after a certain value the error stop decreasing and
+it stabilizes slowly to a certain threshold ~ 0.88, and it becames useless
+to lower the value.
+
+
+\subsection{Investigation over other parameters}
+
+\subsubsection{The $\lambda$ value}
+As said previously the $\lambda$ value is used to reduce the magnitude
+of each rating preventing the overfitting of our dataset.
+We have run this test with the 1M MovieLens dataset on our local machine. The results
+highlighted a correlation between the speed of convergence to the "correct" error
+and the $\lambda$ value. The higher and the slower will be the convergence to
+a better result.
+
+\subsubsection{The number of features}
+
+We thought that the number of features would be on of the most
+valuable parameters which could make the difference. However we
+have noticed that increasing or decreasing their number (10 or 50)
+the difference was very subtle. We have tried then to raise significantly
+the number of features to \textbf{2000} to see how they would have impacted the
+overall performances. In this case we have used an $\alpha$ parameter of 0.5, to
+see if the number of features would have improved something. The results
+proved we were correct; the error was not improving as expected, the improvements
+were neglebible (around 0.01) and the performance degraded a lot.
+
+\subsubsection{The learning rate}
+
+The learning rate value is the value from where to start the
+learning process. In all of our tests it has been set to 0.1,
+but we have decided to investigate its influence on the algorithm.
+The range of values is between 0.175 and 0.05 (higher values causes overflow).
+We discovered that the starting value influences the speed of which tha algorithm
+starts to converge to an error.\\
+In this test we have used on purpose a high $\alpha$ value (0.5) to test wheter
+the algorithm can improve.
+
+\begin{figure}
+    \caption{SGD learning rate}
+    \centering
+    \includegraphics[scale=0.35]{learning.png}
+\end{figure}
+
+
 
 \subsection{Profiling ALS}
 
@@ -826,8 +883,8 @@ with this dataset \cite{recommender}.
 \caption{Dataset comparison: RMSE and Running}
 \begin{tabular}{|c|c|c|c|} \hline
 \textbf{Dataset} & \textbf{Training} & \textbf{Test} & \textbf{Running time}\\ \hline
-MovieLens 1M & 0.88784915 & 0.92768897 & 8.57s \\ \hline
-Book-Crossing & 0.25676326 & 1.66998831 & 4.278s \\ \hline
+MovieLens 1M & 0.88784915 & 0.92768897 & 8.57m \\ \hline
+Book-Crossing & 0.25676326 & 1.66998831 & 4.278m \\ \hline
 \end{tabular}
 \end{table}
 
