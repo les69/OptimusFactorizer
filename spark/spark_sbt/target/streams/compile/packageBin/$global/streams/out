@@ -46,6 +46,8 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelSGD$$anonfun$1.class[0m
 [0m[[0mdebug[0m] [0m	ParallelSGD$$typecreator1$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelSGD$$typecreator1$1.class[0m
+[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1.class[0m
+[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1.class[0m
 [0m[[0mdebug[0m] [0m	OptimizedSGD$$anonfun$cacheOpt$1$$anonfun$11.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/OptimizedSGD$$anonfun$cacheOpt$1$$anonfun$11.class[0m
 [0m[[0mdebug[0m] [0m	TestGradientDescent$$anonfun$2.class[0m
@@ -106,8 +108,6 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/OptimizedSGD$$anonfun$main$1$$anonfun$1.class[0m
 [0m[[0mdebug[0m] [0m	TestGradientDescentOld$$anonfun$6$$anonfun$apply$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/TestGradientDescentOld$$anonfun$6$$anonfun$apply$1.class[0m
-[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$typecreator1$1.class[0m
-[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$typecreator1$1.class[0m
 [0m[[0mdebug[0m] [0m	TestGradientDescent$$anonfun$5.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/TestGradientDescent$$anonfun$5.class[0m
 [0m[[0mdebug[0m] [0m	org/apache/spark/examples/NaiveALS$$anonfun$main$1$$anonfun$apply$mcVI$sp$3.class[0m
@@ -134,6 +134,8 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/NaiveALS$$anonfun$rmse$2$$anonfun$apply$mcVI$sp$2.class[0m
 [0m[[0mdebug[0m] [0m	org/apache/spark/examples/LocalALS$$anonfun$updateMovie$2.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/LocalALS$$anonfun$updateMovie$2.class[0m
+[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2$$typecreator2$1.class[0m
+[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2$$typecreator2$1.class[0m
 [0m[[0mdebug[0m] [0m	org/apache/spark[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark[0m
 [0m[[0mdebug[0m] [0m	OptimizedSGD$$anonfun$cacheOpt$1.class[0m
@@ -164,6 +166,8 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/NaiveALS$.class[0m
 [0m[[0mdebug[0m] [0m	TestWrdCount$$anonfun$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/TestWrdCount$$anonfun$1.class[0m
+[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2.class[0m
+[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2.class[0m
 [0m[[0mdebug[0m] [0m	org/apache/spark/examples/NaiveALS$$anonfun$main$4.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/NaiveALS$$anonfun$main$4.class[0m
 [0m[[0mdebug[0m] [0m	TestGradientDescentOld.class[0m
@@ -212,8 +216,6 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/OptimizedSGD$$anonfun$main$2$$anonfun$2.class[0m
 [0m[[0mdebug[0m] [0m	TestSGDSVM$$anonfun$4.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/TestSGDSVM$$anonfun$4.class[0m
-[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$4.class[0m
-[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$4.class[0m
 [0m[[0mdebug[0m] [0m	TestGradientDescent$$anonfun$main$2.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/TestGradientDescent$$anonfun$main$2.class[0m
 [0m[[0mdebug[0m] [0m	OptimizedSGD$$anonfun$main$3$$anonfun$apply$mcVI$sp$2.class[0m
@@ -260,6 +262,8 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/NaiveALS.class[0m
 [0m[[0mdebug[0m] [0m	OptimizedSGD$$anonfun$9.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/OptimizedSGD$$anonfun$9.class[0m
+[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$run$1.class[0m
+[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$run$1.class[0m
 [0m[[0mdebug[0m] [0m	TestGradientDescent$$anonfun$predictRating$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/TestGradientDescent$$anonfun$predictRating$1.class[0m
 [0m[[0mdebug[0m] [0m	TestGradientDescent$$anonfun$md5$1.class[0m
@@ -278,8 +282,12 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelOptimizedSGD.class[0m
 [0m[[0mdebug[0m] [0m	ParallelSGD$$anonfun$9.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelSGD$$anonfun$9.class[0m
+[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1.class[0m
+[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1.class[0m
 [0m[[0mdebug[0m] [0m	ParallelOptimizedSGD$$anonfun$3.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelOptimizedSGD$$anonfun$3.class[0m
+[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2$$anonfun$4.class[0m
+[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2$$anonfun$4.class[0m
 [0m[[0mdebug[0m] [0m	ParallelOptimizedSGD$$anonfun$main$3.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelOptimizedSGD$$anonfun$main$3.class[0m
 [0m[[0mdebug[0m] [0m	ParallelOptimizedSGD$$anonfun$updateUser$1$$anonfun$apply$mcVI$sp$1.class[0m
@@ -318,6 +326,8 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/TestGradientDescentOld$$anonfun$7$$anonfun$apply$2.class[0m
 [0m[[0mdebug[0m] [0m	ParallelSGD$$anonfun$update$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelSGD$$anonfun$update$1.class[0m
+[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2$$typecreator1$1.class[0m
+[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$anonfun$run$1$$anonfun$apply$mcVI$sp$1$$anonfun$apply$mcVD$sp$1$$anonfun$apply$mcVI$sp$2$$typecreator1$1.class[0m
 [0m[[0mdebug[0m] [0m	org/apache/spark/examples/LocalALS$$anonfun$rmse$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/LocalALS$$anonfun$rmse$1.class[0m
 [0m[[0mdebug[0m] [0m	org/apache/spark/examples/NaiveALS$$anonfun$rmse$1.class[0m
@@ -326,8 +336,6 @@
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/NaiveALS$$anonfun$main$6.class[0m
 [0m[[0mdebug[0m] [0m	ParallelOptimizedSGD$$anonfun$main$1$$anonfun$1.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/ParallelOptimizedSGD$$anonfun$main$1$$anonfun$1.class[0m
-[0m[[0mdebug[0m] [0m	org/apache/spark/examples/ml/TestALS$$typecreator2$1.class[0m
-[0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/org/apache/spark/examples/ml/TestALS$$typecreator2$1.class[0m
 [0m[[0mdebug[0m] [0m	OptimizedSGD$$anonfun$5.class[0m
 [0m[[0mdebug[0m] [0m	  /home/supermanheng/IdeaProjects/bigdata2k16/spark/spark_sbt/target/scala-2.10/classes/OptimizedSGD$$anonfun$5.class[0m
 [0m[[0mdebug[0m] [0m	ParallelSGD$$anonfun$main$1.class[0m

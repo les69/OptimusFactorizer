@@ -59,6 +59,8 @@ object TestALS {
     def main(args: Array[String]): Unit = {
 
         //run(0) 3.7638334016698507
+
+	
         run(5)
         //run(5) //0.8940511755361474
         //run(10) //0.8716105777929495
@@ -70,11 +72,11 @@ object TestALS {
     }
 
     def run(maxIter:Int): Unit={
-        val rank = 10
+        //val rank = 10
         //val maxIter = 15
-        val regParam = 0.1
+        //val regParam = 0.1
         //val ratingsPath  = "ml-latest/ratings.csv"
-        val ratingsPath  = "/home/supermanheng/Documents/ml-1m/ratings.dat"
+        val ratingsPath  = "ml-latest/ratings-1m.dat"
         val conf = new SparkConf().setAppName(s"MovieLensALS")
         val sc = new SparkContext(conf)
         val sqlContext = new SQLContext(sc)
@@ -84,7 +86,7 @@ object TestALS {
         //val movies = sc.textFile("ml-latest/movies.csv").map(Movie.parseMovie).toDF()
         val ratings = sc.textFile(ratingsPath).map(Rating.parseRating).cache()
        
-        val t0 = System.nanoTime()
+       
 
         val numRatings = ratings.count()
         val numUsers = ratings.map(_.userId).distinct().count()
@@ -101,35 +103,58 @@ object TestALS {
         println(s"Training: $numTraining, test: $numTest.")
 
         ratings.unpersist(blocking = false)
+        val ranks = List(8, 10, 12)
+        val lambdas = List(0.1, 0.3, 0.5)
+	val blocks = List(3, 5, 8)
+	val numIters = List(5) 
 
-        val als = new ALS()
-            .setUserCol("userId")
-            .setItemCol("movieId")
-            .setRank(rank)
-            .setMaxIter(maxIter)
-            .setRegParam(regParam)
-            .setNumBlocks(10)
+    var bestValidationRmse = Double.MaxValue
+    var bestRank = 0
+    var bestLambda = -1.0
+    var bestNumIter = -1
+for (rank <- ranks; lambda <- lambdas; block <- blocks; numIter <- numIters) {
+                val t0 = System.nanoTime()
+		val als = new ALS()
+		    .setUserCol("userId")
+		    .setItemCol("movieId")
+		    .setRank(rank)
+		    .setMaxIter(numIter)
+		    .setRegParam(lambda)
+		    .setNumBlocks(block)
 
-        val model = als.fit(training.toDF())
+		val model = als.fit(training.toDF())
 
 
-        val predictions = model.transform(test.toDF()).cache()
+		val predictions = model.transform(test.toDF()).cache()
 
-        // Evaluate the model.
-        // TODO: Create an evaluator to compute RMSE.
-        val mse = predictions.select("rating", "prediction").rdd
-            .flatMap { case Row(rating: Float, prediction: Float) =>
-                val err = rating.toDouble - prediction
-                val err2 = err * err
-                if (err2.isNaN) {
-                    None
-                } else {
-                    Some(err2)
-                }
-            }.mean()
-        val rmse = math.sqrt(mse)
-        println(s"Test RMSE = $rmse.")
+		// Evaluate the model.
+		// TODO: Create an evaluator to compute RMSE.
+		val mse = predictions.select("rating", "prediction").rdd
+		    .flatMap { case Row(rating: Float, prediction: Float) =>
+		        val err = rating.toDouble - prediction
+		        val err2 = err * err
+		        if (err2.isNaN) {
+		            None
+		        } else {
+		            Some(err2)
+		        }
+		    }.mean()
+		val rmse = math.sqrt(mse)
+		//println(s"Test RMSE = $rmse.")
+    println("RMSE (validation) = " + rmse + " for the model trained with rank = " 
+        + rank + ", lambda = " + lambda + ", and numIter = " + numIter + ", and block = " + block + ".")
+		val t1 = System.nanoTime()
+		println("Elapsed time: " + (t1 - t0) + "ns")
 
+	if (rmse < bestValidationRmse) {
+		bestValidationRmse = rmse
+		bestRank = rank
+		bestLambda = lambda
+		bestNumIter = numIter
+	      }
+}
+println("The best model was trained with rank = " + bestRank + " and lambda = " + bestLambda
+      + ", and numIter = " + bestNumIter + ", and its RMSE on the test set is " + bestValidationRmse + ".")
         // Inspect false positives.
         // Note: We reference columns in 2 ways:
         //  (1) predictions("movieId") lets us specify the movieId column in the predictions
@@ -152,8 +177,7 @@ object TestALS {
         /**val output = predictions
            .select($"userId",$"movieId",$"prediction")
            .where(predictions("userId") === 1).collect().foreach(println)**/
-     val t1 = System.nanoTime()
-    println("Elapsed time: " + (t1 - t0) + "ns")
+     
         sc.stop()
     }
 }
