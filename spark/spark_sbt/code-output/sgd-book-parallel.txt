@@ -1,0 +1,5 @@
+20 features 25 iterations
+Waiting for tasks to terminate
+188023034 microseconds
+rmse training 0.4393130156174117
+rmse test 0.43617856802704064

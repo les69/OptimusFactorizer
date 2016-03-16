@@ -1,0 +1,17 @@
+Serial running with: 25 iterations  20 features 0.9 learningDecay 0.1 lambda
+Test prediction for user 2163 with item 2997 and real value 5.0
+rmse training 1.118034555274368
+rmse test 1.1194362987829716
+rmse training 1.2339117652509053
+rmse test 1.256172604308849
+rmse training 1.1948836482761704
+rmse test 1.2334483919077075
+rmse training 1.169637273239378
+rmse test 1.2187826299842242
+rmse training 1.1547668085876883
+rmse test 1.2096238621700564
+rmse training 1.1458914249527294
+rmse test 1.203947400193228
+484910140 microseconds
+rmse training 1.144608698989916
+rmse test 1.2031156691662277

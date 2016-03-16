@@ -1,4 +1,5 @@
 import java.security.MessageDigest
+import java.util.concurrent.TimeUnit
 
 import breeze.linalg.DenseVector
 import org.apache.spark.rdd.RDD
@@ -6,6 +7,8 @@ import org.apache.spark.sql.SQLContext
 import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.immutable.HashMap
+import scala.collection.parallel.mutable.{ParHashMap, ParMap}
+import scala.collection.{Map, breakOut}
 import scala.util.Random
 
 ///home/Downloads/spark/bin/spark-submit --class TestGradientDescent target/scala-2.10/spark_sbt_2.10-1.0.jar
@@ -38,11 +41,11 @@ object BookOptimizedSGD {
     val item_bias_index = 2
     val feature_offset = 3
 
-    val bias_learning_rate = 0.1
+    val bias_learning_rate = 0.01
     val biasReg = 0.1
     val numFeatures = 20
     val numIterations = 25
-    var pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
+    var pool = java.util.concurrent.Executors.newFixedThreadPool(1000)
     var threadPool = List
 
     val test_users = 10000
@@ -83,7 +86,7 @@ object BookOptimizedSGD {
 
 
         //val numUsers = ratings.map(_.userId).distinct().count()
-
+        //var userItem: ParHashMap[Int,Seq[String]] = users.par.collect{case u: Int => val rating = ratings.filter(r=> r.userId == u).map(u=>u.isbn).collect().toSeq; (u,rating)}.map(x=>x)(breakOut)
 
 
 
@@ -102,24 +105,24 @@ object BookOptimizedSGD {
         }
 
         //[TODO] check shuffling
-        val userItemMatrix = cacheOpt(training,rand.shuffle(totUsers.toSeq).toArray)
-        var cachedRatings = new HashMap[String,Double]
+        val userItemMatrix: Map[Int, Seq[String]] = ratings.groupBy(x=>x.userId).map(x=> x._2.head.userId -> x._2.map(x=>x.isbn).toSeq).collectAsMap()
+        //val userItemMatrix = cacheOpt(training,rand.shuffle(totUsers.toSeq).toArray)
+        val cachedRatings: Map[String, Double] = ratings.collect{
+            case r: Book => val digest = md5(r.userId.toString+" "+r.isbn.toString)
+                (digest , r.rating.toDouble)
+        }.map(x=>x).collect().toMap
 
-        ratings.collect.foreach{
-            r=> val digest = md5(r.userId.toString+" "+r.isbn.toString)
-                cachedRatings += digest -> r.rating.toDouble
-        }
 
         var currentLearningRate = learningRate
-        val testUser = userMap.apply(userItemMatrix.head._1)
+        /**val testUser = userMap.apply(userItemMatrix.head._1)
         val testItem = itemMap.apply(userItemMatrix.head._2.head)
         val i = userItemMatrix.head._1
         val j = userItemMatrix.head._2.head
-        val md5val = md5(i.toString+" "+j.toString)
+        val md5val = md5(i.toString+" "+j.toString)**/
 
 
         println("Serial running with 15 iterations and 30 features")
-        println("Test prediction for user "+userItemMatrix.head._1+" with item "+userItemMatrix.head._2.head+" and real value "+cachedRatings.apply(md5val))
+        //println("Test prediction for user "+userItemMatrix.head._1+" with item "+userItemMatrix.head._2.head+" and real value "+cachedRatings.apply(md5val))
         val time = System.nanoTime()
         for(iteration <- 0 to numIterations ) {
             //println("Iteration " + iteration + " out of " + numIterations)
@@ -136,22 +139,21 @@ object BookOptimizedSGD {
                 userItem =>
                     val uid = userItem._1
                     val preferencesVector = userItem._2
-                    //println("Starting new thread for user "+uid)
-                    /** pool.execute(new Runnable {
+                    /**pool.execute(new Runnable {
                         override def run(): Unit = {
-                            updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
+                            updateUserMap(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
                         }
                     })**/
-                    updateUser(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
+                    updateUserMap(userItemMatrix, preferencesVector, userMap,itemMap,cachedRatings, uid, currentLearningRate)
 
 
 
 
             }
-            // println("Waiting for tasks to terminate")
-            // pool.shutdown()
-            // pool.awaitTermination(10000,TimeUnit.SECONDS)
-            //pool = java.util.concurrent.Executors.newFixedThreadPool(1500)
+            /**println("Waiting for tasks to terminate")
+            pool.shutdown()
+            pool.awaitTermination(10000,TimeUnit.SECONDS)
+            pool = java.util.concurrent.Executors.newFixedThreadPool(1000)**/
 
             currentLearningRate *= learningRateDecay
 
@@ -159,15 +161,16 @@ object BookOptimizedSGD {
         val micros = (System.nanoTime - time) / 1000
         println("%d microseconds".format(micros))
 
-        println("rmse training "+rmse_test(userMap,itemMap,training))
-        println("rmse test "+rmse_test(userMap,itemMap,splits(1)))
+        println("rmse training "+rmse(userMap,itemMap,training))
+        println("rmse test "+rmse(userMap,itemMap,splits(1)))
+        //testOutput(splits(1), cachedRatings, userMap,itemMap)
 
 
 
 
 
     }
-    def updateUser(userMatrix:HashMap[Int,Seq[String]],preferencesVector:Seq[String],userMap:HashMap[Int,VectorFactorItem],itemMap:HashMap[String,VectorFactorItem],ratings:HashMap[String,Double],uid:Int, currentLearningRate:Double): Unit= {
+    def updateUserMap(userMatrix:Map[Int,Seq[String]],preferencesVector:Seq[String],userMap:HashMap[Int,VectorFactorItem],itemMap:HashMap[String,VectorFactorItem],ratings:Map[String,Double],uid:Int, currentLearningRate:Double): Unit= {
         preferencesVector.foreach {
             iid =>
 
@@ -206,6 +209,46 @@ object BookOptimizedSGD {
         //println("Task completed for user "+uid)
 
     }
+    def updateUser(userMatrix:ParHashMap[Int,Seq[String]],preferencesVector:Seq[String],userMap:HashMap[Int,VectorFactorItem],itemMap:HashMap[String,VectorFactorItem],ratings:HashMap[String,Double],uid:Int, currentLearningRate:Double): Unit= {
+        preferencesVector.foreach {
+            iid =>
+
+                val user = userMap.apply(uid)
+                val item = itemMap.apply(iid)
+                val digest = md5(uid.toString + " " + iid.toString)
+
+
+                item.synchronized {
+                    val pr_rating = predictRating(user.factors, item.factors)
+
+
+                    val value = ratings.apply(digest)
+                    val userVector = user.factors
+                    val itemVector = item.factors
+
+                    val err = value - pr_rating
+                    userVector.update(user_bias_index, user.userBias + bias_learning_rate * (err - biasReg * preventOverFitting * user.userBias))
+                    itemVector.update(item_bias_index, item.itemBias + bias_learning_rate * (err - biasReg * preventOverFitting * item.itemBias))
+                    user.userBias = userVector.apply(user_bias_index)
+                    item.itemBias = itemVector.apply(item_bias_index)
+                    for (featureIndex <- feature_offset to numFeatures) {
+
+                        val uF = userVector.apply(featureIndex)
+                        val iF = itemVector.apply(featureIndex)
+                        val deltaUserFeature = err * iF - preventOverFitting * uF
+                        userVector.update(featureIndex, userVector.apply(featureIndex) + currentLearningRate * deltaUserFeature)
+                        val deltaItemFeature = err * uF - preventOverFitting * iF
+                        itemVector.update(featureIndex, itemVector.apply(featureIndex) + currentLearningRate * deltaItemFeature)
+                    }
+                    item.notifyAll()
+
+                }
+
+        }
+        //println("Task completed for user "+uid)
+
+    }
+
     def md5(s: String): String = {
         MessageDigest.getInstance("MD5").digest(s.getBytes).map("%02x".format(_)).mkString
     }
@@ -237,33 +280,28 @@ object BookOptimizedSGD {
         //Math.sqrt(res)
 
     }
-    def testOutput(userMatrix:Array[Array[Double]],itemMatrix:Array[Array[Double]], ratings:RDD[Book], cachedUsers:Array[Int], cachedItems:Array[Int]): Unit={
-        println("Test prediction on all users one item each")
+    def testOutput(ratings:RDD[Book], cachedRatings: Map[String,Double], userMatrix:HashMap[Int,VectorFactorItem], itemMatrix:HashMap[String,VectorFactorItem]): Unit={
 
-        userMatrix.zipWithIndex.foreach{
-            userRow=>
-                val loopIndex = userRow._2
-                val uid = cachedUsers.apply(loopIndex)
-                val iid = cachedItems.apply(loopIndex)
-
-            //val pr_rating = predictRating(userMatrix.apply(uid),itemMatrix.apply(iid))
-            //val realValue = ratings.filter(r=> r.movieId == iid && r.userId == uid).first().rating
-
-            //println("Prediction for user "+uid+" for item "+iid+" predicted value "+pr_rating+" real value "+realValue)
+        ratings.foreach{
+            r=> val pr_val = predictRating(userMatrix.apply(r.userId).factors, itemMatrix.apply(r.isbn).factors)
+                val rating = r.rating
+                println(s"Prediction for $rating  is $pr_val")
         }
     }
     def joinVectors(v1:Array[Double],v2:DenseVector[Double]): DenseVector[Double] ={
         val lastArray = Array(v1,v2.toArray).flatten
         DenseVector(lastArray)
     }
-    def cacheOpt(ratings: RDD[Book], users:Array[Int]): HashMap[Int,Seq[String]]={
+    def cacheOpt(ratings: RDD[Book], users:Array[Int]): ParHashMap[Int,Seq[String]]={
 
-        var userItem = new HashMap[Int,Seq[String]]()
-        users.par.foreach{
+        //var userItem = new HashMap[Int,Seq[String]]()
+        var userItem: ParHashMap[Int,Seq[String]] = users.par.collect{case u: Int => val rating = ratings.filter(r=> r.userId == u).map(u=>u.isbn).collect().toSeq; (u,rating)}.map(x=>x)(breakOut)
+
+        /**users.foreach{
             user=>
                 val rating = ratings.filter(r=> r.userId == user).map(u=>u.isbn).collect().toSeq
                 userItem += user -> rating
-        }
+        }**/
         userItem
     }
     def predictRating(userVector:DenseVector[Double], itemVector:DenseVector[Double]): Double ={

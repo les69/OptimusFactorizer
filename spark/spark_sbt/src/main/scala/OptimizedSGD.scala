@@ -22,7 +22,7 @@ object OptimizedSGD {
     val learningRate = 0.1
     val preventOverFitting = 0.1
     val randomNoise = 0.1
-    val learningRateDecay = 0.9
+    val learningRateDecay = 1.5
 
     val user_bias_index = 1
     val item_bias_index = 2
