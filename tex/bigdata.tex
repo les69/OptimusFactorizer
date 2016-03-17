@@ -785,6 +785,22 @@ there are some spikes in the error dropping. The best value for it is around
     \includegraphics[scale=0.45]{lrdecay.png}
 \end{figure}
 
+\subsection{Comparison with the non-biased version}
+As said in the previous chapters there are many optimized versions of SGD,
+including the one used during the whole paper. We have considered to be of
+interest a comparison between the two versions, in a matter of running time
+and error.\\
+The running time did not differ too much from it's improved versiong, though there
+is a substancial difference in the rmse calculation. The non-biased version
+stars from a higher value (3.7 compared to 1.12) and stops decreasing
+the error converging slowly to a higher error (1.06 compared to 0.86).
+
+\begin{figure}
+    \caption{SGD implementations}
+    \centering
+    \includegraphics[scale=0.55]{biasvsunbias.png}
+\end{figure}
+
 
 
 \subsection{Profiling ALS}

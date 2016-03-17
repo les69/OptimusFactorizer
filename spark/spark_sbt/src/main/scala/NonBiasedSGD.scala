@@ -26,8 +26,8 @@ object NonBiasedSGD {
     val item_bias_index = 2
     val feature_offset = 3
 
-    //val bias_learning_rate = 0.01
-    val bias_learning_rate = 0.5
+    val bias_learning_rate = 0.01
+    //val bias_learning_rate = 0.5
     val biasReg = 0.1
     val numFeatures = 20
     val numIterations = 25
