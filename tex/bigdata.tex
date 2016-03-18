@@ -808,33 +808,54 @@ the error converging slowly to a higher error (1.06 compared to 0.86).
 We give less space to this algorithm since it's behaviour and performance
 is well known, since is the most adopted for this task. However it is
 a good metric of comparison between our implementation of SGD.\\
-We have conducted several test with respect to: error of predictions and performances.
+We have conducted several test with respect to: error of predictions and performances. The basic assumption is that the test is run with $\lambda$=0.1, number of features=10, number of iterations=5 on the the smaller dataset presente in the table above (1M ratings)..
 
-\begin{enumerate}
-    \item The first test is to compare the error on predictions of the algorithm related to the number of iterations.
-        We could do at maximum 20 iterations before the machine break down with a stack overflow message. However the error
-        was quite low and in the end converged around 0.86, as can be seen in Figure 4. In this test we have used the smaller
-        dataset presente in the table above (1M ratings).
-    \item The second test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
+\subsubsection{Number of Iterations}
+    The first test is to compare the error on predictions of the algorithm related to the number of iterations.
+        We could do at maximum 20 iterations before the machine break down with a stack overflow message. However the error was quite low and in the end converged around 0.86, as can be seen in \textbf{Figure 8}.
+\begin{figure}
+    \caption{ASL RMSE with different iterations}
+    \centering
+    \includegraphics[scale=0.4]{alsrmse.png}
+\end{figure}
+\subsubsection{Number of Features}
+    The second test is to compare the error on predictions of the algorithm related to the number of features.
+        At the beginning, we tested with iteration=5, but we found that the number of features doesn't influence the RMSE a lot. Thus, we also tested with iteration=20, and we got the similar result in \textbf{Figure 9}. As result, we could say the the number of features doesn't influence the RMSE that much if the number of features is around 10.
+        \begin{figure}
+    \caption{ASL RMSE with different number of features}
+    \centering
+    \includegraphics[scale=0.4]{alsfeature.png}
+\end{figure}
+        \subsubsection{Value of $\lambda$}
+    The third test is to compare the error on predictions of the algorithm related to the value of lambda. As we can see from \textbf{Figure 10}, the bigger $\lambda$ we have, the worse RMSE we got.
+\begin{figure}
+    \caption{ASL RMSE with different $\lambda$}
+    \centering
+    \includegraphics[scale=0.4]{alslambda.png}
+\end{figure}
+        \subsubsection{Full Dataset}
+     The fourth test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
     running time of ~4.8 minutes. Furthermore we have noticed a reduction of the rmse (10 iterations) to the value 0.81, which is the best one
     we had in all the tests so far.
-    \item Last but not least we have conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 4}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance because the Spark API is already optimized.
+    \subsubsection{ALS Versions}
+     We have also conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 5}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance because the Spark API is already optimized.
 \begin{table}
 \centering
 \caption{Running times}
 \begin{tabular}{|c|c|c|c|} \hline
-\textbf{Matrix}  & \textbf{LocalALS} & \textbf{SparkALS} & \textbf{ALS }\\ \hline
-3.900 * 6.040 & about 2792s  & about 5400s & about 65s\\ \hline
+\textbf{Matrix}  & \textbf{LocalALS} & \textbf{SparkALS} & \textbf{ParalleledALS}\\ \hline
+3.900 * 6.040 & about 2792s  & about 5400s & about 52s\\ \hline
 \end{tabular}
 \end{table}
-\end{enumerate}
-All this test have been conducted on a laptop due to some billing problems with the remote server.
+\subsubsection{Number of Blocks}
+    As the ParalleledALS has the best running time performance, we run a test to see how number of blocks influence the running time. According to \textbf{Figure 11}, instead of the performance improved as the number of blocks increases, the  ParalleledALS got the best running time about 52s when the number of blocks is equal to 5. We supposed the reason is that when blocks increases, the shuffle cost also increases and the shuffle cost overwhelms the improved with more parallelization.
 
-\begin{figure}
-    \caption{ASL RMSE}
+        \begin{figure}
+    \caption{ASL RMSE with different number of blocks}
     \centering
-    \includegraphics[scale=0.4]{alsrmse.png}
+    \includegraphics[scale=0.4]{alsblock.png}
 \end{figure}
+
 
 \subsection{The parallel version}
 We analyzed the iterative version and in order to proceede in the parallelization
