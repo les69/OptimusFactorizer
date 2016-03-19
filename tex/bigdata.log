@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.3)  19 MAR 2016 00:14
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2016.3.3)  19 MAR 2016 11:34
 entering extended mode
 **./bigdata.tex
 (bigdata.tex
@@ -546,13 +546,13 @@ Overfull \hbox (33.41666pt too wide) in paragraph at lines 827--828
  [][] 
  []
 
-<alslambda.png, id=56, 657.95813pt x 407.27156pt>
+<alslambda.png, id=56, 698.61pt x 407.27156pt>
 File: alslambda.png Graphic file (type png)
  <use alslambda.png>
 Package pdftex.def Info: alslambda.png used on input line 834.
-(pdftex.def)             Requested size: 263.17859pt x 162.90573pt.
+(pdftex.def)             Requested size: 279.43904pt x 162.90573pt.
 
-Overfull \hbox (23.17859pt too wide) in paragraph at lines 834--835
+Overfull \hbox (39.43904pt too wide) in paragraph at lines 834--835
  [][] 
  []
 
@@ -561,13 +561,13 @@ Overfull \hbox (19.67282pt too wide) in paragraph at lines 845--849
  [][] 
  []
 
-<alsblock.png, id=62, 651.18282pt x 411.03563pt>
+<alsblock.png, id=62, 700.86844pt x 410.2828pt>
 File: alsblock.png Graphic file (type png)
  <use alsblock.png>
 Package pdftex.def Info: alsblock.png used on input line 856.
-(pdftex.def)             Requested size: 260.4685pt x 164.41133pt.
+(pdftex.def)             Requested size: 280.3424pt x 164.11021pt.
 
-Overfull \hbox (20.4685pt too wide) in paragraph at lines 856--857
+Overfull \hbox (40.3424pt too wide) in paragraph at lines 856--857
  [][] 
  []
 
@@ -594,7 +594,7 @@ Here is how much of TeX's memory you used:
  7354 multiletter control sequences out of 15000+200000
  59748 words of font info for 85 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 41i,10n,34p,873b,473s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,10n,34p,881b,473s stack positions out of 5000i,500n,10000p,200000b,50000s
 {D:/Users/Administrator/AppData/Local/Program
 s/MiKTeX 2.9/fonts/enc/dvips/fontname/8r.enc}<D:/Users/Administrator/AppData/Lo
 cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><D:/Users/Admi
@@ -618,7 +618,7 @@ pfb><D:/Users/Administrator/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/t
 imes/utmb8a.pfb><D:/Users/Administrator/AppData/Local/Programs/MiKTeX 2.9/fonts
 /type1/urw/times/utmr8a.pfb><D:/Users/Administrator/AppData/Local/Programs/MiKT
 eX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on bigdata.pdf (10 pages, 539609 bytes).
+Output written on bigdata.pdf (10 pages, 544887 bytes).
 PDF statistics:
  123 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

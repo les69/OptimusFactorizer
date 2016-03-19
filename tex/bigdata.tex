@@ -820,14 +820,14 @@ We have conducted several test with respect to: error of predictions and perform
 \end{figure}
 \subsubsection{Number of Features}
     The second test is to compare the error on predictions of the algorithm related to the number of features.
-        At the beginning, we tested with iteration=5, but we found that the number of features doesn't influence the RMSE a lot. Thus, we also tested with iteration=20, and we got the similar result in \textbf{Figure 9}. As result, we could say the the number of features doesn't influence the RMSE that much if the number of features is around 10.
+        At the beginning, we tested with iteration=5 and with number of features respectively equals to 8, 10, 12 and 15, but we found that the number of features doesn't influence the RMSE a lot. Thus, we also tested with iteration=20, and we got the similar result in \textbf{Figure 9}. As result, we could say the the number of features doesn't influence the RMSE that much if the number of features is around 10.
         \begin{figure}
     \caption{ASL RMSE with different number of features}
     \centering
     \includegraphics[scale=0.4]{alsfeature.png}
 \end{figure}
         \subsubsection{Value of $\lambda$}
-    The third test is to compare the error on predictions of the algorithm related to the value of lambda. As we can see from \textbf{Figure 10}, the bigger $\lambda$ we have, the worse RMSE we got.
+    The third test is to compare the error on predictions of the algorithm related to the value of lambda. We tested with $\lambda$ respectively equals to 0.08, 0.1, 0.3 and 0.5. As we can see from \textbf{Figure 10}, the bigger $\lambda$ we have, the worse RMSE we got.
 \begin{figure}
     \caption{ASL RMSE with different $\lambda$}
     \centering
@@ -835,10 +835,10 @@ We have conducted several test with respect to: error of predictions and perform
 \end{figure}
         \subsubsection{Full Dataset}
      The fourth test was a performance test on the complete dataset (22M ratings). The algorithm behaved very well, with an average
-    running time of ~4.8 minutes. Furthermore we have noticed a reduction of the rmse (10 iterations) to the value 0.81, which is the best one
+    running time of ~4.8 minutes. Furthermore we have noticed a reduction of the RMSE (10 iterations) to the value 0.81, which is the best one
     we had in all the tests so far.
     \subsubsection{ALS Versions}
-     We have also conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 5}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice, which has the best performance because the Spark API is already optimized.
+     We have also conducted a test to investigate the different running times between the three different versions of ALS : the LocalALS without using Spark API, the SparkALS partial using Spark API which is partially paralleled, and ParalleledALS fully using Spark API which is fully paralleled. Running on a Matrix with 3.900 movies, 6.040 users, the training has 5 iteration. For the SparkALS, it is run in 2 slices as when we try to run with 5 slice we got out of Memory error. The running times are shown in \textbf{Table 5}. It is interesting that the partial paralleled version has the worst performance, probably because it is just partial paralleled without optimization. On the other hand, ParalleledALS sharply improves the running performance with 5 slice(blocks), which has the best performance because the Spark API is already optimized.
 \begin{table}
 \centering
 \caption{Running times}
@@ -848,7 +848,7 @@ We have conducted several test with respect to: error of predictions and perform
 \end{tabular}
 \end{table}
 \subsubsection{Number of Blocks}
-    As the ParalleledALS has the best running time performance, we run a test to see how number of blocks influence the running time. According to \textbf{Figure 11}, instead of the performance improved as the number of blocks increases, the  ParalleledALS got the best running time about 52s when the number of blocks is equal to 5. We supposed the reason is that when blocks increases, the shuffle cost also increases and the shuffle cost overwhelms the improved with more parallelization.
+    As the ParalleledALS has the best running time performance, we run a test to see how number of blocks influences the running time. According to \textbf{Figure 11}, instead of the performance improved as the number of blocks increases, the ParalleledALS got the best running time(about 52s) when the number of blocks is equal to 5. We supposed the reason is that when blocks increases, the shuffle cost also increases and the shuffle cost overwhelms the improvement with more parallelization.
 
         \begin{figure}
     \caption{ASL RMSE with different number of blocks}
