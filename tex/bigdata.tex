@@ -920,7 +920,7 @@ results.
 \subsubsection{SGD on Book-Crossing}
 
 The algorithm performed much faster compared to the \textit{MovieLens}
-datasets, with an acceptable rmse value. Altough the number of users and
+datasets, with an excellent rmse value. Altough the number of users and
 books is much higher the algorithm performed much better. The reason behind
 this different performance can be found in the different sparsity of the
 matrices taken in consideration, that's the only reason we found to be acceptable.
@@ -949,6 +949,25 @@ Book-Crossing &  0.439313 & 0.436178 & 3.31m \\ \hline
 \end{tabular}
 \end{table}
 
+\subsection{ALS on Book-Crossing}
+
+We were surprised to notice such a difference of results with the letter experiment.
+With this dataset the algorithm performed not too much better than the Serial version of
+SGD (4.27 minutes compared to 3.51 for this experiment). However, it's not the running time
+what surpised the most but the rmse difference, we had an average of \textit{3.9} against
+the 0.4 of the previous experiment.\\
+The only explanation we have found to the problem is in the number of ratings, which does
+not allow our algorithm to start working properly. Furthermore in the literature
+there are very similar values of rmse for this dataset and ALS. \cite{recommender}
+\begin{table}
+\centering
+\caption{Comparison: RMSE and Running}
+\begin{tabular}{|c|c|c|c|} \hline
+\textbf{Dataset} & \textbf{Training} & \textbf{Test} & \textbf{Running time}\\ \hline
+MovieLens 1M & 0.759313 & 0.86346 & 0.37m \\ \hline
+Book-Crossing &  2.088756 & 3.836608 & 3.51m \\ \hline
+\end{tabular}
+\end{table}
 
 
 \section{Conclusions}

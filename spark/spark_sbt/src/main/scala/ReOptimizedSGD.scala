@@ -87,11 +87,11 @@ object ReOptimizedSGD {
         val time = System.nanoTime()
         for(iteration <- 0 to numIterations ) {
 
-            /**just debug **/
+            /**just debug
             if(iteration % 5 == 0) {
                 println("rmse training " + rmse(userMap, itemMap, training))
                 println("rmse test " + rmse(userMap, itemMap, splits(1)))
-            }
+            }**/
 
             userItemMatrix.foreach {
                 userItem =>
