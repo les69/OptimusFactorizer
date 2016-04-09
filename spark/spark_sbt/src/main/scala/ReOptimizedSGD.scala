@@ -15,6 +15,26 @@ import scala.util.Random
   */
 object ReOptimizedSGD {
 
+    case class Rating(userId: Int, movieId: Int, rating: Float, timestamp: Long)
+
+    object Rating {
+        def parseRating(str: String): Rating = {
+            //val fields = str.split(",")
+            val fields = str.split("::")
+            assert(fields.size == 4)
+            Rating(fields(0).toInt, fields(1).toInt, fields(2).toFloat, fields(3).toLong)
+        }
+    }
+
+    case class Movie(movieId: Int, title: String, genres: Seq[String])
+
+    object Movie {
+        def parseMovie(str: String): Movie = {
+            val fields = str.split(",")
+            Movie(fields(0).toInt, fields(1), fields(2).split("\\|"))
+        }
+    }
+
     // val rand = RandomUtils.getRandom(42L)
     val rand = new Random(42L)
     val learningRate = 0.1

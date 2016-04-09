@@ -1,4 +1,0 @@
-full dataset 50 features 100 iterations
-1064248252 microseconds
-rmse training 0.99413463499755
-rmse test 1.1108819626904175

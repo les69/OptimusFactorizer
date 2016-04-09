@@ -4,7 +4,7 @@
 		module="spark_sbt_2.10"
 		revision="1.0"
 		status="integration"
-		publication="20160309102729"
+		publication="20160409140413"
 	>
 		<description>
 		spark_sbt
